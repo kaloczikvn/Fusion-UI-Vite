@@ -1,0 +1,41 @@
+import { RouterProvider, createBrowserRouter } from 'react-router';
+import PageLogin from './pages/PageLogin';
+import PageConnection from './pages/PageConnection';
+import PageOriginLink from './pages/PageOriginLink';
+import BaseWrapper from './components/wrapper/BaseWrapper';
+import PageMainMenu from './pages/PageMainMenu';
+import PageCredits from './pages/PageCredits';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <BaseWrapper />,
+        children: [
+            {
+                path: 'login',
+                element: <PageLogin />,
+            },
+            {
+                path: 'connection',
+                element: <PageConnection />,
+            },
+            {
+                path: 'origin-link',
+                element: <PageOriginLink />,
+            },
+            {
+                path: 'main-menu',
+                element: <PageMainMenu />,
+            },
+            {
+                path: 'credits',
+                element: <PageCredits />,
+            },
+        ],
+    },
+]);
+
+const Router: React.FC = () => {
+    return <RouterProvider router={router} />;
+};
+export default Router;
