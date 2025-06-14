@@ -62,7 +62,8 @@ form {
         margin-right: 5%;
         background: rgba(0, 0, 0, 0.8);
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             border-color: #fff;
         }
     }
@@ -126,13 +127,14 @@ form {
         box-shadow: none;
     }
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
         border-color: #e14d43;
         box-shadow: none;
     }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
     // TODO: Fix checkbox
     display: none;
 
@@ -147,7 +149,7 @@ input[type="checkbox"] {
     position: relative;
 
     &:checked:after {
-        content: "";
+        content: '';
         height: 0.3703703703703704vh; // 4px
         width: 0.8333333333333333vh; // 9px
         border-left: 0.2777777777777778vh solid #e14d43; // 3px

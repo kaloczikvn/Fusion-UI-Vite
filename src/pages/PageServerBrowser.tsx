@@ -12,6 +12,10 @@ import useUserStore from '../stores/useUserStore';
 import ConnectingServerPopup from '../components/popups/ConnectingServerPopup';
 import ServerEntry from '../components/server/ServerEntry';
 import clsx from 'clsx';
+import ServerFilters from '../components/server/ServerFilters';
+import { getDefaultFilters, getSortingFunction } from '../utils/server';
+import { checkServerCompatibility } from '../utils/server/server';
+import useBaseStore from '../stores/useBaseStore';
 
 const PageServerBrowser: React.FC = () => {
     const filters = useServerStore((s) => s.filters);
@@ -21,8 +25,12 @@ const PageServerBrowser: React.FC = () => {
     const fetchStatus = useServerStore((s) => s.fetchStatus);
     const sortDirection = useServerStore((s) => s.sortDirection);
     const stateSortBy = useServerStore((s) => s.sortBy);
-    const accountStorage = useUserStore((s) => s.accountStorage);
     const map = useServerStore((s) => s.map);
+    const availableXPacks = useServerStore((s) => s.availableXPacks);
+    const minServerBuild = useServerStore((s) => s.minServerBuild);
+    const build = useBaseStore((s) => s.build);
+    const vextVersion = useBaseStore((s) => s.vextVersion);
+    const accountStorage = useUserStore((s) => s.accountStorage);
 
     const [expandedServer, setExpandedServer] = useState<any>(null);
     const [filtersVisible, setFiltersVisible] = useState<boolean>(false);
@@ -146,9 +154,7 @@ const PageServerBrowser: React.FC = () => {
     const _hasFilterApplied = () => {
         if (filters === null) return false;
 
-        return true;
-        // TODO: Fixme
-        // return JSON.stringify(filters) !== JSON.stringify(ServerFilters.getDefaultFilters());
+        return JSON.stringify(filters) !== JSON.stringify(getDefaultFilters());
     };
 
     const _onCloseFilters = () => {
@@ -295,30 +301,6 @@ const PageServerBrowser: React.FC = () => {
         if (scrollbarRef.current !== null) scrollbarRef.current.update();
     });
 
-    /*
-    let serversList: any = [];
-
-    for (const server of servers) {
-        let isFavorite = false;
-        if (favoriteServers.size) {
-            isFavorite = favoriteServers.has(server.guid);
-        }
-
-        serversList.push(
-            <ServerEntry
-                server={server}
-                key={server.guid}
-                expanded={expandedServer === server.guid}
-                onClick={_onExpandServer}
-                onJoin={_onJoinServer}
-                onSpectate={_onSpectateServer}
-                onAddRemoveFavorite={_onAddRemoveFavorite}
-                isFavorite={isFavorite}
-            />
-        );
-    }
-        */
-
     let sortIcon: any = '';
 
     if (sortDirection === SortDirection.ASC)
@@ -367,11 +349,98 @@ const PageServerBrowser: React.FC = () => {
                 if (favoriteServers.size === 0 || !favoriteServers.has(guid)) continue;
             }
 
+            if (filters !== null) {
+                if (filters.minPlayers !== undefined && server.players < filters.minPlayers) continue;
+                if (filters.minPlayers !== undefined && server.players < filters.minPlayers) continue;
+                if (filters.minPing !== undefined && server.ping < filters.minPing) continue;
+                if (filters.maxPing !== undefined && server.ping > filters.maxPing) continue;
+                if (filters.hideFull && server.players >= server.variables.maxplayers) continue;
+                if (filters.hideEmpty && server.players == 0) continue;
+                if (filters.hidePassworded && server.passworded) continue;
+                if (filters.hideIncompatible) {
+                    const compatibility = checkServerCompatibility(
+                        server,
+                        availableXPacks,
+                        minServerBuild,
+                        build,
+                        vextVersion
+                    );
+
+                    if (compatibility !== null) continue;
+                }
+                if (!filters.freq30Hz && server.variables.frequency === 'reg') continue;
+                if (!filters.freq60Hz && server.variables.frequency === 'high60') continue;
+                if (!filters.freq120Hz && server.variables.frequency === 'high120') continue;
+                if (
+                    filters.serverName.trim().length > 0 &&
+                    server.name.toLowerCase().indexOf(filters.serverName.toLowerCase().trim()) === -1
+                ) {
+                    continue;
+                }
+                if (filters.maps.length > 0) {
+                    let mapFound = false;
+
+                    for (const map of filters.maps) {
+                        if (server.variables.mapname.toLowerCase() === map.toLowerCase()) {
+                            mapFound = true;
+                        }
+                    }
+
+                    if (!mapFound) continue;
+                }
+                if (filters.gamemodes.length > 0) {
+                    let gamemodeFound = false;
+
+                    for (const gamemode of filters.gamemodes) {
+                        if (server.variables.gamemode.toLowerCase() === gamemode.toLowerCase()) {
+                            gamemodeFound = true;
+                        }
+                    }
+
+                    if (!gamemodeFound) continue;
+                }
+                if (filters.tags.length > 0) {
+                    let tagFound = false;
+
+                    let serverTags = [];
+
+                    if (server.variables.tags && server.variables.tags.length > 0)
+                        serverTags = server.variables.tags.split(',');
+
+                    for (const tag of filters.tags) {
+                        for (const serverTag of serverTags) {
+                            if (serverTag.toLowerCase() === tag.toLowerCase()) {
+                                tagFound = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!tagFound) continue;
+                }
+            }
+
             servers.push(server);
         }
 
+        // Sorting
+        const sorter = getSortingFunction(stateSortBy, sortDirection);
+        if (sorter !== null) {
+            servers.sort(sorter);
+        }
+
         return servers;
-    }, [map, favoriteServersOnly]);
+    }, [
+        map,
+        favoriteServersOnly,
+        stateSortBy,
+        sortDirection,
+        filters,
+        availableXPacks,
+        minServerBuild,
+        build,
+        vextVersion,
+    ]);
 
     return (
         <div className="server-browser content-wrapper" ref={browserRef}>
@@ -416,10 +485,7 @@ const PageServerBrowser: React.FC = () => {
                                     <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
                                 </svg>
                             </a>
-                            {/*
-                            // TODO: Fixme
                             <ServerFilters visible={filtersVisible} onClose={_onCloseFilters} />
-                            */}
                         </div>
                         <div
                             className={clsx('header-action compact', { active: compactViewMemo })}

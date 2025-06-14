@@ -1,3 +1,6 @@
+import * as ServerSort from '../constants/ServerSort';
+import * as SortDirection from '../constants/SortDirection';
+
 export const getServerSpectators = (server: any) => {
     const spectatorsNum = parseInt(server.variables.spectators, 10);
     return !isNaN(spectatorsNum) ? spectatorsNum : 0;
@@ -21,4 +24,121 @@ export const getServerPlayersOnly = (server: any) => {
     const playersOnly = playersCount - spectatorsCount;
 
     return playersOnly > 0 ? playersOnly : 0;
+};
+
+export const getDefaultFilters = () => {
+    return {
+        maps: [],
+        gamemodes: [],
+        tags: [],
+        serverName: '',
+        minPlayers: undefined,
+        maxPlayers: undefined,
+        minPing: undefined,
+        maxPing: undefined,
+        freq30Hz: true,
+        freq60Hz: true,
+        freq120Hz: true,
+        hideFull: false,
+        hideEmpty: false,
+        hidePassworded: false,
+        hideIncompatible: false,
+    };
+};
+
+function sortByNameAsc(a: any, b: any) {
+    return a.name.localeCompare(b.name);
+}
+
+function sortByNameDesc(a: any, b: any) {
+    return -a.name.localeCompare(b.name);
+}
+
+function sortByMapAsc(a: any, b: any) {
+    return a.variables.mapname.localeCompare(b.variables.mapname);
+}
+
+function sortByMapDesc(a: any, b: any) {
+    return -a.variables.mapname.localeCompare(b.variables.mapname);
+}
+
+function sortByGamemodeAsc(a: any, b: any) {
+    return a.variables.gamemode.localeCompare(b.variables.gamemode);
+}
+
+function sortByGamemodeDesc(a: any, b: any) {
+    return -a.variables.gamemode.localeCompare(b.variables.gamemode);
+}
+
+function sortByPlayersAsc(a: any, b: any) {
+    const playerCountLeft = getServerPlayersOnly(a);
+    const playerCountRight = getServerPlayersOnly(b);
+
+    if (playerCountLeft < playerCountRight) return -1;
+
+    if (playerCountLeft > playerCountRight) return 1;
+
+    return 0;
+}
+
+function sortByPlayersDesc(a: any, b: any) {
+    const playerCountLeft = getServerPlayersOnly(a);
+    const playerCountRight = getServerPlayersOnly(b);
+
+    if (playerCountLeft < playerCountRight) return 1;
+
+    if (playerCountLeft > playerCountRight) return -1;
+
+    return 0;
+}
+
+function sortByPingAsc(a: any, b: any) {
+    let pingLeft = a.ping !== '-' ? parseInt(a.ping, 10) : 99999;
+    let pingRight = b.ping !== '-' ? parseInt(b.ping, 10) : 99999;
+
+    if (pingLeft < pingRight) return -1;
+
+    if (pingLeft > pingRight) return 1;
+
+    return 0;
+}
+
+function sortByPingDesc(a: any, b: any) {
+    let pingLeft = a.ping !== '-' ? parseInt(a.ping, 10) : 99999;
+    let pingRight = b.ping !== '-' ? parseInt(b.ping, 10) : 99999;
+
+    if (pingLeft < pingRight) return 1;
+
+    if (pingLeft > pingRight) return -1;
+
+    return 0;
+}
+
+const sorters: any = {
+    [ServerSort.NAME]: {
+        [SortDirection.ASC]: sortByNameAsc,
+        [SortDirection.DESC]: sortByNameDesc,
+    },
+    [ServerSort.MAP]: {
+        [SortDirection.ASC]: sortByMapAsc,
+        [SortDirection.DESC]: sortByMapDesc,
+    },
+    [ServerSort.GAMEMODE]: {
+        [SortDirection.ASC]: sortByGamemodeAsc,
+        [SortDirection.DESC]: sortByGamemodeDesc,
+    },
+    [ServerSort.PLAYERS]: {
+        [SortDirection.ASC]: sortByPlayersAsc,
+        [SortDirection.DESC]: sortByPlayersDesc,
+    },
+    [ServerSort.PING]: {
+        [SortDirection.ASC]: sortByPingAsc,
+        [SortDirection.DESC]: sortByPingDesc,
+    },
+};
+
+export const getSortingFunction = (sortBy: number, sortDirection: number): any => {
+    if (sortBy === ServerSort.NONE || sortDirection === SortDirection.NONE) return null;
+
+    return sorters[sortBy][sortDirection];
 };

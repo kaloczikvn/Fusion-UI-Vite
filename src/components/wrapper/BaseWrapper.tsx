@@ -28,6 +28,7 @@ const BaseWrapper: React.FC = () => {
 
     useEffect(() => {
         window.WebUI.Call('Startup');
+
         setTimeout(() => {
             window.WebUI.Call('InitialConnect');
         }, 2500);

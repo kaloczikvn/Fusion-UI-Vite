@@ -17,7 +17,8 @@
 
     .column {
         display: inline-block;
-        overflow: hidden;
+        // overflow: hidden;
+
         &.column-1 {
             display: flex;
             flex-direction: column;
@@ -89,7 +90,7 @@
             }
 
             &.active svg {
-                opacity: 1.0;
+                opacity: 1;
                 fill: #e14d43;
             }
 
@@ -97,10 +98,10 @@
                 &::after {
                     content: '';
                     position: absolute;
-                    right: .4vh;
+                    right: 0.4vh;
                     top: 0;
-                    width: .75vh;
-                    height: .75vh;
+                    width: 0.75vh;
+                    height: 0.75vh;
                     background: #e14d43;
                     border-radius: 50%;
                     pointer-events: none;
@@ -110,7 +111,7 @@
             a.fetching {
                 svg {
                     fill: #e14d43;
-                    opacity: 1.0;
+                    opacity: 1;
                     animation: spin-reverse 1s infinite linear;
                 }
             }
@@ -132,7 +133,7 @@
             }
         }
 
-        .column-1{
+        .column-1 {
             flex-direction: row !important;
         }
         .column {
@@ -146,7 +147,7 @@
         overflow-y: auto;
         position: relative;
 
-        &>div {
+        & > div {
             overflow-x: hidden !important;
         }
 
@@ -188,12 +189,12 @@
         bottom: 0;
         background: rgba(0, 0, 0, 0.2);
         z-index: 1;
-        opacity: 0.0;
+        opacity: 0;
         transition: opacity 150ms ease-in-out;
     }
 
     &:hover:before {
-        opacity: 1.0;
+        opacity: 1;
     }
 
     &:last-child {
@@ -299,7 +300,8 @@
         z-index: 2;
         position: relative;
 
-        .left-content, .right-content {
+        .left-content,
+        .right-content {
             margin: 0;
         }
 
@@ -320,7 +322,7 @@
             opacity: 0.85;
 
             &:hover {
-                opacity: 1.0;
+                opacity: 1;
             }
 
             &.spec-btn {
@@ -330,7 +332,7 @@
                 opacity: 0.6;
 
                 &:hover {
-                    opacity: 1.0;
+                    opacity: 1;
                 }
             }
 
@@ -345,7 +347,7 @@
 
         .favorite-btn {
             &:hover {
-                opacity: 1.0;
+                opacity: 1;
             }
 
             &.is-favorite {
@@ -388,7 +390,8 @@
         }*/
 
         .btn {
-            &.spec-btn, &.join-btn {
+            &.spec-btn,
+            &.join-btn {
                 cursor: default;
                 opacity: 0.3;
 
@@ -415,11 +418,11 @@
         display: inline;
         margin-right: 1.111111111111111vh; // 12px
 
-        &.empty, &.only-tags {
+        &.empty,
+        &.only-tags {
             margin-right: 0;
         }
     }
-
 
     .server-icon {
         opacity: 0.5;
@@ -432,7 +435,7 @@
 
         &.lag {
             color: #e14d43;
-            opacity: 1.0;
+            opacity: 1;
         }
     }
 }
@@ -478,7 +481,7 @@
 
 .list-body.compact .server-entry .server-icon.compact-tags {
     display: inline;
-    svg{
+    svg {
         fill: #61d2ff !important;
     }
 }
@@ -509,7 +512,7 @@
 }
 
 .list-body.compact .server-entry.expanded .column.column-4 h4 {
-    display: flex; 
+    display: flex;
 }
 
 .list-body.compact .server-entry.expanded .server-icon.compact-tags {
@@ -538,7 +541,8 @@
         display: flex;
     }
 
-    .left, .right {
+    .left,
+    .right {
         flex: 1 1 50%;
         display: inline-block;
     }
@@ -559,7 +563,7 @@
         font-weight: 400;
     }
 
-    input[type="text"] {
+    input[type='text'] {
         background: rgba(255, 255, 255, 0.1);
         width: 100%;
         height: 3.703703703703704vh; // 40px
@@ -586,7 +590,7 @@
         }
     }
 
-    input[type="text"] {
+    input[type='text'] {
         width: 65%;
         display: inline-block;
         margin-left: 1.481481481481481vh; // 16px

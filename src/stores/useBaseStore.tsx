@@ -162,7 +162,7 @@ const useBaseStore = create<State>((set) => ({
             });
         },
         [SET_NEWS]: (action: any) => {
-            set({ popup: action.news });
+            set({ news: action.news });
         },
     },
 }));

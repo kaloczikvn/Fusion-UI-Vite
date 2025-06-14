@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useBaseStore from '../stores/useBaseStore';
-import { SET_BLUR, SET_MENU } from '../constants/ActionTypes';
+import { SET_BLUR, SET_MENU, SET_NEWS } from '../constants/ActionTypes';
 
 const PageMainMenu: React.FC = () => {
     const news = useBaseStore((s) => s.news);
+    const fetchNewsIntervalRef = useRef<number | null>(null);
 
     const disableBlur = () => {
         window.DispatchAction(SET_BLUR, { blur: false });
@@ -14,8 +15,37 @@ const PageMainMenu: React.FC = () => {
     };
 
     useEffect(() => {
+        const fetchNews = () =>
+            new Promise((resolve, reject) => {
+                fetch('https://veniceunleashed.net/vu-ig-news')
+                    .then((response: any) => {
+                        response
+                            .json()
+                            .then((newsJson: any) => {
+                                window.DispatchAction(SET_NEWS, { news: newsJson });
+                                resolve(newsJson);
+                            })
+                            .catch((err: any) => {
+                                reject(err);
+                            });
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+
         disableBlur();
         enableMenu();
+
+        fetchNews();
+        fetchNewsIntervalRef.current = setInterval(fetchNews, 30 * 60 * 1000);
+
+        return () => {
+            if (fetchNewsIntervalRef.current) {
+                clearInterval(fetchNewsIntervalRef.current);
+                fetchNewsIntervalRef.current = null;
+            }
+        };
     }, []);
 
     const openNewsLink = (link: string, e: any) => {

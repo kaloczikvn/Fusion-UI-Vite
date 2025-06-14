@@ -14,15 +14,12 @@ import {
     CYCLE_SERVER_SORT_DIRECTION,
     REMOVE_FAVORITE_SERVER,
     SET_AVAILABLE_XPACKS,
-    SET_BUILD_NUMBER,
     SET_FAVORITE_SERVERS,
     SET_MIN_SERVER_BUILD,
     SET_SERVERS,
     SET_SERVER_DATA,
     SET_SERVER_DOWNLOAD_PROGRESS,
     SET_SERVER_FILTERS,
-    SET_VERSION_NUMBER,
-    SET_VEXT_VERSION,
     SORT_SERVERS_BY,
     TOGGLE_FAVORITE_SERVERS_ONLY,
 } from '../constants/ActionTypes';
@@ -43,9 +40,6 @@ type State = {
     };
     availableXPacks: any;
     minServerBuild: any;
-    build: any;
-    version: any;
-    vextVersion: any;
     favoriteServers: Set<string>;
     favoriteServersOnly: boolean;
     //
@@ -68,9 +62,6 @@ const initialState = {
     },
     availableXPacks: [],
     minServerBuild: 0,
-    build: 0,
-    version: '',
-    vextVersion: '',
     favoriteServers: new Set([]),
     favoriteServersOnly: false,
 };
@@ -79,17 +70,6 @@ const useServerStore = create<State>((set) => ({
     ...initialState,
     //
     actions: {
-        /*
-        [SET_BUILD_NUMBER]: (action: any) => {
-            set({ build: action.build });
-        },
-        [SET_VERSION_NUMBER]: (action: any) => {
-            set({ version: action.version });
-        },
-        [SET_VEXT_VERSION]: (action: any) => {
-            set({ vextVersion: action.version });
-        },
-        */
         [SET_FAVORITE_SERVERS]: (action: any) => {
             set({ favoriteServers: new Set([...action.servers]) });
         },
