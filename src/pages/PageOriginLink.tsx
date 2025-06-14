@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react';
 import useBaseStore from '../stores/useBaseStore';
 import useUserStore from '../stores/useUserStore';
+import { SET_BLUR, SET_MENU, SET_POPUP } from '../constants/ActionTypes';
 
 const PageOriginLink: React.FC = () => {
     const productName = useBaseStore((s) => s.productName);
     const originLinkStatus = useUserStore((s) => s.originLinkStatus);
 
     const enableBlur = () => {
-        // TODO: dispatch({ type: ActionTypes.SET_BLUR, blur: true });
+        window.DispatchAction(SET_BLUR, {
+            blur: true,
+        });
     };
 
     const disableMenu = () => {
-        // TODO: dispatch({ type: ActionTypes.SET_MENU, menu: false });
+        window.DispatchAction(SET_MENU, {
+            menu: false,
+        });
     };
 
     const setPopup = (popup: any) => {
-        // TODO: dispatch({ type: ActionTypes.SET_POPUP, popup: popup });
+        window.DispatchAction(SET_POPUP, {
+            popup: popup,
+        });
     };
 
     const onRetry = (e: any) => {

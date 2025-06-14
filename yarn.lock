@@ -2030,6 +2030,11 @@ use-isomorphic-layout-effect@^1.2.0:
   resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.2.1.tgz#2f11a525628f56424521c748feabc2ffcc962fce"
   integrity sha512-tpZZ+EX0gaghDAiFR37hj5MgY6ZN55kLiPkJsKxBMZ6GZdOSPJXiOzPM984oPYZ5AnehYx5WQp1+ME8I/P/pRA==
 
+vite-plugin-vext@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-vext/-/vite-plugin-vext-0.1.1.tgz#d21344f64c6de28b99bcdd48a899da16bdb5fb07"
+  integrity sha512-Xmj2D8js8XJl00app+OOv7wBHcPn/tRB1KgxJI2g7AWslXTgZkwNj6RfoBkNMw2KmOpeiCiE4dXFvxmDGvtf3w==
+
 vite@^6.3.5:
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.5.tgz#fec73879013c9c0128c8d284504c6d19410d12a3"

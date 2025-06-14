@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import useUserStore from '../stores/useUserStore';
+import { CHANGE_LOGIN_STATUS, SET_BLUR, SET_MENU, SET_POPUP } from '../constants/ActionTypes';
+import { LOGGING_IN } from '../constants/LoginStatus';
 
 const PageLogin: React.FC = () => {
-    const loginData = useUserStore((s) => state.loginData);
-    const loginToken = useUserStore((s) => state.loginToken);
+    const loginData = useUserStore((s) => s.loginData);
+    const loginToken = useUserStore((s) => s.loginToken);
 
     const [capsLock, setCapsLock] = useState(false);
     const [username, setUsername] = useState<string>('');
@@ -11,25 +13,27 @@ const PageLogin: React.FC = () => {
     const [remember, setRemember] = useState<boolean>(false);
 
     const enableBlur = () => {
-        // TODO: dispatch({ type: ActionTypes.SET_BLUR, blur: true });
+        window.DispatchAction(SET_BLUR, {
+            blur: true,
+        });
     };
 
     const disableMenu = () => {
-        // TODO:dispatch({ type: ActionTypes.SET_MENU, menu: false });
+        window.DispatchAction(SET_MENU, {
+            menu: false,
+        });
     };
 
     const setPopup = (popup: any) => {
-        // TODO:dispatch({ type: ActionTypes.SET_POPUP, popup: popup });
+        window.DispatchAction(SET_POPUP, {
+            popup: popup,
+        });
     };
 
     const onSetLogin = () => {
-        /*
-        // TODO:
-        dispatch({
-            type: ActionTypes.CHANGE_LOGIN_STATUS,
-            status: LoginStatus.LOGGING_IN,
+        window.DispatchAction(CHANGE_LOGIN_STATUS, {
+            status: LOGGING_IN,
         });
-        */
     };
 
     const onUpdateCapsLock = (e: any) => {
