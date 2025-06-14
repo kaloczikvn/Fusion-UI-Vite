@@ -22,7 +22,6 @@ window.DispatchAction = (action: number, data?: any) => {
         console.error(`No zustand function implemented for action: ${action}`);
         return;
     }
-
     func(data);
 };
 

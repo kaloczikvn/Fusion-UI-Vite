@@ -5,6 +5,7 @@ import PageOriginLink from './pages/PageOriginLink';
 import BaseWrapper from './components/wrapper/BaseWrapper';
 import PageMainMenu from './pages/PageMainMenu';
 import PageCredits from './pages/PageCredits';
+import PageServerBrowser from './pages/PageServerBrowser';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: 'main-menu',
                 element: <PageMainMenu />,
+            },
+            {
+                path: 'server-browser',
+                element: <PageServerBrowser />,
             },
             {
                 path: 'credits',

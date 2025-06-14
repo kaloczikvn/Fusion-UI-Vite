@@ -29,9 +29,9 @@ type State = {
     hasBlur: boolean;
     hasMenu: boolean;
     popup: any | null;
-    build: number;
-    version: string;
-    vextVersion: string;
+    build: any;
+    version: any;
+    vextVersion: any;
     pendingServer: string | null;
     pendingServerSpectate: boolean;
     pendingServerPassword: string;

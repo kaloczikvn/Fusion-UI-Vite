@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 
-import * as AccountStorageKeys from '../constants/AccountStorageKeys';
 import * as ServerFetchStatus from '../constants/ServerFetchStatus';
 import * as ServerSort from '../constants/ServerSort';
 import * as SortDirection from '../constants/SortDirection';
@@ -29,8 +28,6 @@ import {
 } from '../constants/ActionTypes';
 
 type State = {
-    originalListing: any;
-    listing: any;
     map: any;
     filters: any | null;
     sortBy: number;
@@ -45,10 +42,10 @@ type State = {
         currentFile: number;
     };
     availableXPacks: any;
-    minServerBuild: number;
-    build: number;
-    version: string;
-    vextVersion: string;
+    minServerBuild: any;
+    build: any;
+    version: any;
+    vextVersion: any;
     favoriteServers: Set<string>;
     favoriteServersOnly: boolean;
     //
@@ -56,8 +53,6 @@ type State = {
 };
 
 const initialState = {
-    originalListing: [],
-    listing: [],
     map: {},
     filters: null,
     sortBy: ServerSort.NONE,
@@ -84,6 +79,7 @@ const useServerStore = create<State>((set) => ({
     ...initialState,
     //
     actions: {
+        /*
         [SET_BUILD_NUMBER]: (action: any) => {
             set({ build: action.build });
         },
@@ -93,6 +89,7 @@ const useServerStore = create<State>((set) => ({
         [SET_VEXT_VERSION]: (action: any) => {
             set({ vextVersion: action.version });
         },
+        */
         [SET_FAVORITE_SERVERS]: (action: any) => {
             set({ favoriteServers: new Set([...action.servers]) });
         },
@@ -111,10 +108,31 @@ const useServerStore = create<State>((set) => ({
             set({ fetchStatus: action.status });
         },
         [SET_SERVERS]: (action: any) => {
-            // set({ fetchStatus: action.status });
+            set(() => {
+                let map: any = {};
+
+                for (const server of action.servers) {
+                    map[server.guid] = server;
+                }
+
+                return {
+                    map: map,
+                };
+            });
         },
         [ADD_SERVER]: (action: any) => {
-            // set({ fetchStatus: action.status });
+            set((s) => {
+                let map = { ...s.map };
+
+                map = {
+                    ...map,
+                    [action.server.guid]: action.server,
+                };
+
+                return {
+                    map: map,
+                };
+            });
         },
         [CHANGE_SERVER_CONNECT_STATUS]: (action: any) => {
             set({ connectStatus: action.status });
@@ -126,7 +144,18 @@ const useServerStore = create<State>((set) => ({
             set({ minServerBuild: action.build });
         },
         [SET_SERVER_DATA]: (action: any) => {
-            // set({ fetchStatus: action.status });
+            set((s) => {
+                const map = { ...s.map };
+
+                map[action.server.guid] = {
+                    ...map[action.server.guid],
+                    ...action.server,
+                };
+
+                return {
+                    map: map,
+                };
+            });
         },
         [SET_SERVER_DOWNLOAD_PROGRESS]: (action: any) => {
             set((s) => ({
@@ -141,13 +170,50 @@ const useServerStore = create<State>((set) => ({
             }));
         },
         [SORT_SERVERS_BY]: (action: any) => {
-            // set({ fetchStatus: action.status });
+            set((s) => {
+                if (s.sortBy === action.sortBy && s.sortDirection === action.sortDirection) {
+                    return {};
+                }
+
+                return {
+                    sortBy: action.sortBy,
+                    sortDirection: action.sortDirection,
+                };
+            });
         },
-        [CYCLE_SERVER_SORT_DIRECTION]: (action: any) => {
-            // set({ fetchStatus: action.status });
+        [CYCLE_SERVER_SORT_DIRECTION]: () => {
+            set((s) => {
+                if (s.sortBy === ServerSort.NONE) {
+                    return {};
+                }
+
+                if (s.sortDirection === SortDirection.NONE) {
+                    return {
+                        sortDirection: SortDirection.ASC,
+                    };
+                }
+
+                if (s.sortDirection === SortDirection.ASC) {
+                    return {
+                        sortDirection: SortDirection.DESC,
+                    };
+                }
+
+                return {
+                    sortDirection: SortDirection.NONE,
+                };
+            });
         },
         [SET_SERVER_FILTERS]: (action: any) => {
-            // set({ fetchStatus: action.status });
+            set((s) => {
+                if (s.filters === action.filters) {
+                    return {};
+                }
+
+                return {
+                    filters: action.filters,
+                };
+            });
         },
         [ADD_FAVORITE_SERVER]: (action: any) => {
             set((s) => {
@@ -175,8 +241,12 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [TOGGLE_FAVORITE_SERVERS_ONLY]: (action: any) => {
-            //
+        [TOGGLE_FAVORITE_SERVERS_ONLY]: () => {
+            set((s) => {
+                return {
+                    favoriteServersOnly: !s.favoriteServersOnly,
+                };
+            });
         },
     },
 }));
