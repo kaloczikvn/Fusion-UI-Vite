@@ -7,6 +7,7 @@ import PageMainMenu from './pages/PageMainMenu';
 import PageCredits from './pages/PageCredits';
 import PageServerBrowser from './pages/PageServerBrowser';
 import PagePlayers from './pages/PagePlayers';
+import PageSettings from './pages/PageSettings';
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: 'credits',
                 element: <PageCredits />,
+            },
+            {
+                path: 'settings',
+                element: <PageSettings />,
             },
             {
                 path: '*',

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as ActionTypes from '../../constants/ActionTypes';
 import useSettingsStore from '../../stores/useSettingsStore';
 
-const SettingsPopup: React.FC = () => {
+const ApplySettingsPopup: React.FC = () => {
     const currentSettings = useSettingsStore((s) => s.currentSettings);
     const gameSettings = useSettingsStore((s) => s.gameSettings);
 
@@ -95,4 +95,4 @@ const SettingsPopup: React.FC = () => {
         </div>
     );
 };
-export default SettingsPopup;
+export default ApplySettingsPopup;

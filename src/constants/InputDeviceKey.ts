@@ -143,7 +143,7 @@ export const INPUT_DEVICE_KEY_Mail = 236;
 export const INPUT_DEVICE_KEY_MediaSelect = 237;
 export const INPUT_DEVICE_KEY_Undefined = 255;
 
-export const InputDeviceKeyNames = {
+export const InputDeviceKeyNames: any = {
     [INPUT_DEVICE_KEY_None]: 'None',
     [INPUT_DEVICE_KEY_Escape]: 'Escape',
     [INPUT_DEVICE_KEY_1]: '1',

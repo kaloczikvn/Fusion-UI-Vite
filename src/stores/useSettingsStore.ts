@@ -3,6 +3,7 @@ import {
     SET_CURRENT_SETTINGS,
     SET_MOD_SETTINGS,
     SET_SETTINGS,
+    SET_SETTINGS_SELECTED_MOD,
     SET_SETTINGS_TAB,
     SHOW_SETTINGS_POPUP,
 } from '../constants/ActionTypes';
@@ -53,6 +54,13 @@ const useSettingsStore = create<State>((set) => ({
             });
         },
         [SET_SETTINGS_TAB]: (action: any) => {
+            set(() => {
+                return {
+                    tab: action.tab,
+                };
+            });
+        },
+        [SET_SETTINGS_SELECTED_MOD]: (action: any) => {
             set(() => {
                 return {
                     selectedMod: action.selectedMod,
