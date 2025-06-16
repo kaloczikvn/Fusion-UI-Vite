@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-// import PerfectScrollbar from 'perfect-scrollbar';
+import PerfectScrollbar from 'perfect-scrollbar';
 import useServerStore from '../stores/useServerStore';
 import useUserStore from '../stores/useUserStore';
 import ConnectingServerPopup from '../components/popups/ConnectingServerPopup';
@@ -16,6 +16,16 @@ import { ServerConnectStatus } from '../constants/ServerConnectStatus';
 import { COMPACT_VIEW } from '../constants/AccountStorageKeys';
 import { ServerSort } from '../constants/ServerSort';
 import { SortDirection } from '../constants/SortDirection';
+import {
+    MdArrowDropDown,
+    MdArrowDropUp,
+    MdFilterList,
+    MdOutlineToggleOff,
+    MdOutlineToggleOn,
+    MdSync,
+    MdToggleOff,
+    MdToggleOn,
+} from 'react-icons/md';
 
 const PageServerBrowser: React.FC = () => {
     const filters = useServerStore((s) => s.filters);
@@ -37,9 +47,10 @@ const PageServerBrowser: React.FC = () => {
     const [width, setWidth] = useState<number>(920);
     const [height, setHeight] = useState<number>(580);
 
-    const scrollbarRef = useRef<any>(null);
-    const browserRef = useRef<any>(null);
-    const headerRef = useRef<any>(null);
+    const scrollbarRef = useRef<PerfectScrollbar | null>(null);
+    const serverListRef = useRef<HTMLDivElement | null>(null);
+    const browserRef = useRef<HTMLDivElement | null>(null);
+    const headerRef = useRef<HTMLDivElement | null>(null);
 
     const onResetServerFetch = () => {
         window.DispatchAction(ActionTypes.CHANGE_SERVER_FETCH_STATUS, {
@@ -137,26 +148,6 @@ const PageServerBrowser: React.FC = () => {
         }
 
         cycleServerSortDirection();
-    };
-
-    /*
-    const _onServerList = (ref: any) => {
-        if (ref === null) {
-            scrollbarRef.current = null;
-            return;
-        }
-
-        scrollbarRef.current = new PerfectScrollbar(ref, {
-            wheelSpeed: 3,
-            suppressScrollX: true,
-        });
-    };
-    */
-
-    const _hasFilterApplied = () => {
-        if (filters === null) return false;
-
-        return JSON.stringify(filters) !== JSON.stringify(getDefaultFilters());
     };
 
     const _onCloseFilters = () => {
@@ -305,32 +296,8 @@ const PageServerBrowser: React.FC = () => {
 
     let sortIcon: any = '';
 
-    if (sortDirection === SortDirection.ASC)
-        sortIcon = (
-            <svg
-                className="sort-indicator"
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#e8eaed"
-            >
-                <path d="m280-400 200-200 200 200H280Z" />
-            </svg>
-        );
-    else if (sortDirection === SortDirection.DESC)
-        sortIcon = (
-            <svg
-                className="sort-indicator"
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#e8eaed"
-            >
-                <path d="M480-360 280-560h400L480-360Z" />
-            </svg>
-        );
+    if (sortDirection === SortDirection.ASC) sortIcon = <MdArrowDropUp />;
+    else if (sortDirection === SortDirection.DESC) sortIcon = <MdArrowDropDown />;
 
     const mapSort = stateSortBy === ServerSort.MAP ? sortIcon : '';
     const gamemodeSort = stateSortBy === ServerSort.GAMEMODE ? sortIcon : '';
@@ -444,6 +411,27 @@ const PageServerBrowser: React.FC = () => {
         vextVersion,
     ]);
 
+    const hasFilterAppliedMemo = useMemo(() => {
+        if (filters === null) return false;
+        return JSON.stringify(filters) !== JSON.stringify(getDefaultFilters());
+    }, [filters]);
+
+    useEffect(() => {
+        if (!scrollbarRef.current && serverListRef.current) {
+            scrollbarRef.current = new PerfectScrollbar(serverListRef.current, {
+                wheelSpeed: 3,
+                suppressScrollX: true,
+            });
+        }
+
+        return () => {
+            if (scrollbarRef.current) {
+                scrollbarRef.current.destroy();
+                scrollbarRef.current = null;
+            }
+        };
+    }, []);
+
     return (
         <div className="server-browser content-wrapper" ref={browserRef}>
             <div className="server-list">
@@ -456,36 +444,19 @@ const PageServerBrowser: React.FC = () => {
                                     : `Found ${serversMemo.length} server${serversMemo.length !== 1 ? 's' : ''}`}
                             </span>
                             <a href="#" className={clsx({ fetching: fetchStatus === ServerFetchStatus.FETCHING })}>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    height="24px"
-                                    viewBox="0 -960 960 960"
-                                    width="24px"
-                                    fill="#e8eaed"
-                                >
-                                    <path d="M160-160v-80h110l-16-14q-52-46-73-105t-21-119q0-111 66.5-197.5T400-790v84q-72 26-116 88.5T240-478q0 45 17 87.5t53 78.5l10 10v-98h80v240H160Zm400-10v-84q72-26 116-88.5T720-482q0-45-17-87.5T650-648l-10-10v98h-80v-240h240v80H690l16 14q49 49 71.5 106.5T800-482q0 111-66.5 197.5T560-170Z" />
-                                </svg>
+                                <MdSync />
                             </a>
                         </div>
                         <div
                             id="filters_visible"
-                            className={
-                                'header-action' +
-                                (filtersVisible ? ' active' : '') +
-                                (_hasFilterApplied() ? ' hasFilter' : '')
-                            }
+                            className={clsx('header-action', {
+                                active: filtersVisible,
+                                hasFilter: hasFilterAppliedMemo,
+                            })}
                         >
                             <span onClick={onEditFilters}>Filters</span>
                             <a href="#" onClick={onEditFilters}>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    height="24px"
-                                    viewBox="0 -960 960 960"
-                                    width="24px"
-                                    fill="#e8eaed"
-                                >
-                                    <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
-                                </svg>
+                                <MdFilterList />
                             </a>
                             <ServerFilters visible={filtersVisible} onClose={_onCloseFilters} />
                         </div>
@@ -494,58 +465,14 @@ const PageServerBrowser: React.FC = () => {
                             onClick={onToggleCompactView}
                         >
                             <span>Compact view</span>
-                            <a href="#">
-                                {compactViewMemo ? (
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        height="24px"
-                                        viewBox="0 -960 960 960"
-                                        width="24px"
-                                        fill="#e8eaed"
-                                    >
-                                        <path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm400-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM480-480Z" />
-                                    </svg>
-                                ) : (
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        height="24px"
-                                        viewBox="0 -960 960 960"
-                                        width="24px"
-                                        fill="#e8eaed"
-                                    >
-                                        <path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm200-120Z" />
-                                    </svg>
-                                )}
-                            </a>
+                            <a href="#">{compactViewMemo ? <MdOutlineToggleOn /> : <MdOutlineToggleOff />}</a>
                         </div>
                         <div
                             className={'header-action compact' + (favoriteServersOnly ? ' active' : '')}
                             onClick={onToggleFavoritesOnly}
                         >
                             <span>Favorites</span>
-                            <a href="#">
-                                {favoriteServersOnly ? (
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        height="24px"
-                                        viewBox="0 -960 960 960"
-                                        width="24px"
-                                        fill="#e8eaed"
-                                    >
-                                        <path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm400-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM480-480Z" />
-                                    </svg>
-                                ) : (
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        height="24px"
-                                        viewBox="0 -960 960 960"
-                                        width="24px"
-                                        fill="#e8eaed"
-                                    >
-                                        <path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm200-120Z" />
-                                    </svg>
-                                )}
-                            </a>
+                            <a href="#">{favoriteServersOnly ? <MdOutlineToggleOn /> : <MdOutlineToggleOff />}</a>
                         </div>
                     </div>
                     <div className="column column-2 sort-action" onClick={_onSortByMap}>
@@ -572,7 +499,7 @@ const PageServerBrowser: React.FC = () => {
                         width: width,
                         height: height,
                     }}
-                    // ref={_onServerList}
+                    ref={serverListRef}
                 >
                     {serversMemo.length > 0 ? (
                         <>

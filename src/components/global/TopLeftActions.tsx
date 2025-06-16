@@ -1,9 +1,8 @@
 import React from 'react';
 
-import ExitToAppIcon from '../icons/ExitToAppIcon';
-import PowerSettingsNewIcon from '../icons/PowerSettingsNewIcon';
 import useUserStore from '../../stores/useUserStore';
 import { LoginStatus } from '../../constants/LoginStatus';
+import { MdExitToApp, MdPowerSettingsNew } from 'react-icons/md';
 
 interface IProps {
     onQuit: () => void;
@@ -29,13 +28,13 @@ const TopLeftActions: React.FC<IProps> = ({ onQuit, onLogoutQuit }) => {
         <ul className="top-actions left">
             <li>
                 <a href="#" onClick={handleQuit}>
-                    <PowerSettingsNewIcon />
+                    <MdPowerSettingsNew />
                 </a>
             </li>
             {loginStatus === LoginStatus.LOGGED_IN ? (
                 <li>
                     <a href="#" onClick={handleLogout}>
-                        <ExitToAppIcon />
+                        <MdExitToApp />
                     </a>
                 </li>
             ) : null}

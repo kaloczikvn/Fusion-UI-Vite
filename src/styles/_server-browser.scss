@@ -72,7 +72,7 @@
             transition: opacity 150ms ease-in-out;
 
             &.sort-indicator {
-                fill: #fff;
+                color: #fff;
                 opacity: 0.4;
             }
         }
@@ -314,7 +314,7 @@
 
         .compat-notice {
             svg {
-                fill: #e14d43;
+                color: #e14d43;
             }
         }
 
@@ -351,7 +351,7 @@
             }
 
             &.is-favorite {
-                fill: #e14d43;
+                color: #e14d43;
             }
         }
     }
@@ -481,8 +481,9 @@
 
 .list-body.compact .server-entry .server-icon.compact-tags {
     display: inline;
+
     svg {
-        fill: #61d2ff !important;
+        color: #61d2ff !important;
     }
 }
 

@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 9.259259259259259vh;
 }
 
 .main-container {
@@ -89,6 +90,8 @@
             opacity: 0;
             transition: opacity 150ms ease-in-out;
             z-index: 3;
+            width: 7.407407407407407vh;
+            height: 7.407407407407407vh;
         }
 
         &:hover {
