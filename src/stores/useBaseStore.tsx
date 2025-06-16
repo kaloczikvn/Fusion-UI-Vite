@@ -1,27 +1,10 @@
 import { create } from 'zustand';
-import {
-    CHANGE_CONNECTION_STATUS,
-    CHANGE_INGAME,
-    CHANGE_UPDATE_STATE,
-    SET_BLUR,
-    SET_BUILD_NUMBER,
-    SET_ERROR,
-    SET_GLOBAL_NOTICE,
-    SET_INITIALIZED,
-    SET_MENU,
-    SET_NEWS,
-    SET_PENDING_SERVER,
-    SET_POPUP,
-    SET_PRODUCT_CODE,
-    SET_PRODUCT_NAME,
-    SET_VERSION_NUMBER,
-    SET_VEXT_VERSION,
-} from '../constants/ActionTypes';
 import UpdateReadyPopup from '../components/popups/UpdateReadyPopup';
 import ConnectToPendingServerPopup from '../components/popups/ConnectToPendingServerPopup';
 import useNavigateStore from './useNavigateStore';
-import * as ConnectionStatus from '../constants/ConnectionStatus';
-import * as UpdateState from '../constants/UpdateState';
+import { ActionTypes } from '../constants/ActionTypes';
+import { ConnectionStatus } from '../constants/ConnectionStatus';
+import { UpdateState } from '../constants/UpdateState';
 
 type State = {
     initialized: boolean;
@@ -65,10 +48,10 @@ const useBaseStore = create<State>((set) => ({
     globalNotice: null,
     //
     actions: {
-        [SET_GLOBAL_NOTICE]: (action: any) => {
+        [ActionTypes.SET_GLOBAL_NOTICE]: (action: any) => {
             set({ globalNotice: action.notice });
         },
-        [SET_INITIALIZED]: () => {
+        [ActionTypes.SET_INITIALIZED]: () => {
             set((s) => {
                 setTimeout(() => {
                     if (s.connectionStatus === ConnectionStatus.CONNECTED) {
@@ -81,22 +64,22 @@ const useBaseStore = create<State>((set) => ({
                 return { initialized: true };
             });
         },
-        [SET_PRODUCT_NAME]: (action: any) => {
+        [ActionTypes.SET_PRODUCT_NAME]: (action: any) => {
             set({ productName: action.name });
         },
-        [SET_PRODUCT_CODE]: (action: any) => {
+        [ActionTypes.SET_PRODUCT_CODE]: (action: any) => {
             set({ productCode: action.code });
         },
-        [SET_BUILD_NUMBER]: (action: any) => {
+        [ActionTypes.SET_BUILD_NUMBER]: (action: any) => {
             set({ build: action.build });
         },
-        [SET_VERSION_NUMBER]: (action: any) => {
+        [ActionTypes.SET_VERSION_NUMBER]: (action: any) => {
             set({ version: action.version });
         },
-        [SET_VEXT_VERSION]: (action: any) => {
+        [ActionTypes.SET_VEXT_VERSION]: (action: any) => {
             set({ vextVersion: action.version });
         },
-        [SET_ERROR]: (action: any) => {
+        [ActionTypes.SET_ERROR]: (action: any) => {
             set({ error: action.error });
 
             if (action.page && action.page.length > 0) {
@@ -105,7 +88,7 @@ const useBaseStore = create<State>((set) => ({
                 }, 50);
             }
         },
-        [CHANGE_INGAME]: (action: any) => {
+        [ActionTypes.CHANGE_INGAME]: (action: any) => {
             set((s) => {
                 if (!s.ingame && s.pendingServer !== null) {
                     return {
@@ -119,7 +102,7 @@ const useBaseStore = create<State>((set) => ({
                 };
             });
         },
-        [CHANGE_CONNECTION_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_CONNECTION_STATUS]: (action: any) => {
             set({ connectionStatus: action.status });
 
             setTimeout(() => {
@@ -130,16 +113,16 @@ const useBaseStore = create<State>((set) => ({
                 }
             }, 50);
         },
-        [SET_BLUR]: (action: any) => {
+        [ActionTypes.SET_BLUR]: (action: any) => {
             set({ hasBlur: action.blur });
         },
-        [SET_MENU]: (action: any) => {
+        [ActionTypes.SET_MENU]: (action: any) => {
             set({ hasMenu: action.menu });
         },
-        [SET_POPUP]: (action: any) => {
+        [ActionTypes.SET_POPUP]: (action: any) => {
             set({ popup: action.popup });
         },
-        [SET_PENDING_SERVER]: (action: any) => {
+        [ActionTypes.SET_PENDING_SERVER]: (action: any) => {
             set((s) => {
                 let obj: any = {
                     pendingServer: action.server,
@@ -154,7 +137,7 @@ const useBaseStore = create<State>((set) => ({
                 return obj;
             });
         },
-        [CHANGE_UPDATE_STATE]: (action: any) => {
+        [ActionTypes.CHANGE_UPDATE_STATE]: (action: any) => {
             set((s) => {
                 if (action.state !== UpdateState.DONE_UPDATING) return {};
                 if (s.popup !== null) return {};
@@ -164,7 +147,7 @@ const useBaseStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_NEWS]: (action: any) => {
+        [ActionTypes.SET_NEWS]: (action: any) => {
             set({ news: action.news });
         },
     },

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LoadingIndicator from '../global/LoadingIndicator';
-import * as ActionTypes from '../../constants/ActionTypes';
 import useUserStore from '../../stores/useUserStore';
-import * as PlayerCreateStatus from '../../constants/PlayerCreateStatus';
 import useBaseStore from '../../stores/useBaseStore';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { PlayerCreateStatus } from '../../constants/PlayerCreateStatus';
 
 const CreatePlayerPopup: React.FC = () => {
     const playerCreateStatus = useUserStore((s) => s.playerCreateStatus);
@@ -58,7 +58,7 @@ const CreatePlayerPopup: React.FC = () => {
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
 
         if (inputRef.current) inputRef.current.focus();
     }, []);

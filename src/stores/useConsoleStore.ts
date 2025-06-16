@@ -1,13 +1,5 @@
 import { create } from 'zustand';
-import {
-    ADD_CONSOLE_TEXT,
-    CLEAR_CONSOLE,
-    EXECUTE_CONSOLE_COMMAND,
-    SET_CONSOLE_ACTIVE,
-    SET_CONSOLE_SUGGESTIONS,
-    TOGGLE_CONSOLE_ACTIVE,
-} from '../constants/ActionTypes';
-
+import { ActionTypes } from '../constants/ActionTypes';
 interface State {
     text: any;
     active: boolean;
@@ -28,7 +20,7 @@ const useConsoleStore = create<State>((set) => ({
     consoleUpdater: { update: true },
     //
     actions: {
-        [TOGGLE_CONSOLE_ACTIVE]: () => {
+        [ActionTypes.TOGGLE_CONSOLE_ACTIVE]: () => {
             set((state: any) => {
                 if (!state.active) {
                     return {
@@ -50,13 +42,13 @@ const useConsoleStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_CONSOLE_ACTIVE]: (action: any) => {
+        [ActionTypes.SET_CONSOLE_ACTIVE]: (action: any) => {
             set({
                 suggestions: [],
                 active: action.active,
             });
         },
-        [ADD_CONSOLE_TEXT]: (action: any) => {
+        [ActionTypes.ADD_CONSOLE_TEXT]: (action: any) => {
             set((state: any) => {
                 let text = action.text.trim();
                 let finalStateText = [...state.text];
@@ -207,7 +199,7 @@ const useConsoleStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_CONSOLE_SUGGESTIONS]: (action: any) => {
+        [ActionTypes.SET_CONSOLE_SUGGESTIONS]: (action: any) => {
             set((state: any) => {
                 if (!state.active) {
                     return {};
@@ -218,7 +210,7 @@ const useConsoleStore = create<State>((set) => ({
                 };
             });
         },
-        [EXECUTE_CONSOLE_COMMAND]: (action: any) => {
+        [ActionTypes.EXECUTE_CONSOLE_COMMAND]: (action: any) => {
             set((state: any) => {
                 if (action.command.trim().length === 0) {
                     return {};
@@ -231,7 +223,7 @@ const useConsoleStore = create<State>((set) => ({
                 };
             });
         },
-        [CLEAR_CONSOLE]: () => {
+        [ActionTypes.CLEAR_CONSOLE]: () => {
             set((state: any) => {
                 return {
                     text: [],

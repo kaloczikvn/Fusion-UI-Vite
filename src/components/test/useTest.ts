@@ -1,19 +1,24 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { PlayerLoginStatus } from '../../constants/PlayerLoginStatus';
+import { OriginLinkStatus } from '../../constants/OriginLinkStatus';
+import { LoginStatus } from '../../constants/LoginStatus';
+import { ConnectionStatus } from '../../constants/ConnectionStatus';
 
 const useTest = () => {
     const navigate = useNavigate();
 
     const init = () => {
-        window.DispatchAction(window.actions.CHANGE_CONNECTION_STATUS, { status: window.window.connStatus.CONNECTING });
-        window.DispatchAction(window.actions.SET_PRODUCT_NAME, { name: 'Venice Unleashed' });
-        window.DispatchAction(window.actions.SET_PRODUCT_CODE, { code: 'VU' });
-        window.DispatchAction(window.actions.SET_VERSION_NUMBER, { version: '1.0' });
-        window.DispatchAction(window.actions.SET_VEXT_VERSION, { version: '1.2.3' });
-        window.DispatchAction(window.actions.SET_BUILD_NUMBER, { build: 12345 });
-        window.DispatchAction(window.actions.SET_MIN_SERVER_BUILD, { build: 12000 });
-        window.DispatchAction(window.actions.SET_AVAILABLE_XPACKS, { xpacks: [1, 2, 3, 4] });
-        window.DispatchAction(window.actions.SET_SETTINGS, {
+        window.DispatchAction(ActionTypes.CHANGE_CONNECTION_STATUS, { status: ConnectionStatus.CONNECTING });
+        window.DispatchAction(ActionTypes.SET_PRODUCT_NAME, { name: 'Venice Unleashed' });
+        window.DispatchAction(ActionTypes.SET_PRODUCT_CODE, { code: 'VU' });
+        window.DispatchAction(ActionTypes.SET_VERSION_NUMBER, { version: '1.0' });
+        window.DispatchAction(ActionTypes.SET_VEXT_VERSION, { version: '1.2.3' });
+        window.DispatchAction(ActionTypes.SET_BUILD_NUMBER, { build: 12345 });
+        window.DispatchAction(ActionTypes.SET_MIN_SERVER_BUILD, { build: 12000 });
+        window.DispatchAction(ActionTypes.SET_AVAILABLE_XPACKS, { xpacks: [1, 2, 3, 4] });
+        window.DispatchAction(ActionTypes.SET_SETTINGS, {
             settings: {
                 resolutions: [
                     [
@@ -385,11 +390,11 @@ const useTest = () => {
                 dialogueVolume: 0.699999988079071,
             },
         });
-        window.DispatchAction(window.actions.SET_INITIALIZED);
+        window.DispatchAction(ActionTypes.SET_INITIALIZED);
 
-        window.DispatchAction(window.actions.CHANGE_CONNECTION_STATUS, { status: window.connStatus.CONNECTED });
+        window.DispatchAction(ActionTypes.CHANGE_CONNECTION_STATUS, { status: ConnectionStatus.CONNECTED });
 
-        window.DispatchAction(window.actions.SET_USER_DATA, {
+        window.DispatchAction(ActionTypes.SET_USER_DATA, {
             data: {
                 username: 'NoFaTe',
                 email: 'nofate@example.com',
@@ -398,12 +403,12 @@ const useTest = () => {
             },
         });
 
-        window.DispatchAction(window.actions.CHANGE_LOGIN_STATUS, { status: window.loginStatus.LOGGED_IN });
-        window.DispatchAction(window.actions.CHANGE_ORIGIN_LINK_STATUS, {
-            status: window.originLinkStatus.LINK_SUCCESSFUL,
+        window.DispatchAction(ActionTypes.CHANGE_LOGIN_STATUS, { status: LoginStatus.LOGGED_IN });
+        window.DispatchAction(ActionTypes.CHANGE_ORIGIN_LINK_STATUS, {
+            status: OriginLinkStatus.LINK_SUCCESSFUL,
         });
 
-        window.DispatchAction(window.actions.SET_USER_PLAYERS, {
+        window.DispatchAction(ActionTypes.SET_USER_PLAYERS, {
             players: [
                 {
                     name: 'NoFaTe',
@@ -414,7 +419,7 @@ const useTest = () => {
             ],
         });
 
-        window.DispatchAction(window.actions.SET_PLAYER_DATA, {
+        window.DispatchAction(ActionTypes.SET_PLAYER_DATA, {
             player: {
                 name: 'NoFaTe',
                 guid: 'ABCDEFGHIJ',
@@ -423,11 +428,11 @@ const useTest = () => {
             },
         });
 
-        window.DispatchAction(window.actions.CHANGE_PLAYER_LOGIN_STATUS, {
-            status: window.playerLoginStatus.LOGGED_IN,
+        window.DispatchAction(ActionTypes.CHANGE_PLAYER_LOGIN_STATUS, {
+            status: PlayerLoginStatus.LOGGED_IN,
         });
 
-        window.DispatchAction(window.actions.SET_SERVERS, {
+        window.DispatchAction(ActionTypes.SET_SERVERS, {
             servers: [
                 {
                     guid: 'B',
@@ -860,7 +865,7 @@ const useTest = () => {
         });
 
         setTimeout(() => {
-            window.DispatchAction(window.actions.SET_MOD_SETTINGS, {
+            window.DispatchAction(ActionTypes.SET_MOD_SETTINGS, {
                 settings: {
                     'vu-battleroyale': {
                         Voip_Team_TransmissionMode: {
@@ -1167,10 +1172,10 @@ const useTest = () => {
         }, 250);
 
         /*setTimeout(() => {
-            window.DispatchAction(window.actions.SET_CONSOLE_ACTIVE, { active: true });
+            window.DispatchAction(ActionTypes.SET_CONSOLE_ACTIVE, { active: true });
         
             for (let i = 0; i < 100; ++i) {
-                window.DispatchAction(window.actions.ADD_CONSOLE_TEXT, { text: 'Lorem ipsum dolor sit amet, `consectetur` adipiscing elit. *Nulla* ultrices nulla id lectus congue euismod. Quisque ac arcu eget nisi faucibus **viverra** vel si' + Math.random() });
+                window.DispatchAction(ActionTypes.ADD_CONSOLE_TEXT, { text: 'Lorem ipsum dolor sit amet, `consectetur` adipiscing elit. *Nulla* ultrices nulla id lectus congue euismod. Quisque ac arcu eget nisi faucibus **viverra** vel si' + Math.random() });
             }
         }, 1000);*/
 
@@ -1179,12 +1184,12 @@ const useTest = () => {
         }, 250);
 
         setInterval(() => {
-            window.DispatchAction(window.actions.SET_VOIP_DATA, { data: { volume: Math.random() } });
+            window.DispatchAction(ActionTypes.SET_VOIP_DATA, { data: { volume: Math.random() } });
         }, 100);
 
         /*setTimeout(() => {
-            window.DispatchAction(window.actions.CHANGE_INGAME, { ingame: true });
-            window.DispatchAction(window.actions.SHOW_SETTINGS_POPUP, { show: true });
+            window.DispatchAction(ActionTypes.CHANGE_INGAME, { ingame: true });
+            window.DispatchAction(ActionTypes.SHOW_SETTINGS_POPUP, { show: true });
         }, 250);*/
 
         // window.GlobalNotice({ notice: 'Wawawwiwa going back to town on the big ass scooter with capri sun.' });

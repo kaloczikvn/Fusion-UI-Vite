@@ -1,5 +1,5 @@
-import * as ServerSort from '../constants/ServerSort';
-import * as SortDirection from '../constants/SortDirection';
+import { ServerSort } from '../constants/ServerSort';
+import { SortDirection } from '../constants/SortDirection';
 
 export const getServerSpectators = (server: any) => {
     const spectatorsNum = parseInt(server.variables.spectators, 10);

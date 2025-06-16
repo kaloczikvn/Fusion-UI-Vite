@@ -9,9 +9,9 @@ import {
     hasMapImage,
 } from '../../utils/server/server';
 import { getServerPlayersOnly, getServerSpectators } from '../../utils/server';
-import * as ActionTypes from '../../constants/ActionTypes';
 import ServerPerformancePopup from '../popups/ServerPerformancePopup';
 import ServerPasswordPopup from '../popups/ServerPasswordPopup';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 interface IProps {
     server: any;

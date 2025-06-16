@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { SET_VOIP_DATA } from '../constants/ActionTypes';
+import { ActionTypes } from '../constants/ActionTypes';
 
 type State = {
     devices: any;
@@ -19,7 +19,7 @@ const useVoipStore = create<State>((set) => ({
     volumeMultiplier: 1.0,
     //
     actions: {
-        [SET_VOIP_DATA]: (action: any) => {
+        [ActionTypes.SET_VOIP_DATA]: (action: any) => {
             set({ ...action.data });
         },
     },

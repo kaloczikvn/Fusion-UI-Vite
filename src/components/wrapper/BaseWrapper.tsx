@@ -9,12 +9,12 @@ import TopRightActions from '../global/TopRightActions';
 import Watermark from '../global/Watermark';
 import TopMenu from '../global/TopMenu';
 import GlobalNotice from '../global/GlobalNotice';
-import { SET_POPUP } from '../../constants/ActionTypes';
 import QuitConfirmationPopup from '../popups/QuitConfirmationPopup';
 import LogoutQuitConfirmationPopup from '../popups/LogoutQuitConfirmationPopup';
 import SettingsPopup from '../popups/SettingsPopup';
 import useNavigator from '../test/useNavigator';
 import useTest from '../test/useTest';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 const BaseWrapper: React.FC = () => {
     useTest();
@@ -51,7 +51,7 @@ const BaseWrapper: React.FC = () => {
     }, [ingame]);
 
     const setPopup = (popup: any) => {
-        window.DispatchAction(SET_POPUP, { popup: popup });
+        window.DispatchAction(ActionTypes.SET_POPUP, { popup: popup });
     };
 
     const onQuit = () => {

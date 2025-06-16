@@ -1,29 +1,10 @@
 import { create } from 'zustand';
-
-import * as ServerFetchStatus from '../constants/ServerFetchStatus';
-import * as ServerSort from '../constants/ServerSort';
-import * as SortDirection from '../constants/SortDirection';
-import * as ServerConnectStatus from '../constants/ServerConnectStatus';
-import * as ConnectionStatus from '../constants/ConnectionStatus';
-import {
-    ADD_FAVORITE_SERVER,
-    ADD_SERVER,
-    CHANGE_CONNECTION_STATUS,
-    CHANGE_SERVER_CONNECT_STATUS,
-    CHANGE_SERVER_FETCH_STATUS,
-    CYCLE_SERVER_SORT_DIRECTION,
-    REMOVE_FAVORITE_SERVER,
-    SET_AVAILABLE_XPACKS,
-    SET_FAVORITE_SERVERS,
-    SET_MIN_SERVER_BUILD,
-    SET_SERVERS,
-    SET_SERVER_DATA,
-    SET_SERVER_DOWNLOAD_PROGRESS,
-    SET_SERVER_FILTERS,
-    SORT_SERVERS_BY,
-    TOGGLE_FAVORITE_SERVERS_ONLY,
-} from '../constants/ActionTypes';
-
+import { ServerSort } from '../constants/ServerSort';
+import { SortDirection } from '../constants/SortDirection';
+import { ServerConnectStatus } from '../constants/ServerConnectStatus';
+import { ServerFetchStatus } from '../constants/ServerFetchStatus';
+import { ConnectionStatus } from '../constants/ConnectionStatus';
+import { ActionTypes } from '../constants/ActionTypes';
 type State = {
     map: any;
     filters: any | null;
@@ -70,10 +51,10 @@ const useServerStore = create<State>((set) => ({
     ...initialState,
     //
     actions: {
-        [SET_FAVORITE_SERVERS]: (action: any) => {
+        [ActionTypes.SET_FAVORITE_SERVERS]: (action: any) => {
             set({ favoriteServers: new Set([...action.servers]) });
         },
-        [CHANGE_CONNECTION_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_CONNECTION_STATUS]: (action: any) => {
             set(() => {
                 if (action.status === ConnectionStatus.DISCONNECTED) {
                     return {
@@ -84,10 +65,10 @@ const useServerStore = create<State>((set) => ({
                 return {};
             });
         },
-        [CHANGE_SERVER_FETCH_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_SERVER_FETCH_STATUS]: (action: any) => {
             set({ fetchStatus: action.status });
         },
-        [SET_SERVERS]: (action: any) => {
+        [ActionTypes.SET_SERVERS]: (action: any) => {
             set(() => {
                 let map: any = {};
 
@@ -100,7 +81,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [ADD_SERVER]: (action: any) => {
+        [ActionTypes.ADD_SERVER]: (action: any) => {
             set((s) => {
                 let map = { ...s.map };
 
@@ -114,16 +95,16 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [CHANGE_SERVER_CONNECT_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_SERVER_CONNECT_STATUS]: (action: any) => {
             set({ connectStatus: action.status });
         },
-        [SET_AVAILABLE_XPACKS]: (action: any) => {
+        [ActionTypes.SET_AVAILABLE_XPACKS]: (action: any) => {
             set({ availableXPacks: [...action.xpacks] });
         },
-        [SET_MIN_SERVER_BUILD]: (action: any) => {
+        [ActionTypes.SET_MIN_SERVER_BUILD]: (action: any) => {
             set({ minServerBuild: action.build });
         },
-        [SET_SERVER_DATA]: (action: any) => {
+        [ActionTypes.SET_SERVER_DATA]: (action: any) => {
             set((s) => {
                 const map = { ...s.map };
 
@@ -137,7 +118,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_SERVER_DOWNLOAD_PROGRESS]: (action: any) => {
+        [ActionTypes.SET_SERVER_DOWNLOAD_PROGRESS]: (action: any) => {
             set((s) => ({
                 downloadProgress: {
                     ...s.downloadProgress,
@@ -149,7 +130,7 @@ const useServerStore = create<State>((set) => ({
                 },
             }));
         },
-        [SORT_SERVERS_BY]: (action: any) => {
+        [ActionTypes.SORT_SERVERS_BY]: (action: any) => {
             set((s) => {
                 if (s.sortBy === action.sortBy && s.sortDirection === action.sortDirection) {
                     return {};
@@ -161,7 +142,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [CYCLE_SERVER_SORT_DIRECTION]: () => {
+        [ActionTypes.CYCLE_SERVER_SORT_DIRECTION]: () => {
             set((s) => {
                 if (s.sortBy === ServerSort.NONE) {
                     return {};
@@ -184,7 +165,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_SERVER_FILTERS]: (action: any) => {
+        [ActionTypes.SET_SERVER_FILTERS]: (action: any) => {
             set((s) => {
                 if (s.filters === action.filters) {
                     return {};
@@ -195,7 +176,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [ADD_FAVORITE_SERVER]: (action: any) => {
+        [ActionTypes.ADD_FAVORITE_SERVER]: (action: any) => {
             set((s) => {
                 window.WebUI.Call('AddFavoriteServer', action.server.guid);
 
@@ -208,7 +189,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [REMOVE_FAVORITE_SERVER]: (action: any) => {
+        [ActionTypes.REMOVE_FAVORITE_SERVER]: (action: any) => {
             set((s) => {
                 window.WebUI.Call('RemoveFavoriteServer', action.server.guid);
 
@@ -221,7 +202,7 @@ const useServerStore = create<State>((set) => ({
                 };
             });
         },
-        [TOGGLE_FAVORITE_SERVERS_ONLY]: () => {
+        [ActionTypes.TOGGLE_FAVORITE_SERVERS_ONLY]: () => {
             set((s) => {
                 return {
                     favoriteServersOnly: !s.favoriteServersOnly,

@@ -1,26 +1,27 @@
 import React, { useEffect } from 'react';
 import useBaseStore from '../stores/useBaseStore';
 import useUserStore from '../stores/useUserStore';
-import { SET_BLUR, SET_MENU, SET_POPUP } from '../constants/ActionTypes';
+import { ActionTypes } from '../constants/ActionTypes';
+import { OriginLinkStatus } from '../constants/OriginLinkStatus';
 
 const PageOriginLink: React.FC = () => {
     const productName = useBaseStore((s) => s.productName);
     const originLinkStatus = useUserStore((s) => s.originLinkStatus);
 
     const enableBlur = () => {
-        window.DispatchAction(SET_BLUR, {
+        window.DispatchAction(ActionTypes.SET_BLUR, {
             blur: true,
         });
     };
 
     const disableMenu = () => {
-        window.DispatchAction(SET_MENU, {
+        window.DispatchAction(ActionTypes.SET_MENU, {
             menu: false,
         });
     };
 
     const setPopup = (popup: any) => {
-        window.DispatchAction(SET_POPUP, {
+        window.DispatchAction(ActionTypes.SET_POPUP, {
             popup: popup,
         });
     };
@@ -34,6 +35,7 @@ const PageOriginLink: React.FC = () => {
     useEffect(() => {
         enableBlur();
         disableMenu();
+
         window.WebUI.Call('LinkOrigin');
 
         return () => {
@@ -46,56 +48,50 @@ const PageOriginLink: React.FC = () => {
     let spinning = false;
 
     switch (originLinkStatus) {
-        case window.originLinkStatus.IDLE:
+        case OriginLinkStatus.IDLE:
             originState = 'Waiting for Origin / EA Desktop...';
             spinning = true;
             break;
 
-        case window.originLinkStatus.LINKING:
+        case OriginLinkStatus.LINKING:
             originState = 'Linking Account...';
             spinning = true;
             break;
 
-        case window.originLinkStatus.LINK_SUCCESSFUL:
+        case OriginLinkStatus.LINK_SUCCESSFUL:
             originState = 'Successfully Linked!';
             break;
 
-        case window.originLinkStatus.CHECKING_OWNERSHIP:
+        case OriginLinkStatus.CHECKING_OWNERSHIP:
             originState = 'Checking Ownership...';
             spinning = true;
             break;
 
-        case window.originLinkStatus.LINK_FAILED:
+        case OriginLinkStatus.LINK_FAILED:
             originState = 'Link Failed, Try later';
             canRetry = true;
             break;
 
-        case window.originLinkStatus.PRODUCT_MISSING:
+        case OriginLinkStatus.PRODUCT_MISSING:
             originState = 'Your account does not own Battlefield 3';
             canRetry = true;
             break;
 
-        case window.originLinkStatus.LINK_TAKEN:
+        case OriginLinkStatus.LINK_TAKEN:
             originState = 'This EA Account is already linked to another account';
             canRetry = true;
             break;
 
-        case window.originLinkStatus.LINK_UNAVAILABLE:
+        case OriginLinkStatus.LINK_UNAVAILABLE:
             originState = 'Link Service Unavailable';
             canRetry = true;
             break;
 
-        case window.originLinkStatus.ORIGIN_ERROR:
+        case OriginLinkStatus.ORIGIN_ERROR:
             originState = 'An error occurred while communicating with Origin / EA Desktop';
             canRetry = true;
             break;
     }
-
-    let retryButton = canRetry ? (
-        <a href="#" className="btn border-btn" onClick={onRetry}>
-            Retry
-        </a>
-    ) : null;
 
     return (
         <div id="origin-link-page">
@@ -110,7 +106,11 @@ const PageOriginLink: React.FC = () => {
                 <div className="status-container">
                     <img src="/assets/img/common/origin.svg" className={spinning ? 'spinning' : ''} />
                     <h2>{originState}</h2>
-                    {retryButton}
+                    {canRetry ? (
+                        <a href="#" className="btn border-btn" onClick={onRetry}>
+                            Retry
+                        </a>
+                    ) : null}
                 </div>
             </div>
         </div>

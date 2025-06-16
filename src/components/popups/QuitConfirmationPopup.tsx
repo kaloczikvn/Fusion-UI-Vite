@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useBaseStore from '../../stores/useBaseStore';
-import { SET_POPUP } from '../../constants/ActionTypes';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 const QuitConfirmationPopup: React.FC = () => {
     const productName = useBaseStore((s) => s.productName);
@@ -16,11 +16,11 @@ const QuitConfirmationPopup: React.FC = () => {
     const onClosePopup = (e: any) => {
         e.preventDefault();
 
-        window.DispatchAction(SET_POPUP, { popup: null });
+        window.DispatchAction(ActionTypes.SET_POPUP, { popup: null });
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
     }, []);
 
     return (

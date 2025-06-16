@@ -1,11 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import * as ServerFetchStatus from '../constants/ServerFetchStatus';
-import * as ServerConnectStatus from '../constants/ServerConnectStatus';
-import * as ActionTypes from '../constants/ActionTypes';
-import * as AccountStorageKeys from '../constants/AccountStorageKeys';
-import * as ServerSort from '../constants/ServerSort';
-import * as SortDirection from '../constants/SortDirection';
 // import PerfectScrollbar from 'perfect-scrollbar';
 import useServerStore from '../stores/useServerStore';
 import useUserStore from '../stores/useUserStore';
@@ -16,6 +10,12 @@ import ServerFilters from '../components/server/ServerFilters';
 import { getDefaultFilters, getSortingFunction } from '../utils/server';
 import { checkServerCompatibility } from '../utils/server/server';
 import useBaseStore from '../stores/useBaseStore';
+import { ActionTypes } from '../constants/ActionTypes';
+import { ServerFetchStatus } from '../constants/ServerFetchStatus';
+import { ServerConnectStatus } from '../constants/ServerConnectStatus';
+import { COMPACT_VIEW } from '../constants/AccountStorageKeys';
+import { ServerSort } from '../constants/ServerSort';
+import { SortDirection } from '../constants/SortDirection';
 
 const PageServerBrowser: React.FC = () => {
     const filters = useServerStore((s) => s.filters);
@@ -83,9 +83,9 @@ const PageServerBrowser: React.FC = () => {
     };
 
     const toggleCompactView = () => {
-        const boolValue = !(accountStorage[AccountStorageKeys.COMPACT_VIEW] === 'true');
+        const boolValue = !(accountStorage[COMPACT_VIEW] === 'true');
         window.DispatchAction(ActionTypes.SET_ACCOUNT_STORAGE_VALUE, {
-            key: AccountStorageKeys.COMPACT_VIEW,
+            key: COMPACT_VIEW,
             value: boolValue.toString(),
         });
     };
@@ -338,7 +338,7 @@ const PageServerBrowser: React.FC = () => {
     const pingSort = stateSortBy === ServerSort.PING ? sortIcon : '';
 
     const compactViewMemo: boolean = useMemo(() => {
-        return accountStorage[AccountStorageKeys.COMPACT_VIEW] === 'true';
+        return accountStorage[COMPACT_VIEW] === 'true';
     }, [accountStorage]);
 
     const serversMemo = useMemo(() => {

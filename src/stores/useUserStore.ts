@@ -1,25 +1,10 @@
 import { create } from 'zustand';
-import {
-    CHANGE_CONNECTION_STATUS,
-    CHANGE_LOGIN_STATUS,
-    CHANGE_ORIGIN_LINK_STATUS,
-    CHANGE_PLAYER_CREATE_STATUS,
-    CHANGE_PLAYER_DELETE_STATUS,
-    CHANGE_PLAYER_LOGIN_STATUS,
-    REMOVE_ACCOUNT_STORAGE_VALUE,
-    SET_ACCOUNT_STORAGE,
-    SET_ACCOUNT_STORAGE_VALUE,
-    SET_LOGIN_DATA,
-    SET_LOGIN_TOKEN,
-    SET_PLAYER_DATA,
-    SET_USER_DATA,
-    SET_USER_PLAYERS,
-} from '../constants/ActionTypes';
-import * as LoginStatus from '../constants/LoginStatus';
-import * as PlayerLoginStatus from '../constants/PlayerLoginStatus';
-import * as OriginLinkStatus from '../constants/OriginLinkStatus';
-import * as ConnectionStatus from '../constants/ConnectionStatus';
 import useNavigateStore from './useNavigateStore';
+import { ActionTypes } from '../constants/ActionTypes';
+import { LoginStatus } from '../constants/LoginStatus';
+import { OriginLinkStatus } from '../constants/OriginLinkStatus';
+import { ConnectionStatus } from '../constants/ConnectionStatus';
+import { PlayerLoginStatus } from '../constants/PlayerLoginStatus';
 
 type State = {
     user: null | any;
@@ -51,7 +36,7 @@ const useUserStore = create<State>((set) => ({
     accountStorage: {},
     //
     actions: {
-        [CHANGE_CONNECTION_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_CONNECTION_STATUS]: (action: any) => {
             if (action.status !== ConnectionStatus.DISCONNECTED) return;
             set((s) => {
                 return {
@@ -60,7 +45,7 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_USER_DATA]: (action: any) => {
+        [ActionTypes.SET_USER_DATA]: (action: any) => {
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
@@ -79,17 +64,17 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_LOGIN_TOKEN]: (action: any) => {
+        [ActionTypes.SET_LOGIN_TOKEN]: (action: any) => {
             set({
                 loginToken: action.data,
             });
         },
-        [SET_LOGIN_DATA]: (action: any) => {
+        [ActionTypes.SET_LOGIN_DATA]: (action: any) => {
             set({
                 loginData: action.data,
             });
         },
-        [CHANGE_LOGIN_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_LOGIN_STATUS]: (action: any) => {
             set((s) => {
                 if (
                     action.status === LoginStatus.LOGGED_IN &&
@@ -108,7 +93,7 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_USER_PLAYERS]: (action: any) => {
+        [ActionTypes.SET_USER_PLAYERS]: (action: any) => {
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
@@ -127,17 +112,17 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [CHANGE_PLAYER_DELETE_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_PLAYER_DELETE_STATUS]: (action: any) => {
             set({
                 playerDeleteStatus: action.status,
             });
         },
-        [CHANGE_PLAYER_CREATE_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_PLAYER_CREATE_STATUS]: (action: any) => {
             set({
                 playerCreateStatus: action.status,
             });
         },
-        [CHANGE_PLAYER_LOGIN_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_PLAYER_LOGIN_STATUS]: (action: any) => {
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
@@ -156,7 +141,7 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_PLAYER_DATA]: (action: any) => {
+        [ActionTypes.SET_PLAYER_DATA]: (action: any) => {
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
@@ -175,7 +160,7 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [CHANGE_ORIGIN_LINK_STATUS]: (action: any) => {
+        [ActionTypes.CHANGE_ORIGIN_LINK_STATUS]: (action: any) => {
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
@@ -205,12 +190,12 @@ const useUserStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_ACCOUNT_STORAGE]: (action: any) => {
+        [ActionTypes.SET_ACCOUNT_STORAGE]: (action: any) => {
             set({
                 accountStorage: { ...action.accountStorage },
             });
         },
-        [SET_ACCOUNT_STORAGE_VALUE]: (action: any) => {
+        [ActionTypes.SET_ACCOUNT_STORAGE_VALUE]: (action: any) => {
             window.WebUI.Call('SetAccountStorageObject', action.key, action.value);
 
             set((s) => ({
@@ -220,7 +205,7 @@ const useUserStore = create<State>((set) => ({
                 },
             }));
         },
-        [REMOVE_ACCOUNT_STORAGE_VALUE]: (action: any) => {
+        [ActionTypes.REMOVE_ACCOUNT_STORAGE_VALUE]: (action: any) => {
             window.WebUI.Call('RemoveAccountStorageObject', action.key);
 
             set((s) => {

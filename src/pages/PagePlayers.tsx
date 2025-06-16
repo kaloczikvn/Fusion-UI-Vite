@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import useUserStore from '../stores/useUserStore';
-import * as PlayerCreateStatus from '../constants/PlayerCreateStatus';
-import * as PlayerDeleteStatus from '../constants/PlayerDeleteStatus';
-import * as PlayerLoginStatus from '../constants/PlayerLoginStatus';
-import * as ActionTypes from '../constants/ActionTypes';
 import LoggingPlayerPopup from '../components/popups/LoggingPlayerPopup';
 import PlayerDeleteConfirmationPopup from '../components/popups/PlayerDeleteConfirmationPopup';
 import CreatePlayerPopup from '../components/popups/CreatePlayerPopup';
 import SoldierEntry from '../components/players/SoldierEntry';
+import { ActionTypes } from '../constants/ActionTypes';
+import { PlayerCreateStatus } from '../constants/PlayerCreateStatus';
+import { PlayerDeleteStatus } from '../constants/PlayerDeleteStatus';
+import { PlayerLoginStatus } from '../constants/PlayerLoginStatus';
 
 const PagePlayers: React.FC = () => {
     const players = useUserStore((s) => s.players);

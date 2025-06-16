@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Router from './Router';
-import './utils/globals/constants';
 import './utils/globals/DispatchAction';
 import './utils/globals/GlobalNotice';
 import './utils/globals/PrintState';

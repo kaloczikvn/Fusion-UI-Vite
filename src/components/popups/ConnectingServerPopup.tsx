@@ -2,8 +2,8 @@ import React from 'react';
 import LoadingIndicator from '../global/LoadingIndicator';
 import useServerStore from '../../stores/useServerStore';
 import useBaseStore from '../../stores/useBaseStore';
-import * as ServerConnectStatus from '../../constants/ServerConnectStatus';
-import * as ActionTypes from '../../constants/ActionTypes';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { ServerConnectStatus } from '../../constants/ServerConnectStatus';
 
 const ConnectingServerPopup: React.FC = () => {
     const connectStatus = useServerStore((s) => s.connectStatus);

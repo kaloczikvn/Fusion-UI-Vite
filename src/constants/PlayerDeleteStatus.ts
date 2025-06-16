@@ -1,3 +1,5 @@
-export const NO_STATUS = 0;
-export const DELETING = 1;
-export const DELETION_FAILED = 2;
+export enum PlayerDeleteStatus {
+    NO_STATUS = 0,
+    DELETING = 1,
+    DELETION_FAILED = 2,
+}

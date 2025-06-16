@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
-import { SET_BLUR, SET_MENU } from '../constants/ActionTypes';
 import useBaseStore from '../stores/useBaseStore';
+import { ActionTypes } from '../constants/ActionTypes';
 
 const PageCredits: React.FC = () => {
     const productName = useBaseStore((s) => s.productName);
 
     const disableBlur = () => {
-        window.DispatchAction(SET_BLUR, { blur: false });
+        window.DispatchAction(ActionTypes.SET_BLUR, { blur: false });
     };
 
     const enableMenu = () => {
-        window.DispatchAction(SET_MENU, { menu: true });
+        window.DispatchAction(ActionTypes.SET_MENU, { menu: true });
     };
 
     useEffect(() => {

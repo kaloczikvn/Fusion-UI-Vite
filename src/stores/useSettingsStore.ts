@@ -1,12 +1,5 @@
 import { create } from 'zustand';
-import {
-    SET_CURRENT_SETTINGS,
-    SET_MOD_SETTINGS,
-    SET_SETTINGS,
-    SET_SETTINGS_SELECTED_MOD,
-    SET_SETTINGS_TAB,
-    SHOW_SETTINGS_POPUP,
-} from '../constants/ActionTypes';
+import { ActionTypes } from '../constants/ActionTypes';
 
 type State = {
     gameSettings: null | any;
@@ -28,7 +21,7 @@ const useSettingsStore = create<State>((set) => ({
     selectedMod: '',
     //
     actions: {
-        [SET_SETTINGS]: (action: any) => {
+        [ActionTypes.SET_SETTINGS]: (action: any) => {
             set(() => {
                 return {
                     gameSettings: { ...action.settings },
@@ -36,7 +29,7 @@ const useSettingsStore = create<State>((set) => ({
                 };
             });
         },
-        [SET_CURRENT_SETTINGS]: (action: any) => {
+        [ActionTypes.SET_CURRENT_SETTINGS]: (action: any) => {
             set((s) => {
                 return {
                     currentSettings: {
@@ -46,28 +39,28 @@ const useSettingsStore = create<State>((set) => ({
                 };
             });
         },
-        [SHOW_SETTINGS_POPUP]: (action: any) => {
+        [ActionTypes.SHOW_SETTINGS_POPUP]: (action: any) => {
             set(() => {
                 return {
                     showPopup: action.show,
                 };
             });
         },
-        [SET_SETTINGS_TAB]: (action: any) => {
+        [ActionTypes.SET_SETTINGS_TAB]: (action: any) => {
             set(() => {
                 return {
                     tab: action.tab,
                 };
             });
         },
-        [SET_SETTINGS_SELECTED_MOD]: (action: any) => {
+        [ActionTypes.SET_SETTINGS_SELECTED_MOD]: (action: any) => {
             set(() => {
                 return {
                     selectedMod: action.selectedMod,
                 };
             });
         },
-        [SET_MOD_SETTINGS]: (action: any) => {
+        [ActionTypes.SET_MOD_SETTINGS]: (action: any) => {
             set(() => {
                 return {
                     modSettings: { ...action.settings },

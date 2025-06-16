@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useSettingsStore from '../stores/useSettingsStore';
 import Select from 'react-select';
-import * as ActionTypes from '../constants/ActionTypes';
-import * as ModSettingType from '../constants/ModSettingType';
 import PerfectScrollbar from 'perfect-scrollbar';
 import ApplySettingsPopup from '../components/popups/ApplySettingsPopup';
 import { SELECT_STYLE } from '../constants/Styles';
@@ -13,6 +11,8 @@ import KeybindInput from '../components/settings/KeybindInput';
 import MultiKeybindInput from '../components/settings/MultiKeybindInput';
 import OptionsInput from '../components/settings/OptionsInput';
 import AudioSettings from '../components/settings/AudioSettings';
+import { ActionTypes } from '../constants/ActionTypes';
+import { ModSettingType } from '../constants/ModSettingType';
 
 interface IProps {
     popup?: boolean;

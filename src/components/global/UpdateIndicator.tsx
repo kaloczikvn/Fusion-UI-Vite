@@ -1,11 +1,10 @@
 import React from 'react';
 
-import * as UpdateError from '../../constants/UpdateError';
-import * as UpdateState from '../../constants/UpdateState';
-
 import LoadingIndicator from './LoadingIndicator';
 import ProgressIndicator from './ProgressIndicator';
 import useUpdateStore from '../../stores/useUpdateStore';
+import { UpdateError } from '../../constants/UpdateError';
+import { UpdateState } from '../../constants/UpdateState';
 
 const UpdateIndicator: React.FC = () => {
     const percentage = useUpdateStore((s) => s.percentage);

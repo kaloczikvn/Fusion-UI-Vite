@@ -4,7 +4,7 @@ import { getGamemodeName, getMapName } from '../../utils/server/server';
 import Select from 'react-select';
 import { getDefaultFilters } from '../../utils/server';
 import clsx from 'clsx';
-import * as ActionTypes from '../../constants/ActionTypes';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 interface IProps {
     visible: boolean;

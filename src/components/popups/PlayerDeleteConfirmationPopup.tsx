@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import * as ActionTypes from '../../constants/ActionTypes';
-import * as PlayerDeleteStatus from '../../constants/PlayerDeleteStatus';
 import DeletingPlayerPopup from './DeletingPlayerPopup';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { PlayerDeleteStatus } from '../../constants/PlayerDeleteStatus';
 
 interface IProps {
     name: string;
@@ -42,7 +42,7 @@ const PlayerDeleteConfirmationPopup: React.FC<IProps> = ({ name, guid }) => {
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
     }, []);
 
     return (

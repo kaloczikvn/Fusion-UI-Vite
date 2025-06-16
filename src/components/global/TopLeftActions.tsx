@@ -1,9 +1,9 @@
 import React from 'react';
-import * as LoginStatus from '../../constants/LoginStatus';
 
 import ExitToAppIcon from '../icons/ExitToAppIcon';
 import PowerSettingsNewIcon from '../icons/PowerSettingsNewIcon';
 import useUserStore from '../../stores/useUserStore';
+import { LoginStatus } from '../../constants/LoginStatus';
 
 interface IProps {
     onQuit: () => void;
@@ -13,14 +13,14 @@ interface IProps {
 const TopLeftActions: React.FC<IProps> = ({ onQuit, onLogoutQuit }) => {
     const loginStatus = useUserStore((s) => s.loginStatus);
 
-    const handleQuit = (e: any) => {
-        if (e) e.preventDefault();
+    const handleQuit: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+        e.preventDefault();
 
         if (onQuit) onQuit();
     };
 
-    const handleLogout = (e: any) => {
-        if (e) e.preventDefault();
+    const handleLogout: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+        e.preventDefault();
 
         if (onLogoutQuit) onLogoutQuit();
     };

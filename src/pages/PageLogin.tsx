@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import useUserStore from '../stores/useUserStore';
-import { CHANGE_LOGIN_STATUS, SET_BLUR, SET_MENU, SET_POPUP } from '../constants/ActionTypes';
-import { LOGGING_IN } from '../constants/LoginStatus';
 import LoginPopup from '../components/popups/LoginPopup';
+import { ActionTypes } from '../constants/ActionTypes';
+import { LoginStatus } from '../constants/LoginStatus';
 
 const PageLogin: React.FC = () => {
     const loginData = useUserStore((s) => s.loginData);
@@ -14,26 +14,26 @@ const PageLogin: React.FC = () => {
     const [remember, setRemember] = useState<boolean>(false);
 
     const enableBlur = () => {
-        window.DispatchAction(SET_BLUR, {
+        window.DispatchAction(ActionTypes.SET_BLUR, {
             blur: true,
         });
     };
 
     const disableMenu = () => {
-        window.DispatchAction(SET_MENU, {
+        window.DispatchAction(ActionTypes.SET_MENU, {
             menu: false,
         });
     };
 
     const setPopup = (popup: any) => {
-        window.DispatchAction(SET_POPUP, {
+        window.DispatchAction(ActionTypes.SET_POPUP, {
             popup: popup,
         });
     };
 
     const onSetLogin = () => {
-        window.DispatchAction(CHANGE_LOGIN_STATUS, {
-            status: LOGGING_IN,
+        window.DispatchAction(ActionTypes.CHANGE_LOGIN_STATUS, {
+            status: LoginStatus.LOGGING_IN,
         });
     };
 

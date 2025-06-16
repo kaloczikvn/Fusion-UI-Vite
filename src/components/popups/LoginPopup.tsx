@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import LoadingIndicator from '../global/LoadingIndicator';
-import * as ActionTypes from '../../constants/ActionTypes';
 import useUserStore from '../../stores/useUserStore';
-import * as LoginStatus from '../../constants/LoginStatus';
 import useBaseStore from '../../stores/useBaseStore';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { LoginStatus } from '../../constants/LoginStatus';
 
 const LoginPopup: React.FC = () => {
     const loginStatus = useUserStore((s) => s.loginStatus);
@@ -29,7 +29,7 @@ const LoginPopup: React.FC = () => {
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
     }, []);
 
     if (loginStatus === LoginStatus.LOGIN_FAILED) {

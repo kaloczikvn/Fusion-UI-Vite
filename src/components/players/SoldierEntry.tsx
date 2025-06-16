@@ -15,8 +15,8 @@ const SoldierEntry: React.FC<IProps> = ({ actions, name, className, deleteCallba
         if (cb) cb(e);
     };
 
-    const onMainClick = (e: any) => {
-        if (e) e.preventDefault();
+    const onMainClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+        e.preventDefault();
 
         if (actions && actions.length > 0) actions[0].callback(e);
     };

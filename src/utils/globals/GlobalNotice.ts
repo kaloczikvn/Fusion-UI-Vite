@@ -1,4 +1,4 @@
-import { SET_GLOBAL_NOTICE } from '../../constants/ActionTypes';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 let globalNoticeTimer: number | undefined = undefined;
 
@@ -8,13 +8,13 @@ window.GlobalNotice = (data: any) => {
         globalNoticeTimer = undefined;
     }
 
-    window.DispatchAction(SET_GLOBAL_NOTICE, {
+    window.DispatchAction(ActionTypes.SET_GLOBAL_NOTICE, {
         notice: data.notice,
     });
 
     globalNoticeTimer = setTimeout(() => {
         globalNoticeTimer = undefined;
-        window.DispatchAction(SET_GLOBAL_NOTICE, {
+        window.DispatchAction(ActionTypes.SET_GLOBAL_NOTICE, {
             notice: null,
         });
     }, 10000);

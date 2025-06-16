@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import useBaseStore from '../stores/useBaseStore';
-import { SET_BLUR, SET_MENU, SET_NEWS } from '../constants/ActionTypes';
+import { ActionTypes } from '../constants/ActionTypes';
 
 const PageMainMenu: React.FC = () => {
     const news = useBaseStore((s) => s.news);
     const fetchNewsIntervalRef = useRef<number | null>(null);
 
     const disableBlur = () => {
-        window.DispatchAction(SET_BLUR, { blur: false });
+        window.DispatchAction(ActionTypes.SET_BLUR, { blur: false });
     };
 
     const enableMenu = () => {
-        window.DispatchAction(SET_MENU, { menu: true });
+        window.DispatchAction(ActionTypes.SET_MENU, { menu: true });
     };
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const PageMainMenu: React.FC = () => {
                         response
                             .json()
                             .then((newsJson: any) => {
-                                window.DispatchAction(SET_NEWS, { news: newsJson });
+                                window.DispatchAction(ActionTypes.SET_NEWS, { news: newsJson });
                                 resolve(newsJson);
                             })
                             .catch((err: any) => {
@@ -59,14 +59,6 @@ const PageMainMenu: React.FC = () => {
 
         window.WebUI.Call('OpenLink', link);
     };
-
-    /*
-    const onQuit = (e: any) => {
-        if (e) e.preventDefault();
-
-        window.WebUI.Call('Quit');
-    };
-    */
 
     let newsLeft = {
         title: 'Please wait',

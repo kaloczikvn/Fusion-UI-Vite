@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import LoadingIndicator from '../global/LoadingIndicator';
 import useServerStore from '../../stores/useServerStore';
 import useBaseStore from '../../stores/useBaseStore';
-import * as ServerConnectStatus from '../../constants/ServerConnectStatus';
-import * as ActionTypes from '../../constants/ActionTypes';
 import { checkServerCompatibility } from '../../utils/server/server';
 import ServerPasswordPopup from './ServerPasswordPopup';
 import ConnectingServerPopup from './ConnectingServerPopup';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { ServerConnectStatus } from '../../constants/ServerConnectStatus';
 
 const ConnectToPendingServerPopup: React.FC = () => {
     const [compatibility, setCompatibility] = useState<any>(null);
@@ -47,7 +47,7 @@ const ConnectToPendingServerPopup: React.FC = () => {
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
 
         // If we're connecting to another server or didn't get any data cancel.
         if (pendingServer === null || connectStatus === ServerConnectStatus.CONNECTING) {

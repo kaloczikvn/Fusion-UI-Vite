@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import LoadingIndicator from '../global/LoadingIndicator';
-import * as ActionTypes from '../../constants/ActionTypes';
 import useUserStore from '../../stores/useUserStore';
-import * as PlayerDeleteStatus from '../../constants/PlayerDeleteStatus';
+import { ActionTypes } from '../../constants/ActionTypes';
+import { PlayerDeleteStatus } from '../../constants/PlayerDeleteStatus';
 
 const DeletingPlayerPopup: React.FC = () => {
     const playerDeleteStatus = useUserStore((s) => s.playerDeleteStatus);
@@ -27,7 +27,7 @@ const DeletingPlayerPopup: React.FC = () => {
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
     }, []);
 
     if (playerDeleteStatus === PlayerDeleteStatus.DELETION_FAILED) {

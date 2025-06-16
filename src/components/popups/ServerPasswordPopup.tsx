@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as ActionTypes from '../../constants/ActionTypes';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 interface IProps {
     server: any;
@@ -35,7 +35,7 @@ const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
     }, []);
 
     return (

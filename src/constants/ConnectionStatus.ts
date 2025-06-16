@@ -1,4 +1,6 @@
-export const DISCONNECTED = 0;
-export const CONNECTING = 1;
-export const CONNECTION_FAILED = 2;
-export const CONNECTED = 3;
+export enum ConnectionStatus {
+    DISCONNECTED = 0,
+    CONNECTING = 1,
+    CONNECTION_FAILED = 2,
+    CONNECTED = 3,
+}

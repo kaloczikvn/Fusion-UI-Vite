@@ -3,10 +3,10 @@ import Slider from 'rc-slider';
 import NumberInput from './NumberInput';
 import useVoipStore from '../../stores/useVoipStore';
 import { SELECT_STYLE } from '../../constants/Styles';
-import * as ActionTypes from '../../constants/ActionTypes';
 import useSettingsStore from '../../stores/useSettingsStore';
 import Select from 'react-select';
 import VoipSlider from './VoipSlider';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 const AudioSettings: React.FC = () => {
     const devices = useVoipStore((s) => s.devices);

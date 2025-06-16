@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as ActionTypes from '../../constants/ActionTypes';
 import useSettingsStore from '../../stores/useSettingsStore';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 const ApplySettingsPopup: React.FC = () => {
     const currentSettings = useSettingsStore((s) => s.currentSettings);

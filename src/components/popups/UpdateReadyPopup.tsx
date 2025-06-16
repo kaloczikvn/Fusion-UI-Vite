@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { SET_POPUP } from '../../constants/ActionTypes';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 const UpdateReadyPopup: React.FC = () => {
-    const onClosePopup = (e: any) => {
+    const onClosePopup: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
         e.preventDefault();
 
-        window.DispatchAction(SET_POPUP, { popup: null });
+        window.DispatchAction(ActionTypes.SET_POPUP, { popup: null });
     };
 
     useEffect(() => {
-        (document.activeElement as any)?.blur();
+        (document.activeElement as HTMLElement).blur();
     }, []);
 
     return (

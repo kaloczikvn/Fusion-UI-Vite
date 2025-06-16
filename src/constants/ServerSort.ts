@@ -1,6 +1,8 @@
-export const NONE = 0;
-export const NAME = 1;
-export const MAP = 2;
-export const GAMEMODE = 3;
-export const PLAYERS = 4;
-export const PING = 5;
+export enum ServerSort {
+    NONE = 0,
+    NAME = 1,
+    MAP = 2,
+    GAMEMODE = 3,
+    PLAYERS = 4,
+    PING = 5,
+}
