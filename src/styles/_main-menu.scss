@@ -1,8 +1,7 @@
 .main-menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 30px;
 }
 
 .main-container {
@@ -13,9 +12,11 @@
     backdrop-filter: blur(20px);
     display: block;
     position: relative;
+    /*
     margin-top: -19.44444444444444vh; // -210px
     margin-left: 2vmin;
     margin-right: 2vmin;
+    */
 
     &:after {
         display: inline-block;
@@ -60,7 +61,7 @@
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%),
             url('/assets/img/news-bg.png') no-repeat center center;
         background-size: 100% 100%;
-        padding: 2.407407407407407vh; // 26px
+        // padding: 2.407407407407407vh; // 26px
         -webkit-user-select: none;
         user-select: none;
 

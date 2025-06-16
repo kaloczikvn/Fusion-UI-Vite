@@ -32,9 +32,9 @@ type State = {
     build: any;
     version: any;
     vextVersion: any;
-    pendingServer: string | null;
+    pendingServer: any;
     pendingServerSpectate: boolean;
-    pendingServerPassword: string;
+    pendingServerPassword: any;
     news: any | null;
     globalNotice: string | null;
     //

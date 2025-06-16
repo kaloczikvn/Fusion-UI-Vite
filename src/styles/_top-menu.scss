@@ -4,16 +4,18 @@
 }
 
 .top-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    // margin: 0 auto;
     text-align: center;
-    position: relative;
     z-index: 2;
     user-select: none;
     justify-content: center;
     // align-items: center;
 
-    .left-items, .right-items {
+    .left-items,
+    .right-items {
         display: flex;
         list-style-type: none;
         vertical-align: top;
@@ -21,8 +23,9 @@
         padding: 4.62962962962963vh 0 1.66666666666667vh; // 50px 0 18px
 
         li {
-            display:flex;
+            display: flex;
             text-align: center;
+            justify-content: center;
             width: 15.74074074074074vh; // 170px
 
             a {
