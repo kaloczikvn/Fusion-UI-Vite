@@ -19,6 +19,7 @@ import * as LoginStatus from '../constants/LoginStatus';
 import * as PlayerLoginStatus from '../constants/PlayerLoginStatus';
 import * as OriginLinkStatus from '../constants/OriginLinkStatus';
 import * as ConnectionStatus from '../constants/ConnectionStatus';
+import useNavigateStore from './useNavigateStore';
 
 type State = {
     user: null | any;
@@ -51,11 +52,8 @@ const useUserStore = create<State>((set) => ({
     //
     actions: {
         [CHANGE_CONNECTION_STATUS]: (action: any) => {
+            if (action.status !== ConnectionStatus.DISCONNECTED) return;
             set((s) => {
-                if (action.status !== ConnectionStatus.DISCONNECTED) {
-                    return {};
-                }
-
                 return {
                     loginToken: s.loginToken,
                     loginData: s.loginData,
@@ -66,17 +64,14 @@ const useUserStore = create<State>((set) => ({
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
-                    s.user !== null &&
+                    action.data !== null &&
                     s.players !== null &&
                     s.player === null &&
                     s.originLinkStatus === OriginLinkStatus.LINK_SUCCESSFUL
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/players');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/players');
                     }, 50);
-                    */
                 }
 
                 return {
@@ -97,18 +92,15 @@ const useUserStore = create<State>((set) => ({
         [CHANGE_LOGIN_STATUS]: (action: any) => {
             set((s) => {
                 if (
-                    s.loginStatus === LoginStatus.LOGGED_IN &&
+                    action.status === LoginStatus.LOGGED_IN &&
                     s.user !== null &&
                     s.players !== null &&
                     s.player === null &&
                     s.originLinkStatus === OriginLinkStatus.LINK_SUCCESSFUL
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/players');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/players');
                     }, 50);
-                    */
                 }
 
                 return {
@@ -121,16 +113,13 @@ const useUserStore = create<State>((set) => ({
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
                     s.user !== null &&
-                    s.players !== null &&
+                    action.players !== null &&
                     s.player === null &&
                     s.originLinkStatus === OriginLinkStatus.LINK_SUCCESSFUL
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/players');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/players');
                     }, 50);
-                    */
                 }
 
                 return {
@@ -152,17 +141,14 @@ const useUserStore = create<State>((set) => ({
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
-                    s.playerLoginStatus === PlayerLoginStatus.LOGGED_IN &&
+                    action.status === PlayerLoginStatus.LOGGED_IN &&
                     s.user !== null &&
                     s.players !== null &&
                     s.player !== null
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/main-menu');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/main-menu');
                     }, 50);
-                    */
                 }
 
                 return {
@@ -176,15 +162,12 @@ const useUserStore = create<State>((set) => ({
                     s.loginStatus === LoginStatus.LOGGED_IN &&
                     s.playerLoginStatus === PlayerLoginStatus.LOGGED_IN &&
                     s.user !== null &&
-                    s.players !== null &&
+                    action.players !== null &&
                     s.player !== null
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/main-menu');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/main-menu');
                     }, 50);
-                    */
                 }
 
                 return {
@@ -196,16 +179,12 @@ const useUserStore = create<State>((set) => ({
             set((s) => {
                 if (
                     s.loginStatus === LoginStatus.LOGGED_IN &&
-                    (s.originLinkStatus === OriginLinkStatus.LINK_MISSING ||
-                        s.originLinkStatus === OriginLinkStatus.PRODUCT_MISSING)
+                    (action.status === OriginLinkStatus.LINK_MISSING ||
+                        action.status === OriginLinkStatus.PRODUCT_MISSING)
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/origin-link');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/origin-link');
                     }, 50);
-                    */
-
                     return {};
                 }
 
@@ -214,14 +193,11 @@ const useUserStore = create<State>((set) => ({
                     s.user !== null &&
                     s.players !== null &&
                     s.player === null &&
-                    s.originLinkStatus === OriginLinkStatus.LINK_SUCCESSFUL
+                    action.status === OriginLinkStatus.LINK_SUCCESSFUL
                 ) {
-                    /*
-                    // TODO: Fixme
-                    setTimeout(function () {
-                        hashHistory.push('/players');
+                    setTimeout(() => {
+                        useNavigateStore.getState().actions.setNavigate('/players');
                     }, 50);
-                    */
                 }
 
                 return {

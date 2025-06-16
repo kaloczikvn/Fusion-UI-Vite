@@ -6,7 +6,7 @@ import * as ActionTypes from '../constants/ActionTypes';
 import * as AccountStorageKeys from '../constants/AccountStorageKeys';
 import * as ServerSort from '../constants/ServerSort';
 import * as SortDirection from '../constants/SortDirection';
-import PerfectScrollbar from 'perfect-scrollbar';
+// import PerfectScrollbar from 'perfect-scrollbar';
 import useServerStore from '../stores/useServerStore';
 import useUserStore from '../stores/useUserStore';
 import ConnectingServerPopup from '../components/popups/ConnectingServerPopup';
@@ -139,6 +139,7 @@ const PageServerBrowser: React.FC = () => {
         cycleServerSortDirection();
     };
 
+    /*
     const _onServerList = (ref: any) => {
         if (ref === null) {
             scrollbarRef.current = null;
@@ -150,6 +151,7 @@ const PageServerBrowser: React.FC = () => {
             suppressScrollX: true,
         });
     };
+    */
 
     const _hasFilterApplied = () => {
         if (filters === null) return false;
@@ -203,13 +205,13 @@ const PageServerBrowser: React.FC = () => {
         setPopup(<ConnectingServerPopup />);
 
         if (password && password.length > 0) {
-            setTimeout(function () {
+            setTimeout(() => {
                 window.WebUI.Call('ConnectToServer', guid, password);
             }, 500);
             return;
         }
 
-        setTimeout(function () {
+        setTimeout(() => {
             window.WebUI.Call('ConnectToServer', guid);
         }, 500);
     };
@@ -221,13 +223,13 @@ const PageServerBrowser: React.FC = () => {
         setPopup(<ConnectingServerPopup />);
 
         if (password && password.length > 0) {
-            setTimeout(function () {
+            setTimeout(() => {
                 window.WebUI.Call('SpectateServer', guid, password);
             }, 500);
             return;
         }
 
-        setTimeout(function () {
+        setTimeout(() => {
             window.WebUI.Call('SpectateServer', guid);
         }, 500);
     };
@@ -570,7 +572,7 @@ const PageServerBrowser: React.FC = () => {
                         width: width,
                         height: height,
                     }}
-                    ref={_onServerList}
+                    // ref={_onServerList}
                 >
                     {serversMemo.length > 0 ? (
                         <>

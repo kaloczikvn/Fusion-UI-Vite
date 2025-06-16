@@ -18,6 +18,10 @@ import {
     SET_VEXT_VERSION,
 } from '../constants/ActionTypes';
 import UpdateReadyPopup from '../components/popups/UpdateReadyPopup';
+import ConnectToPendingServerPopup from '../components/popups/ConnectToPendingServerPopup';
+import useNavigateStore from './useNavigateStore';
+import * as ConnectionStatus from '../constants/ConnectionStatus';
+import * as UpdateState from '../constants/UpdateState';
 
 type State = {
     initialized: boolean;
@@ -65,15 +69,17 @@ const useBaseStore = create<State>((set) => ({
             set({ globalNotice: action.notice });
         },
         [SET_INITIALIZED]: () => {
-            set({ initialized: true });
+            set((s) => {
+                setTimeout(() => {
+                    if (s.connectionStatus === ConnectionStatus.CONNECTED) {
+                        useNavigateStore.getState().actions.setNavigate('/login');
+                    } else {
+                        useNavigateStore.getState().actions.setNavigate('/connection');
+                    }
+                }, 50);
 
-            /*
-            // TODO: Fixme
-            setTimeout(function () {
-                if (connectionStatus === CONNECTED) hashHistory.push('/login');
-                else hashHistory.push('/connection');
-            }, 50);
-            */
+                return { initialized: true };
+            });
         },
         [SET_PRODUCT_NAME]: (action: any) => {
             set({ productName: action.name });
@@ -93,38 +99,36 @@ const useBaseStore = create<State>((set) => ({
         [SET_ERROR]: (action: any) => {
             set({ error: action.error });
 
-            /*
-            // TODO: Fixme
-            if (action.page && action.page.length > 0)
-            {
-                setTimeout(function() {
-                    hashHistory.push(`/${action.page}`);
+            if (action.page && action.page.length > 0) {
+                setTimeout(() => {
+                    useNavigateStore.getState().actions.setNavigate(`/${action.page}`);
                 }, 50);
             }
-            */
         },
         [CHANGE_INGAME]: (action: any) => {
-            set({ ingame: action.ingame });
+            set((s) => {
+                if (!s.ingame && s.pendingServer !== null) {
+                    return {
+                        popup: <ConnectToPendingServerPopup />,
+                        ingame: action.ingame,
+                    };
+                }
 
-            /*
-            // TODO: Fixme
-            if (!finalState.ingame && finalState.pendingServer !== null) {
-                finalState.popup = <ConnectToPendingServerPopup />;
-            }
-            */
+                return {
+                    ingame: action.ingame,
+                };
+            });
         },
         [CHANGE_CONNECTION_STATUS]: (action: any) => {
             set({ connectionStatus: action.status });
 
-            /*
-            // TODO: Fixme
-            setTimeout(function() {
-                if (finalState.connectionStatus === ConnectionStatus.CONNECTED)
-                    hashHistory.push('/login');
-                else
-                    hashHistory.push('/connection');
+            setTimeout(() => {
+                if (action.status === ConnectionStatus.CONNECTED) {
+                    useNavigateStore.getState().actions.setNavigate('/login');
+                } else {
+                    useNavigateStore.getState().actions.setNavigate('/connection');
+                }
             }, 50);
-            */
         },
         [SET_BLUR]: (action: any) => {
             set({ hasBlur: action.blur });
@@ -144,8 +148,7 @@ const useBaseStore = create<State>((set) => ({
                 };
 
                 if (!s.ingame) {
-                    // TODO: Fixme
-                    // obj.popup = <ConnectToPendingServerPopup />;
+                    obj.popup = <ConnectToPendingServerPopup />;
                 }
 
                 return obj;
@@ -153,7 +156,7 @@ const useBaseStore = create<State>((set) => ({
         },
         [CHANGE_UPDATE_STATE]: (action: any) => {
             set((s) => {
-                if (action.state !== window.updateState.DONE_UPDATING) return {};
+                if (action.state !== UpdateState.DONE_UPDATING) return {};
                 if (s.popup !== null) return {};
 
                 return {

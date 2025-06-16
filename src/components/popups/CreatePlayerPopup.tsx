@@ -5,7 +5,7 @@ import useUserStore from '../../stores/useUserStore';
 import * as PlayerCreateStatus from '../../constants/PlayerCreateStatus';
 import useBaseStore from '../../stores/useBaseStore';
 
-const ConnectingServerPopup: React.FC = () => {
+const CreatePlayerPopup: React.FC = () => {
     const playerCreateStatus = useUserStore((s) => s.playerCreateStatus);
     const error = useBaseStore((s) => s.error);
 
@@ -161,4 +161,4 @@ const ConnectingServerPopup: React.FC = () => {
         </div>
     );
 };
-export default ConnectingServerPopup;
+export default CreatePlayerPopup;

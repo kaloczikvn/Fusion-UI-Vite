@@ -9,13 +9,16 @@ import TopRightActions from '../global/TopRightActions';
 import Watermark from '../global/Watermark';
 import TopMenu from '../global/TopMenu';
 import GlobalNotice from '../global/GlobalNotice';
-import useTest from '../test/Test';
+// import useTest from '../test/Test';
 import { SET_POPUP } from '../../constants/ActionTypes';
 import QuitConfirmationPopup from '../popups/QuitConfirmationPopup';
 import LogoutQuitConfirmationPopup from '../popups/LogoutQuitConfirmationPopup';
+import SettingsPopup from '../popups/SettingsPopup';
+import useNavigator from '../test/useNavigator';
 
 const BaseWrapper: React.FC = () => {
-    useTest();
+    // useTest();
+    useNavigator();
 
     const hasMenu = useBaseStore((s) => s.hasMenu);
     const ingame = useBaseStore((s) => s.ingame);
@@ -91,8 +94,7 @@ const BaseWrapper: React.FC = () => {
             <>
                 <AnimatedBackground />
                 <div id="app-container">
-                    <h1>TODO: Settings popup</h1>
-                    {/* // TODO: <SettingsPopup /> */}
+                    <SettingsPopup />
                 </div>
             </>
         );

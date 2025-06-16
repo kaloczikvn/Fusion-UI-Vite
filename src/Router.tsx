@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router';
 import PageLogin from './pages/PageLogin';
 import PageConnection from './pages/PageConnection';
 import PageOriginLink from './pages/PageOriginLink';
@@ -6,6 +6,7 @@ import BaseWrapper from './components/wrapper/BaseWrapper';
 import PageMainMenu from './pages/PageMainMenu';
 import PageCredits from './pages/PageCredits';
 import PageServerBrowser from './pages/PageServerBrowser';
+import PagePlayers from './pages/PagePlayers';
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
             {
                 path: 'login',
                 element: <PageLogin />,
+            },
+            {
+                path: 'players',
+                element: <PagePlayers />,
             },
             {
                 path: 'connection',
@@ -35,6 +40,10 @@ const router = createBrowserRouter([
             {
                 path: 'credits',
                 element: <PageCredits />,
+            },
+            {
+                path: '*',
+                element: <Navigate to="/" />,
             },
         ],
     },

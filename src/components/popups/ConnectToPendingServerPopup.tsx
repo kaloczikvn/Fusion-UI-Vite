@@ -6,8 +6,9 @@ import * as ServerConnectStatus from '../../constants/ServerConnectStatus';
 import * as ActionTypes from '../../constants/ActionTypes';
 import { checkServerCompatibility } from '../../utils/server/server';
 import ServerPasswordPopup from './ServerPasswordPopup';
+import ConnectingServerPopup from './ConnectingServerPopup';
 
-const ConnectingServerPopup: React.FC = () => {
+const ConnectToPendingServerPopup: React.FC = () => {
     const [compatibility, setCompatibility] = useState<any>(null);
     const [cannotSpectate, setCannotSpectate] = useState<boolean>(false);
 
@@ -92,13 +93,13 @@ const ConnectingServerPopup: React.FC = () => {
                 const call = pendingServerSpectate ? 'SpectateServer' : 'ConnectToServer';
 
                 if (password && password.length > 0) {
-                    setTimeout(function () {
+                    setTimeout(() => {
                         window.WebUI.Call(call, guid, password);
                     }, 500);
                     return;
                 }
 
-                setTimeout(function () {
+                setTimeout(() => {
                     window.WebUI.Call(call, guid);
                 }, 500);
             };
@@ -152,4 +153,4 @@ const ConnectingServerPopup: React.FC = () => {
         </div>
     );
 };
-export default ConnectingServerPopup;
+export default ConnectToPendingServerPopup;

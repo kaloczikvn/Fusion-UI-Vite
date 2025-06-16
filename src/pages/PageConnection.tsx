@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import * as ConnectionStatus from '../constants/ConnectionStatus';
+import * as ActionTypes from '../constants/ActionTypes';
 import useBaseStore from '../stores/useBaseStore';
 import LoadingIndicator from '../components/global/LoadingIndicator';
 
@@ -8,11 +9,15 @@ const PageConnection: React.FC = () => {
     const error = useBaseStore((s) => s.error);
 
     const enableBlur = () => {
-        // TODO: dispatch({ type: ActionTypes.SET_BLUR, blur: true });
+        window.DispatchAction(ActionTypes.SET_BLUR, {
+            blur: true,
+        });
     };
 
     const disableMenu = () => {
-        // TODO: dispatch({ type: ActionTypes.SET_MENU, menu: false });
+        window.DispatchAction(ActionTypes.SET_BLUR, {
+            menu: false,
+        });
     };
 
     useEffect(() => {

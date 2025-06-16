@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useUserStore from '../stores/useUserStore';
 import { CHANGE_LOGIN_STATUS, SET_BLUR, SET_MENU, SET_POPUP } from '../constants/ActionTypes';
 import { LOGGING_IN } from '../constants/LoginStatus';
+import LoginPopup from '../components/popups/LoginPopup';
 
 const PageLogin: React.FC = () => {
     const loginData = useUserStore((s) => s.loginData);
@@ -51,11 +52,9 @@ const PageLogin: React.FC = () => {
         e.preventDefault();
 
         onSetLogin();
-        // TODO: setPopup(<LoginPopup />);
+        setPopup(<LoginPopup />);
 
-        // TODO: Fix checkbox...
-        // WebUI.Call('Login', usernameRef.current.value, passwordRef.current.value, rememberRef.current.checked);
-        window.WebUI.Call('Login', username, password, true);
+        window.WebUI.Call('Login', username, password, remember);
     };
 
     const onSignUp = (e: any) => {
@@ -69,12 +68,12 @@ const PageLogin: React.FC = () => {
 
         if (loginData !== null) {
             onSetLogin();
-            // TODO: setPopup(<LoginPopup />);
+            setPopup(<LoginPopup />);
 
             window.WebUI.Call('Login', loginData.username, loginData.password, false);
         } else if (loginToken !== null) {
             onSetLogin();
-            // TODO: setPopup(<LoginPopup />);
+            setPopup(<LoginPopup />);
 
             window.WebUI.Call('TokenLogin', loginToken.token);
         }

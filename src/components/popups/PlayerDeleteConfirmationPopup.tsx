@@ -8,7 +8,7 @@ interface IProps {
     guid: string;
 }
 
-const ConnectingServerPopup: React.FC<IProps> = ({ name, guid }) => {
+const PlayerDeleteConfirmationPopup: React.FC<IProps> = ({ name, guid }) => {
     const closePopup = () => {
         window.DispatchAction(ActionTypes.SET_POPUP, {
             popup: null,
@@ -60,4 +60,4 @@ const ConnectingServerPopup: React.FC<IProps> = ({ name, guid }) => {
         </div>
     );
 };
-export default ConnectingServerPopup;
+export default PlayerDeleteConfirmationPopup;
