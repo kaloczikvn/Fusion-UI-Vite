@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import Slider from 'rc-slider';
 import NumberInput from './NumberInput';
 import useVoipStore from '../../stores/useVoipStore';
@@ -32,35 +32,30 @@ const AudioSettings: React.FC = () => {
         window.DispatchAction(ActionTypes.SET_VOIP_DATA, { data: { volumeMultiplier: volume } });
     };
 
-    const onVoipDeviceChange = (device: any) => {
+    const onVoipDeviceChange = (device: { value: number; label: string }) => {
         window.WebUI.Call('VoipSelectDevice', device.value);
     };
 
-    const onVoipCutoffVolumeChange = (volume: any) => {
+    const onVoipCutoffVolumeChange = (volume: number | number[]) => {
         window.WebUI.Call('VoipCutoffVolume', volume);
     };
 
-    const onVoipVolumeMultiplierChange = (volume: any) => {
+    const onVoipVolumeMultiplierChange = (volume: number | number[]) => {
         window.WebUI.Call('VoipVolumeMultiplier', volume);
         setVoipVolumeMultiplier(volume);
     };
 
-    const voipDevices = [];
-    let _selectedDevice = 0;
-
-    for (let i = 0; i < devices.length; ++i) {
-        let device = devices[i];
-        voipDevices.push({ value: device.id, label: device.name });
-
-        if (device.id === selectedDevice) {
-            _selectedDevice = i;
+    const voipDevicesMemo: Array<{ value: number; label: string }> = useMemo(() => {
+        if (devices.length === 0) {
+            return [{ value: -1, label: 'No microphone detected' }];
         }
-    }
+        return devices.map((device) => ({ value: device.id, label: device.name }));
+    }, [devices, selectedDevice]);
 
-    if (voipDevices.length === 0) {
-        voipDevices.push({ value: -1, label: 'No microphone detected' });
-        _selectedDevice = 0; // I don't think we need this one
-    }
+    const selectedDeviceIndexMemo: number = useMemo(() => {
+        if (devices.length === 0) return 0; // I don't think we need this one
+        return devices.findIndex((device) => device.id === selectedDevice);
+    }, [devices, selectedDevice]);
 
     return (
         <>
@@ -81,10 +76,10 @@ const AudioSettings: React.FC = () => {
             <div className="settings-row">
                 <h3>Microphone Device</h3>
                 <Select
-                    options={voipDevices}
+                    options={voipDevicesMemo}
                     isSearchable={false}
-                    value={voipDevices[_selectedDevice]}
-                    onChange={onVoipDeviceChange}
+                    value={voipDevicesMemo[selectedDeviceIndexMemo]}
+                    onChange={(value) => onVoipDeviceChange(value as any)}
                     styles={SELECT_STYLE}
                 />
             </div>
@@ -99,4 +94,4 @@ const AudioSettings: React.FC = () => {
         </>
     );
 };
-export default AudioSettings;
+export default memo(AudioSettings);

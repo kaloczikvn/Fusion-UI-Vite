@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
+import useBaseStore from '../../stores/useBaseStore';
 
-interface IProps {
-    build: number;
-}
+const Watermark: React.FC = () => {
+    const build = useBaseStore((s) => s.build);
 
-const Watermark: React.FC<IProps> = ({ build }) => {
     return (
         <div id="watermark">
             <img src="/assets/img/logo-outline.svg" />
-            {build && <span>#{build}</span>}
+            {build ? <span>#{build}</span> : null}
         </div>
     );
 };
-export default Watermark;
+export default memo(Watermark);

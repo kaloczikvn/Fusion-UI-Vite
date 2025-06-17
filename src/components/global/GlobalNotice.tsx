@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
+import useBaseStore from '../../stores/useBaseStore';
 
-interface IProps {
-    notice: string;
-}
+const GlobalNotice: React.FC = () => {
+    const globalNotice = useBaseStore((s) => s.globalNotice);
 
-const GlobalNotice: React.FC<IProps> = ({ notice }) => {
+    if (!globalNotice) {
+        return null;
+    }
+
+    const noticeText = globalNotice.toString().trim();
+
+    if (noticeText.length === 0) {
+        return null;
+    }
+
     return (
         <div id="global-notice">
             <div className="header">
@@ -13,8 +22,8 @@ const GlobalNotice: React.FC<IProps> = ({ notice }) => {
                 <span>Global message</span>
                 <MdOutlineReport color="#fff" />
             </div>
-            <div className="notice">{notice}</div>
+            <div className="notice">{noticeText}</div>
         </div>
     );
 };
-export default GlobalNotice;
+export default memo(GlobalNotice);

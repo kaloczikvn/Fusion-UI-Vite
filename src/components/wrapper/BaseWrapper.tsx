@@ -26,8 +26,19 @@ const BaseWrapper: React.FC = () => {
     const build = useBaseStore((s) => s.build);
     const initialized = useBaseStore((s) => s.initialized);
     const hasBlur = useBaseStore((s) => s.hasBlur);
-    const globalNotice = useBaseStore((s) => s.globalNotice);
     const showPopup = useSettingsStore((s) => s.showPopup);
+
+    const setPopup = (popup: any) => {
+        window.DispatchAction(ActionTypes.SET_POPUP, { popup: popup });
+    };
+
+    const onQuit = () => {
+        setPopup(<QuitConfirmationPopup />);
+    };
+
+    const onLogoutQuit = () => {
+        setPopup(<LogoutQuitConfirmationPopup />);
+    };
 
     useEffect(() => {
         window.WebUI.Call('Startup');
@@ -50,28 +61,7 @@ const BaseWrapper: React.FC = () => {
         };
     }, [ingame]);
 
-    const setPopup = (popup: any) => {
-        window.DispatchAction(ActionTypes.SET_POPUP, { popup: popup });
-    };
-
-    const onQuit = () => {
-        setPopup(<QuitConfirmationPopup />);
-    };
-
-    const onLogoutQuit = () => {
-        setPopup(<LogoutQuitConfirmationPopup />);
-    };
-
-    let topMenu = null;
-
-    if (hasMenu) topMenu = <TopMenu />;
-
-    let _popup = null;
-    if (popup !== null) {
-        _popup = <div className="popup-container">{popup}</div>;
-    }
-
-    let mainContainers = <Watermark build={build} />;
+    let mainContainers = <Watermark />;
 
     if (initialized && !ingame) {
         mainContainers = (
@@ -80,13 +70,13 @@ const BaseWrapper: React.FC = () => {
                 <div id="app-container" className={hasBlur ? 'has-blur' : ''}>
                     <div className="top-bar">
                         <TopLeftActions onQuit={onQuit} onLogoutQuit={onLogoutQuit} />
-                        {topMenu}
+                        {hasMenu ? <TopMenu /> : null}
                         <TopRightActions />
                     </div>
                     <Outlet />
                     <div id="build-info">{build !== null ? `Build #${build}` : 'Unknown Build'}</div>
                 </div>
-                {_popup}
+                {popup !== null ? <div className="popup-container">{popup}</div> : null}
             </>
         );
     } else if (initialized && showPopup) {
@@ -100,21 +90,11 @@ const BaseWrapper: React.FC = () => {
         );
     }
 
-    let _globalNotice = null;
-
-    if (globalNotice !== null) {
-        const noticeText = globalNotice.toString().trim();
-
-        if (noticeText.length > 0) {
-            _globalNotice = <GlobalNotice notice={noticeText} />;
-        }
-    }
-
     return (
         <div id="ui-app">
             {mainContainers}
             {/* <GameConsole/> TODO: Re-enable later */}
-            {_globalNotice}
+            <GlobalNotice />
         </div>
     );
 };

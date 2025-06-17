@@ -2,7 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 88%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .soldier-entry {
@@ -15,10 +19,12 @@
     justify-content: center;
     align-items: center;
     margin: 0 2.314814814814815vh; // 0 25px
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,1.0) 100%), url('/assets/img/soldier-bg.png') no-repeat center center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%),
+        url('/assets/img/soldier-bg.png') no-repeat center center;
     background-size: 100% 100%;
     -webkit-user-select: none;
     user-select: none;
+    cursor: pointer;
 
     &:before {
         content: '';
@@ -29,7 +35,7 @@
         bottom: 0;
         top: 0;
         background: #000;
-        opacity: 0.0;
+        opacity: 0;
         transition: opacity 150ms ease-in-out;
         z-index: 2;
     }
@@ -66,12 +72,13 @@
         }
 
         a {
-            opacity: 0.0;
+            opacity: 0;
             transition: opacity 150ms ease-in-out;
             display: block;
             position: absolute;
             right: 0;
             bottom: 0;
+            font-size: 2.037037037037037vh; // 22px
 
             svg {
                 opacity: 0.3;
@@ -79,31 +86,33 @@
 
             &:hover {
                 svg {
-                    opacity: 1.0;
+                    opacity: 1;
                 }
             }
         }
     }
 
     .actions {
-        opacity: 0.0;
+        opacity: 0;
         transition: opacity 150ms ease-in-out;
         z-index: 3;
+        font-size: 3.333333333333333vh;
 
         a {
             text-decoration: none;
             margin: 1.481481481481481vh; // 16px
             opacity: 0.5;
             transition: opacity 150ms ease-in-out;
+
             &:hover {
-                opacity: 1.0;
+                opacity: 1;
             }
         }
     }
 
     &:hover {
         .actions {
-            opacity: 1.0;
+            opacity: 1;
         }
 
         &:before {
@@ -111,7 +120,7 @@
         }
 
         .bottom-content a {
-            opacity: 1.0;
+            opacity: 1;
         }
     }
 
@@ -120,12 +129,13 @@
         transform: translate(0%, 0%);
         backdrop-filter: blur(1.851851851851852vh); // 20px
         will-change: top;
+
         &:before {
             display: none;
         }
 
         .actions {
-            opacity: 1.0;
+            opacity: 1;
         }
     }
 }

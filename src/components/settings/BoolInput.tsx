@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './BoolInput.scss';
 
 interface IProps {

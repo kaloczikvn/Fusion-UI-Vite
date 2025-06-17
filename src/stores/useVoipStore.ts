@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { ActionTypes } from '../constants/ActionTypes';
 
 type State = {
-    devices: any;
+    devices: Array<{ id: number; name: string }>;
     selectedDevice: number;
     cutoffVolume: number;
     volume: number;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import LoadingIndicator from './LoadingIndicator';
 import ProgressIndicator from './ProgressIndicator';
@@ -106,4 +106,4 @@ const UpdateIndicator: React.FC = () => {
             return renderEmpty();
     }
 };
-export default UpdateIndicator;
+export default memo(UpdateIndicator);

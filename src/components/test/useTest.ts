@@ -416,9 +416,16 @@ const useTest = () => {
                     legacy_id: 1234,
                     last_login: '2019',
                 },
+                {
+                    name: 'YesFaTe',
+                    guid: 'ABCDEFGHIJ',
+                    legacy_id: 1234,
+                    last_login: '2019',
+                },
             ],
         });
 
+        /*
         window.DispatchAction(ActionTypes.SET_PLAYER_DATA, {
             player: {
                 name: 'NoFaTe',
@@ -427,6 +434,7 @@ const useTest = () => {
                 last_login: '2019',
             },
         });
+        */
 
         window.DispatchAction(ActionTypes.CHANGE_PLAYER_LOGIN_STATUS, {
             status: PlayerLoginStatus.LOGGED_IN,
@@ -1177,11 +1185,14 @@ const useTest = () => {
             for (let i = 0; i < 100; ++i) {
                 window.DispatchAction(ActionTypes.ADD_CONSOLE_TEXT, { text: 'Lorem ipsum dolor sit amet, `consectetur` adipiscing elit. *Nulla* ultrices nulla id lectus congue euismod. Quisque ac arcu eget nisi faucibus **viverra** vel si' + Math.random() });
             }
-        }, 1000);*/
+        }, 1000);
+        */
 
+        /*
         setTimeout(() => {
             navigate('/main-menu');
         }, 250);
+        */
 
         setInterval(() => {
             window.DispatchAction(ActionTypes.SET_VOIP_DATA, { data: { volume: Math.random() } });

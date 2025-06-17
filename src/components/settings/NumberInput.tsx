@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import Slider from 'rc-slider';
-
 import './NumberInput.scss';
 
 interface IProps {

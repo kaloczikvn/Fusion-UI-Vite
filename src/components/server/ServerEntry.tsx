@@ -15,13 +15,11 @@ import { ActionTypes } from '../../constants/ActionTypes';
 import {
     MdHourglassDisabled,
     MdLock,
-    MdOutlineStar,
     MdOutlineStarBorder,
     MdPlayArrow,
     MdSell,
     MdSpeed,
     MdStar,
-    MdStarHalf,
     MdVideocam,
 } from 'react-icons/md';
 

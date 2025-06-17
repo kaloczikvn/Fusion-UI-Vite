@@ -8,6 +8,7 @@ import { ActionTypes } from '../constants/ActionTypes';
 import { PlayerCreateStatus } from '../constants/PlayerCreateStatus';
 import { PlayerDeleteStatus } from '../constants/PlayerDeleteStatus';
 import { PlayerLoginStatus } from '../constants/PlayerLoginStatus';
+import { MdOutlineExitToApp, MdOutlineLibraryAdd } from 'react-icons/md';
 
 const PagePlayers: React.FC = () => {
     const players = useUserStore((s) => s.players);
@@ -90,7 +91,7 @@ const PagePlayers: React.FC = () => {
                 name={players[i].name}
                 actions={[
                     {
-                        icon: 'exit_to_app',
+                        icon: <MdOutlineExitToApp />,
                         callback: (e?: any) => {
                             onLoginPlayer(players[i].guid, e);
                         },
@@ -112,7 +113,7 @@ const PagePlayers: React.FC = () => {
                 key={'create-' + i}
                 actions={[
                     {
-                        icon: 'library_add',
+                        icon: <MdOutlineLibraryAdd />,
                         callback: (e?: any) => {
                             onCreatePlayer(e);
                         },

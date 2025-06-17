@@ -23,8 +23,6 @@ import {
     MdOutlineToggleOff,
     MdOutlineToggleOn,
     MdSync,
-    MdToggleOff,
-    MdToggleOn,
 } from 'react-icons/md';
 
 const PageServerBrowser: React.FC = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import UpdateIndicator from './UpdateIndicator';
 
 const TopRightActions: React.FC = () => {
@@ -10,4 +10,4 @@ const TopRightActions: React.FC = () => {
         </ul>
     );
 };
-export default TopRightActions;
+export default memo(TopRightActions);

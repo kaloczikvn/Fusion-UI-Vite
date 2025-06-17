@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
-
-import './MultiKeybindInput.scss';
 import { InputDeviceKeyNames, getInputDeviceKeyFromKeyboardEvent } from '../../constants/InputDeviceKey';
+import './MultiKeybindInput.scss';
 
 interface IProps {
     value: number;

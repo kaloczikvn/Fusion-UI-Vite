@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -9,9 +9,9 @@ interface IProps {
 }
 
 const ProgressIndicator: React.FC<IProps> = ({ percentage, completed, error }) => {
-    let roundedPercentage = Math.round(percentage);
-    let pathStroke = '#fff';
+    const roundedPercentage = Math.round(percentage);
 
+    let pathStroke = '#fff';
     if (completed) pathStroke = 'rgba(176, 255, 136, 0.82)';
     if (error) pathStroke = 'rgb(255, 95, 95)';
 
@@ -33,4 +33,4 @@ const ProgressIndicator: React.FC<IProps> = ({ percentage, completed, error }) =
         </div>
     );
 };
-export default ProgressIndicator;
+export default memo(ProgressIndicator);

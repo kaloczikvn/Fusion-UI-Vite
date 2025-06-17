@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 const LoadingIndicator: React.FC = () => {
     const [style, setStyle] = useState({});
@@ -15,4 +15,4 @@ const LoadingIndicator: React.FC = () => {
 
     return <i className="loading-indicator" style={style} />;
 };
-export default LoadingIndicator;
+export default memo(LoadingIndicator);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import useUserStore from '../../stores/useUserStore';
 import { LoginStatus } from '../../constants/LoginStatus';
@@ -15,13 +15,13 @@ const TopLeftActions: React.FC<IProps> = ({ onQuit, onLogoutQuit }) => {
     const handleQuit: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
         e.preventDefault();
 
-        if (onQuit) onQuit();
+        onQuit();
     };
 
     const handleLogout: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
         e.preventDefault();
 
-        if (onLogoutQuit) onLogoutQuit();
+        onLogoutQuit();
     };
 
     return (
@@ -41,4 +41,4 @@ const TopLeftActions: React.FC<IProps> = ({ onQuit, onLogoutQuit }) => {
         </ul>
     );
 };
-export default TopLeftActions;
+export default memo(TopLeftActions);
