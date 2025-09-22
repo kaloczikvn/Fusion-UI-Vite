@@ -1,13 +1,12 @@
-
 .btn {
     &.border-btn {
         border: 0.1574074074074074vh solid #fff;
-        line-height: 3.703703703703704vh; // 40px
-        height: 3.703703703703704vh; // 40px
+        line-height: 40rem; // 40px
+        height: 40rem; // 40px
         // display: inline-block;
-        margin-left: 1.851851851851852vh; // 20px
-        padding: 0 1.666666666666667vh; // 0 18px
-        font-size: 1.666666666666667vh; // 18px
+        margin-left: 20rem; // 20px
+        padding: 0 18rem; // 0 18px
+        font-size: 18rem; // 18px
         text-transform: uppercase;
         text-decoration: none;
         opacity: 0.8;
@@ -18,13 +17,13 @@
         background: rgba(0, 0, 0, 0.8);
 
         i {
-            font-size: 1.944444444444444vh; // 21px
+            font-size: 21rem; // 21px
             position: relative;
-            top: 0.3703703703703704vh; // 4px
+            top: 4rem; // 4px
         }
 
         &:hover {
-            opacity: 1.0;
+            opacity: 1;
         }
 
         &:first-child {

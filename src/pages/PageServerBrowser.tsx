@@ -288,9 +288,11 @@ const PageServerBrowser: React.FC = () => {
         };
     }, []);
 
+    /*
     useEffect(() => {
         if (scrollbarRef.current !== null) scrollbarRef.current.update();
     });
+    */
 
     let sortIcon: any = '';
 
@@ -414,6 +416,7 @@ const PageServerBrowser: React.FC = () => {
         return JSON.stringify(filters) !== JSON.stringify(getDefaultFilters());
     }, [filters]);
 
+    /*
     useEffect(() => {
         if (!scrollbarRef.current && serverListRef.current) {
             scrollbarRef.current = new PerfectScrollbar(serverListRef.current, {
@@ -429,6 +432,7 @@ const PageServerBrowser: React.FC = () => {
             }
         };
     }, []);
+    */
 
     return (
         <div className="server-browser content-wrapper" ref={browserRef}>

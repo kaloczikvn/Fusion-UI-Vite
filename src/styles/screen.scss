@@ -1,7 +1,7 @@
-@import "reset";
-@import "fonts";
-@import "animations";
-@import "forms";
+@import 'reset';
+@import 'fonts';
+@import 'animations';
+@import 'forms';
 
 $color-console-red: #da857b;
 $color-console-blue: #61d2ff;
@@ -19,7 +19,12 @@ $color-error-red: rgba(255, 0, 0, 0.8);
     background: transparent;
 }
 
-body, html {
+html {
+    font-size: 10px;
+}
+
+body,
+html {
     color: #fff;
     font-family: 'Blinker';
     font-weight: 500;
@@ -30,13 +35,19 @@ body, html {
     user-select: none;
 }
 
-body, html, #root {
+body,
+html,
+#root {
     width: 100%;
     height: 100%;
 }
 
 body {
     //animation: background-animation 30s ease-in-out infinite;
+}
+
+svg {
+    fill: #fff;
 }
 
 a {
@@ -67,7 +78,7 @@ a {
     height: 100%;
     position: relative;
     backdrop-filter: blur(0);
-    background: rgba(0, 0, 0, 0.0);
+    background: rgba(0, 0, 0, 0);
     overflow: hidden;
 
     &.has-blur {
@@ -137,20 +148,22 @@ a {
 .action-buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 20rem; // 20px
 }
 
-@import "buttons";
-@import "progress";
-@import "popup";
-@import "login";
-@import "updates";
-@import "origin-link";
-@import "top-menu";
-@import "main-menu";
-@import "server-browser";
-@import "soldier-listing";
-@import "credits";
-@import "top-actions";
-@import "game-console";
-@import "settings";
-@import "global-notice";
+@import 'buttons';
+@import 'progress';
+@import 'popup';
+@import 'login';
+@import 'updates';
+@import 'origin-link';
+@import 'top-menu';
+@import 'main-menu';
+@import 'server-browser';
+@import 'soldier-listing';
+@import 'credits';
+@import 'top-actions';
+@import 'game-console';
+@import 'settings';
+@import 'global-notice';

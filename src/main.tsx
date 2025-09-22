@@ -1,4 +1,9 @@
-import { StrictMode } from 'react';
+// Polyfills
+/*
+import 'whatwg-fetch';
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+*/
+
 import { createRoot } from 'react-dom/client';
 import Router from './Router';
 import './utils/globals/GlobalNotice';
@@ -63,8 +68,24 @@ document.addEventListener('keydown', (event) => {
     if (prevent) event.preventDefault();
 });
 
-createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <Router />
-    </StrictMode>
-);
+const onResize = () => {
+    const designHeight = 1080;
+    const actualHeight = window.innerHeight;
+    const scaleFactor = actualHeight / designHeight;
+
+    // Let's say 1rem = 1px at 1080p. So we scale this.
+    document.documentElement.style.fontSize = `${scaleFactor}px`;
+};
+
+onResize();
+window.addEventListener('resize', onResize);
+
+window.addEventListener('unhandledrejection', (event) => {
+    console.error('Unhandled rejection:', event.reason);
+});
+
+try {
+    createRoot(document.getElementById('root')!).render(<Router />);
+} catch (err) {
+    console.error(err);
+}

@@ -35,15 +35,7 @@ form {
 
     .form-actions {
         display: flex;
-        gap: 0.9259259259259259vh; // 10px
-
-        .btn {
-            //margin-right: 1.851851851851852vh; // 20px
-
-            &:last-child {
-                //margin-right: 0;
-            }
-        }
+        align-items: center;
     }
 }
 

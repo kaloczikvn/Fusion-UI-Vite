@@ -45,12 +45,15 @@ const ServerPerformancePopup: React.FC<IProps> = ({ server, onJoin }) => {
                 <h1>Server Performance Warning</h1>
                 <p>The server you are trying to join is experiencing performance issues.</p>
                 <p>This means that you could experience lag, inconsistent hitreg, rubberbanding, etc.</p>
-                <a href="#" className="btn border-btn" onClick={onClosePopup}>
-                    Cancel
-                </a>
-                <a href="#" className="btn border-btn primary" onClick={_onJoin}>
-                    Join anyway
-                </a>
+
+                <div className="action-buttons">
+                    <a href="#" className="btn border-btn" onClick={onClosePopup}>
+                        Cancel
+                    </a>
+                    <a href="#" className="btn border-btn primary" onClick={_onJoin}>
+                        Join anyway
+                    </a>
+                </div>
             </div>
         </div>
     );
