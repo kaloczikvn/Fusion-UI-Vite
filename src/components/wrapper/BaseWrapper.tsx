@@ -15,6 +15,7 @@ import SettingsPopup from '../popups/SettingsPopup';
 import useNavigator from '../test/useNavigator';
 import useTest from '../test/useTest';
 import { ActionTypes } from '../../constants/ActionTypes';
+import GameConsole from '../global/GameConsole';
 
 const BaseWrapper: React.FC = () => {
     useTest();
@@ -93,7 +94,7 @@ const BaseWrapper: React.FC = () => {
     return (
         <div id="ui-app">
             {mainContainers}
-            {/* <GameConsole/> TODO: Re-enable later */}
+            <GameConsole />
             <GlobalNotice />
         </div>
     );

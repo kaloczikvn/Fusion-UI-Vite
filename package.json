@@ -38,6 +38,7 @@
         "typescript": "~5.8.3",
         "typescript-eslint": "^8.30.1",
         "vite": "^6.3.5",
-        "vite-plugin-vext": "^0.1.1"
+        "vite-plugin-vext": "^0.1.1",
+        "react-virtuoso": "^0.20.0"
     }
 }

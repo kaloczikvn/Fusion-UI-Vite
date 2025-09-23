@@ -1179,14 +1179,17 @@ const useTest = () => {
             });
         }, 250);
 
-        /*setTimeout(() => {
+        setTimeout(() => {
             window.DispatchAction(ActionTypes.SET_CONSOLE_ACTIVE, { active: true });
-        
+
             for (let i = 0; i < 100; ++i) {
-                window.DispatchAction(ActionTypes.ADD_CONSOLE_TEXT, { text: 'Lorem ipsum dolor sit amet, `consectetur` adipiscing elit. *Nulla* ultrices nulla id lectus congue euismod. Quisque ac arcu eget nisi faucibus **viverra** vel si' + Math.random() });
+                window.DispatchAction(ActionTypes.ADD_CONSOLE_TEXT, {
+                    text:
+                        'Lorem ipsum dolor sit amet, `consectetur` adipiscing elit. *Nulla* ultrices nulla id lectus congue euismod. Quisque ac arcu eget nisi faucibus **viverra** vel si' +
+                        Math.random(),
+                });
             }
         }, 1000);
-        */
 
         setTimeout(() => {
             setNavigate('/main-menu');
