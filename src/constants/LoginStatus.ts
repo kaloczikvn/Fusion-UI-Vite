@@ -1,6 +1,6 @@
-export enum LoginStatus {
-    LOGGED_OUT = 0,
-    LOGGING_IN = 1,
-    LOGIN_FAILED = 2,
-    LOGGED_IN = 3,
-}
+export const LoginStatus = {
+    LOGGED_OUT: 0,
+    LOGGING_IN: 1,
+    LOGIN_FAILED: 2,
+    LOGGED_IN: 3,
+};

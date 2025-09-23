@@ -47,7 +47,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
     };
 
     const setPopup = (popup: any) => {
-        window.DispatchAction(ActionTypes.SET_MENU, {
+        window.DispatchAction(ActionTypes.SET_POPUP, {
             popup: popup,
         });
     };

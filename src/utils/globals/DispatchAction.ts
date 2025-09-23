@@ -1,4 +1,3 @@
-import type { ActionTypes } from '../../constants/ActionTypes';
 import useBaseStore from '../../stores/useBaseStore';
 import useConsoleStore from '../../stores/useConsoleStore';
 import useServerStore from '../../stores/useServerStore';
@@ -7,7 +6,7 @@ import useUpdateStore from '../../stores/useUpdateStore';
 import useUserStore from '../../stores/useUserStore';
 import useVoipStore from '../../stores/useVoipStore';
 
-window.DispatchAction = (action: ActionTypes, data?: any) => {
+window.DispatchAction = (action: number, data?: any) => {
     const stores: any = [
         useBaseStore.getState().actions,
         useSettingsStore.getState().actions,
@@ -30,5 +29,6 @@ window.DispatchAction = (action: ActionTypes, data?: any) => {
 declare global {
     interface Window {
         DispatchAction: (action: number, data?: any) => void;
+        actions: any;
     }
 }

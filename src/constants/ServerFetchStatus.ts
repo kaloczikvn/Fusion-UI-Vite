@@ -1,4 +1,4 @@
-export enum ServerFetchStatus {
-    IDLE = 0,
-    FETCHING = 1,
-}
+export const ServerFetchStatus = {
+    IDLE: 0,
+    FETCHING: 1,
+};

@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { ActionTypes } from '../../constants/ActionTypes';
 import { PlayerLoginStatus } from '../../constants/PlayerLoginStatus';
 import { OriginLinkStatus } from '../../constants/OriginLinkStatus';
 import { LoginStatus } from '../../constants/LoginStatus';
 import { ConnectionStatus } from '../../constants/ConnectionStatus';
 import useNavigateStore from '../../stores/useNavigateStore';
+import { ActionTypes } from '../../constants/ActionTypes';
 
 const useTest = () => {
     const { setNavigate } = useNavigateStore((s) => s.actions);
@@ -1206,7 +1205,7 @@ const useTest = () => {
     };
 
     useEffect(() => {
-        init();
+        // init();
         /*
         if (import.meta.env.MODE !== 'production') {
         }

@@ -1,12 +1,12 @@
-export enum OriginLinkStatus {
-    IDLE = 0,
-    LINKING = 1,
-    LINK_FAILED = 2,
-    LINK_UNAVAILABLE = 3,
-    LINK_TAKEN = 4,
-    CHECKING_OWNERSHIP = 5,
-    PRODUCT_MISSING = 6,
-    LINK_SUCCESSFUL = 7,
-    LINK_MISSING = 8,
-    ORIGIN_ERROR = 9,
-}
+export const OriginLinkStatus = {
+    IDLE: 0,
+    LINKING: 1,
+    LINK_FAILED: 2,
+    LINK_UNAVAILABLE: 3,
+    LINK_TAKEN: 4,
+    CHECKING_OWNERSHIP: 5,
+    PRODUCT_MISSING: 6,
+    LINK_SUCCESSFUL: 7,
+    LINK_MISSING: 8,
+    ORIGIN_ERROR: 9,
+};
