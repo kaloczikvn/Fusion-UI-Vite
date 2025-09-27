@@ -21,7 +21,7 @@ window.DispatchAction = (action: number, data?: any) => {
         const func = store[action];
         if (!func) continue;
 
-        console.log(`${action} was called with: ${JSON.stringify(data)}`);
+        // console.log(`${action} was called with: ${JSON.stringify(data)}`);
         func(data);
     }
 };

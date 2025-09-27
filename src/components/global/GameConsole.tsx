@@ -1,4 +1,3 @@
-/*
 Element.prototype.scrollTo = function (val) {
     if (typeof val === 'object') {
         this.scrollTop = val.top || 0;
@@ -13,7 +12,6 @@ Element.prototype.scrollTo = function (val) {
     this.style.transform = ''; // Remove immediately
     this.dispatchEvent(new Event('scroll')); // Trigger scroll event
 };
-*/
 
 import React, { useEffect, useRef, useState } from 'react';
 
