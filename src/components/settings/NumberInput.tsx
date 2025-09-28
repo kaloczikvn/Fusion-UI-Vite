@@ -1,6 +1,8 @@
-import React from 'react';
-import Slider from './Slider';
 import './NumberInput.scss';
+
+import React from 'react';
+
+import Slider from './Slider';
 
 interface IProps {
     value: number;

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import useBaseStore from '../stores/useBaseStore';
-import { ActionTypes } from '../constants/ActionTypes';
 import { MdOpenInNew } from 'react-icons/md';
+
+import { ActionTypes } from '../constants/ActionTypes';
+import useBaseStore from '../stores/useBaseStore';
 
 const PageMainMenu: React.FC = () => {
     const news = useBaseStore((s) => s.news);
@@ -50,13 +51,8 @@ const PageMainMenu: React.FC = () => {
     }, []);
 
     const openNewsLink = (link: string, e: any) => {
-        if (e) {
-            e.preventDefault();
-        }
-
-        if (link === '#') {
-            return;
-        }
+        if (e) e.preventDefault();
+        if (link === '#') return;
 
         window.WebUI.Call('OpenLink', link);
     };

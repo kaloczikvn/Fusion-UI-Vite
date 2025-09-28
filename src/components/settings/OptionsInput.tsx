@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+
 import { SELECT_STYLE } from '../../constants/Styles';
 
 interface IProps {

@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useSettingsStore from '../stores/useSettingsStore';
 import Select from 'react-select';
-import PerfectScrollbar from 'perfect-scrollbar';
+
 import ApplySettingsPopup from '../components/popups/ApplySettingsPopup';
-import { SELECT_STYLE } from '../constants/Styles';
-import TextInput from '../components/settings/TextInput';
+import AudioSettings from '../components/settings/AudioSettings';
 import BoolInput from '../components/settings/BoolInput';
-import NumberInput from '../components/settings/NumberInput';
 import KeybindInput from '../components/settings/KeybindInput';
 import MultiKeybindInput from '../components/settings/MultiKeybindInput';
+import NumberInput from '../components/settings/NumberInput';
 import OptionsInput from '../components/settings/OptionsInput';
-import AudioSettings from '../components/settings/AudioSettings';
+import TextInput from '../components/settings/TextInput';
 import { ActionTypes } from '../constants/ActionTypes';
 import { ModSettingType } from '../constants/ModSettingType';
+import { SELECT_STYLE } from '../constants/Styles';
+import useSettingsStore from '../stores/useSettingsStore';
 
 interface IProps {
     popup?: boolean;
@@ -89,7 +89,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
     };
 
     const setSettingValue = (modSettings: any, selectedMod: any, settingKey: any, value: any) => {
-        let newSettings = {
+        const newSettings = {
             ...modSettings,
             [selectedMod]: {
                 ...modSettings[selectedMod],
@@ -358,44 +358,49 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
         screenOptions.push({ value: i, label: `Monitor #${i + 1}` });
     }
 
-    let gameSettingsRender = (
+    const gameSettingsRender = (
         <div className="general-settings">
-            <h2>Display settings</h2>
-            <div className="settings-row">
-                <h3>Display mode</h3>
-                <Select
-                    options={displayModeOptions}
-                    isSearchable={false}
-                    value={displayModeOptions[currentSettings.fullscreen ? 0 : 1]}
-                    onChange={_onDisplayModeChange}
-                    styles={SELECT_STYLE}
-                />
-            </div>
-            <div className="settings-row">
-                <h3>Fullscreen resolution</h3>
-                <Select
-                    options={fullscreenOptions}
-                    isSearchable={false}
-                    value={fullscreenOptions[currentSettings.selectedResolution]}
-                    onChange={_onResolutionChange}
-                    styles={SELECT_STYLE}
-                />
-            </div>
-            <div className="settings-row">
-                <h3>Fullscreen monitor</h3>
-                <Select
-                    options={screenOptions}
-                    isSearchable={false}
-                    value={screenOptions[currentSettings.selectedScreen]}
-                    onChange={_onScreenChange}
-                    styles={SELECT_STYLE}
-                />
-            </div>
+            {!popup ? (
+                <>
+                    <h2>Display settings</h2>
+                    <div className="settings-row">
+                        <h3>Display mode</h3>
+                        <Select
+                            options={displayModeOptions}
+                            isSearchable={false}
+                            value={displayModeOptions[currentSettings.fullscreen ? 0 : 1]}
+                            onChange={_onDisplayModeChange}
+                            styles={SELECT_STYLE}
+                        />
+                    </div>
+                    <div className="settings-row">
+                        <h3>Fullscreen resolution</h3>
+                        <Select
+                            options={fullscreenOptions}
+                            isSearchable={false}
+                            value={fullscreenOptions[currentSettings.selectedResolution]}
+                            onChange={_onResolutionChange}
+                            styles={SELECT_STYLE}
+                        />
+                    </div>
+                    <div className="settings-row">
+                        <h3>Fullscreen monitor</h3>
+                        <Select
+                            options={screenOptions}
+                            isSearchable={false}
+                            value={screenOptions[currentSettings.selectedScreen]}
+                            onChange={_onScreenChange}
+                            styles={SELECT_STYLE}
+                        />
+                    </div>
+                </>
+            ) : null}
+
             <AudioSettings />
         </div>
     );
 
-    let modSettingsRender = (
+    const modSettingsRender = (
         <div className="mod-settings-container">
             <div className="mod-search-bar">
                 <TextInput value={modName} onChange={_onChangeModName} placeholder="Search..." />
@@ -427,18 +432,9 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
         </div>
     );
 
-    let popupHeader = null;
-    if (popup) {
-        gameSettingsRender = (
-            <div className="general-settings">
-                <AudioSettings />
-            </div>
-        );
-    }
-
     return (
         <div className="settings content-wrapper">
-            {popupHeader}
+            {popup ? <div style={{ marginTop: '120rem' }} /> : null}
             <div className="tabs">
                 <a className={_isTabActive('game')} onClick={() => setSettingsTab('game')}>
                     General settings
@@ -449,6 +445,11 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
             </div>
             <div className="tab-inner">{renderActiveTab()}</div>
             <div className="settings-buttons">
+                {popup ? (
+                    <a href="#" className="btn border-btn" onClick={() => hideSettingsPopup()}>
+                        Close
+                    </a>
+                ) : null}
                 <a href="#" className="btn border-btn" onClick={_onResetSettings}>
                     Reset settings
                 </a>

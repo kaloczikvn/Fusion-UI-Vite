@@ -1,6 +1,20 @@
+import clsx from 'clsx';
 import { useRef, useState } from 'react';
+import {
+    MdBookmark,
+    MdBookmarkBorder,
+    MdHourglassDisabled,
+    MdLock,
+    MdPlayArrow,
+    MdSell,
+    MdSpeed,
+    MdVideocam,
+} from 'react-icons/md';
+
+import { ActionTypes } from '../../constants/ActionTypes';
 import useBaseStore from '../../stores/useBaseStore';
 import useServerStore from '../../stores/useServerStore';
+import { getServerPlayersOnly, getServerSpectators } from '../../utils/server';
 import {
     checkServerCompatibility,
     getGamemodeName,
@@ -8,20 +22,8 @@ import {
     getMapName,
     hasMapImage,
 } from '../../utils/server/server';
-import { getServerPlayersOnly, getServerSpectators } from '../../utils/server';
-import ServerPerformancePopup from '../popups/ServerPerformancePopup';
 import ServerPasswordPopup from '../popups/ServerPasswordPopup';
-import { ActionTypes } from '../../constants/ActionTypes';
-import {
-    MdHourglassDisabled,
-    MdLock,
-    MdOutlineStarBorder,
-    MdPlayArrow,
-    MdSell,
-    MdSpeed,
-    MdStar,
-    MdVideocam,
-} from 'react-icons/md';
+import ServerPerformancePopup from '../popups/ServerPerformancePopup';
 
 interface IProps {
     server: any;
@@ -170,11 +172,13 @@ const ServerEntry: React.FC<IProps> = ({
         (server.variables.banner.startsWith('http://') || server.variables.banner.startsWith('https://')) &&
         server.variables.banner.endsWith('.jpg')
     ) {
+        /*
         style.background =
             'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 35%,rgba(0,0,0,0.3) 65%,rgba(0,0,0,0.8) 100%), url(' +
             server.variables.banner +
             ') no-repeat top center';
         style.backgroundSize = '100% auto';
+        */
     } else if (hasMapImage(server.variables.mapname)) {
         style.background =
             "linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 35%,rgba(0,0,0,0.3) 65%,rgba(0,0,0,0.8) 100%), url('/assets/img/maps/" +
@@ -300,7 +304,7 @@ const ServerEntry: React.FC<IProps> = ({
         tags.push(<span key={tag + 's'}>, </span>);
     }
 
-    let serverInfo = [];
+    const serverInfo = [];
     let onlyTags = false;
 
     if (tags.length > 0) {
@@ -337,11 +341,6 @@ const ServerEntry: React.FC<IProps> = ({
         </h1>
     );
 
-    let favoriteButtonClassName = 'favorite-btn';
-    if (isFavorite) {
-        favoriteButtonClassName += ' is-favorite';
-    }
-
     return (
         <div className={serverClassName} style={style} onClick={_onClick}>
             <div className="top-content">
@@ -365,8 +364,17 @@ const ServerEntry: React.FC<IProps> = ({
             <div className="bottom-content">
                 <div className="left-content">{compatibilityNotice}</div>
                 <div className="right-content">
-                    <a href="#" onClick={_onAddRemoveFavorite} className={favoriteButtonClassName}>
-                        {isFavorite ? <MdStar /> : <MdOutlineStarBorder />}
+                    <a
+                        href="#"
+                        onClick={_onAddRemoveFavorite}
+                        className={clsx('btn border-btn favorite-btn', { 'is-favorite': isFavorite })}
+                    >
+                        {isFavorite ? (
+                            <MdBookmark style={{ marginRight: '5rem' }} />
+                        ) : (
+                            <MdBookmarkBorder style={{ marginRight: '5rem' }} />
+                        )}
+                        <span>{isFavorite ? 'Remove' : 'Add'}</span>
                     </a>
                     {spectateButton}
                     <a href="#" onClick={_onJoin} className="btn border-btn join-btn">

@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { InputDeviceKeyNames, getInputDeviceKeyFromKeyboardEvent } from '../../constants/InputDeviceKey';
 import './KeybindInput.scss';
+
+import React, { useRef, useState } from 'react';
+
+import { getInputDeviceKeyFromKeyboardEvent,InputDeviceKeyNames } from '../../constants/InputDeviceKey';
 
 interface IProps {
     value: number;

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 
 const LogoutQuitConfirmationPopup: React.FC = () => {

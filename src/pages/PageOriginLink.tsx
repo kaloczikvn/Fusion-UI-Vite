@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import useBaseStore from '../stores/useBaseStore';
-import useUserStore from '../stores/useUserStore';
+
 import { ActionTypes } from '../constants/ActionTypes';
 import { OriginLinkStatus } from '../constants/OriginLinkStatus';
+import useBaseStore from '../stores/useBaseStore';
+import useUserStore from '../stores/useUserStore';
 
 const PageOriginLink: React.FC = () => {
     const productName = useBaseStore((s) => s.productName);

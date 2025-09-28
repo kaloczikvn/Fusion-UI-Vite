@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-import useNavigateStore from './useNavigateStore';
+
 import { ActionTypes } from '../constants/ActionTypes';
+import { ConnectionStatus } from '../constants/ConnectionStatus';
 import { LoginStatus } from '../constants/LoginStatus';
 import { OriginLinkStatus } from '../constants/OriginLinkStatus';
-import { ConnectionStatus } from '../constants/ConnectionStatus';
 import { PlayerLoginStatus } from '../constants/PlayerLoginStatus';
+import useNavigateStore from './useNavigateStore';
 
 type State = {
     user: null | any;

@@ -11,20 +11,22 @@
 
 .soldier-entry {
     display: flex;
-    width: 24.07407407407407vh; // 260px
-    height: 40.74074074074074vh; // 440px
+    width: 260rem; // 260px
+    height: 440rem; // 440px
     vertical-align: top;
     background: rgba(0, 0, 0, 0.6);
     position: relative;
     justify-content: center;
     align-items: center;
-    margin: 0 2.314814814814815vh; // 0 25px
+    margin: 0 25rem; // 0 25px
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%),
         url('/assets/img/soldier-bg.png') no-repeat center center;
     background-size: 100% 100%;
     -webkit-user-select: none;
     user-select: none;
     cursor: pointer;
+    border-bottom: 2rem solid rgb(96, 96, 96);
+    transition: border 150ms ease-in-out;
 
     &:before {
         content: '';
@@ -40,34 +42,38 @@
         z-index: 2;
     }
 
+    /*
     &:after {
         display: inline-block;
         position: absolute;
         left: 0;
         bottom: 0;
         right: 0;
-        height: 0.1851851851851852vh; // 2px
-        background: rgba(255, 255, 255, 0.2);
+        height: 2rem; // 2px
+        background: rgb(255, 255, 255);
         content: '';
+        opacity: 0.2;
+        transition: opacity 150ms ease-in-out;
         z-index: 3;
     }
+    */
 
     .bottom-content {
         position: absolute;
-        bottom: 2.592592592592593vh; // 28px;
-        left: 2.407407407407407vh; // 26px;
-        right: 2.407407407407407vh; // 26px;
+        bottom: 28rem; // 28px;
+        left: 26rem; // 26px;
+        right: 26rem; // 26px;
         z-index: 3;
 
         h2 {
-            font-size: 1.481481481481481vh; // 16px
+            font-size: 16rem; // 16px
             opacity: 0.4;
             text-transform: uppercase;
         }
 
         h1 {
-            margin-top: 0.9259259259259259vh; // 10px
-            font-size: 2.037037037037037vh; // 22px
+            margin-top: 10rem; // 10px
+            font-size: 22rem; // 22px
             color: #fff;
         }
 
@@ -78,7 +84,7 @@
             position: absolute;
             right: 0;
             bottom: 0;
-            font-size: 2.037037037037037vh; // 22px
+            font-size: 22rem; // 22px
 
             svg {
                 opacity: 0.3;
@@ -100,7 +106,7 @@
 
         a {
             text-decoration: none;
-            margin: 1.481481481481481vh; // 16px
+            margin: 16rem; // 16px
             opacity: 0.5;
             transition: opacity 150ms ease-in-out;
 
@@ -111,6 +117,8 @@
     }
 
     &:hover {
+        border-color: rgb(255, 255, 255);
+
         .actions {
             opacity: 1;
         }
@@ -127,7 +135,7 @@
     &.empty {
         background: rgba(0, 0, 0, 0.6);
         transform: translate(0%, 0%);
-        backdrop-filter: blur(1.851851851851852vh); // 20px
+        backdrop-filter: blur(20rem); // 20px
         will-change: top;
 
         &:before {

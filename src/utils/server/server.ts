@@ -141,13 +141,13 @@ export const getMapName = (map: string) => {
             return "Kaffarov's Villa";
 
         default:
-            let tokens = map.split('/');
+            const tokens = map.split('/');
             return tokens[tokens.length - 1];
     }
 };
 
 export const getLevelName = (map: string) => {
-    let tokens = map.split('/');
+    const tokens = map.split('/');
     return tokens[tokens.length - 1];
 };
 

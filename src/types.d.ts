@@ -1,3 +1,5 @@
+declare module 'react-select';
+
 interface IServer {
     guid: string;
     name: string;

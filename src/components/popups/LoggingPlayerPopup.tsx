@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import LoadingIndicator from '../global/LoadingIndicator';
-import useUserStore from '../../stores/useUserStore';
-import useBaseStore from '../../stores/useBaseStore';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 import { PlayerLoginStatus } from '../../constants/PlayerLoginStatus';
+import useBaseStore from '../../stores/useBaseStore';
+import useUserStore from '../../stores/useUserStore';
+import LoadingIndicator from '../global/LoadingIndicator';
 
 const LoggingPlayerPopup: React.FC = () => {
     const playerLoginStatus = useUserStore((s) => s.playerLoginStatus);

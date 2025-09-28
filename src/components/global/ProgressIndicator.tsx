@@ -1,6 +1,7 @@
+import 'react-circular-progressbar/dist/styles.css';
+
 import React, { memo } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 
 interface IProps {
     percentage: number;

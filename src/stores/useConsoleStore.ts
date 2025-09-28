@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import { ActionTypes } from '../constants/ActionTypes';
 interface State {
     text: any;
@@ -51,7 +52,7 @@ const useConsoleStore = create<State>((set) => ({
         [ActionTypes.ADD_CONSOLE_TEXT]: (action: any) => {
             set((state: any) => {
                 let text = action.text.trim();
-                let finalStateText = [...state.text];
+                const finalStateText = [...state.text];
 
                 if (text.startsWith('Unknown console command "')) {
                     let lastIndex = text.lastIndexOf('"');

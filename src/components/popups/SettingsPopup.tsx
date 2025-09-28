@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PageSettings from '../../pages/PageSettings';
 
 const SettingsPopup: React.FC = () => {

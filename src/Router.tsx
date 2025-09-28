@@ -1,11 +1,12 @@
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router';
-import PageLogin from './pages/PageLogin';
+import { createBrowserRouter,Navigate, RouterProvider } from 'react-router';
+
 import BaseWrapper from './components/wrapper/BaseWrapper';
-import PagePlayers from './pages/PagePlayers';
 import PageConnection from './pages/PageConnection';
-import PageOriginLink from './pages/PageOriginLink';
-import PageMainMenu from './pages/PageMainMenu';
 import PageCredits from './pages/PageCredits';
+import PageLogin from './pages/PageLogin';
+import PageMainMenu from './pages/PageMainMenu';
+import PageOriginLink from './pages/PageOriginLink';
+import PagePlayers from './pages/PagePlayers';
 import PageServerBrowser from './pages/PageServerBrowser';
 import PageSettings from './pages/PageSettings';
 

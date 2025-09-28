@@ -7,18 +7,18 @@ Element.prototype.scrollTo = function (val) {
     }
 
     // Immediate repaint without setTimeout
-    this.style.transform = 'translateZ(0)';
-    this.offsetHeight; // Force layout immediately
-    this.style.transform = ''; // Remove immediately
-    this.dispatchEvent(new Event('scroll')); // Trigger scroll event
+    (this as any).style.transform = 'translateZ(0)';
+    (this as any).offsetHeight; // Force layout immediately
+    (this as any).style.transform = ''; // Remove immediately
+    (this as any).dispatchEvent(new Event('scroll')); // Trigger scroll event
 };
 
 import React, { useEffect, useRef, useState } from 'react';
-
 import { Virtuoso } from 'react-virtuoso';
-import useConsoleStore from '../../stores/useConsoleStore';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 import useBaseStore from '../../stores/useBaseStore';
+import useConsoleStore from '../../stores/useConsoleStore';
 
 const GameConsole: React.FC = () => {
     const consoleUpdater = useConsoleStore((s) => s.consoleUpdater);
@@ -116,7 +116,7 @@ const GameConsole: React.FC = () => {
                 if (previousCommands.length === 0) return;
 
                 // If we have no suggestions we're in "previous command mode".
-                let _previous = previous;
+                const _previous = previous;
 
                 if (_previous >= previousCommands.length - 1) {
                     setPrevious(-1);
@@ -314,7 +314,7 @@ const GameConsole: React.FC = () => {
     let _suggestions = null;
 
     if (suggestions.length > 0) {
-        let suggestionList = [];
+        const suggestionList = [];
 
         for (let i = 0; i < suggestions.length; ++i) {
             suggestionList.push(
@@ -366,7 +366,7 @@ const GameConsole: React.FC = () => {
                 <input
                     type="text"
                     ref={conRef}
-                    autoFocus={true}
+                    autoFocus
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="off"

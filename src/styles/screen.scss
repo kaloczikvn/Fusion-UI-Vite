@@ -126,10 +126,10 @@ a {
 
 #watermark {
     position: absolute;
-    top: 3.703703703703704vh; // 40px
-    right: 3.703703703703704vh; // 40px
+    top: 40rem; // 40px
+    right: 40rem; // 40px
     z-index: 99999;
-    opacity: 0.2;
+    opacity: 0.3;
     text-align: center;
 
     img {

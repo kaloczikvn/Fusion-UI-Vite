@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
+
 import useBaseStore from '../../stores/useBaseStore';
 
 const GlobalNotice: React.FC = () => {

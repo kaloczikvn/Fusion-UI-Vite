@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { PlayerLoginStatus } from '../../constants/PlayerLoginStatus';
-import { OriginLinkStatus } from '../../constants/OriginLinkStatus';
-import { LoginStatus } from '../../constants/LoginStatus';
-import { ConnectionStatus } from '../../constants/ConnectionStatus';
-import useNavigateStore from '../../stores/useNavigateStore';
+
 import { ActionTypes } from '../../constants/ActionTypes';
+import { ConnectionStatus } from '../../constants/ConnectionStatus';
+import { LoginStatus } from '../../constants/LoginStatus';
+import { OriginLinkStatus } from '../../constants/OriginLinkStatus';
+import { PlayerLoginStatus } from '../../constants/PlayerLoginStatus';
 
 const useTest = () => {
-    const { setNavigate } = useNavigateStore((s) => s.actions);
+    // const { setNavigate } = useNavigateStore((s) => s.actions);
 
     const init = () => {
         window.DispatchAction(ActionTypes.CHANGE_CONNECTION_STATUS, { status: ConnectionStatus.CONNECTING });
@@ -1179,6 +1179,7 @@ const useTest = () => {
             });
         }, 250);
 
+        /*
         setTimeout(() => {
             window.DispatchAction(ActionTypes.SET_CONSOLE_ACTIVE, { active: true });
 
@@ -1194,6 +1195,7 @@ const useTest = () => {
         setTimeout(() => {
             setNavigate('/main-menu');
         }, 250);
+        */
 
         setInterval(() => {
             window.DispatchAction(ActionTypes.SET_VOIP_DATA, { data: { volume: Math.random() } });
@@ -1208,11 +1210,9 @@ const useTest = () => {
     };
 
     useEffect(() => {
-        // init();
-        /*
-        if (import.meta.env.MODE !== 'production') {
+        if (import.meta.env.DEV || import.meta.env.MODE === 'DEV') {
+            init();
         }
-        */
     }, []);
 };
 export default useTest;

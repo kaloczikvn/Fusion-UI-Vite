@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import useBaseStore from '../../stores/useBaseStore';
 
 const Watermark: React.FC = () => {
@@ -7,7 +8,7 @@ const Watermark: React.FC = () => {
     return (
         <div id="watermark">
             <img src="/assets/img/logo-outline.svg" />
-            {build ? <span>#{build}</span> : null}
+            {build ? <span>{`#${build}`}</span> : null}
         </div>
     );
 };

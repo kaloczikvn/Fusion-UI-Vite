@@ -1,23 +1,23 @@
 // Polyfills
 import 'whatwg-fetch';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-
-import { createRoot } from 'react-dom/client';
-import Router from './Router';
 import './utils/globals/GlobalNotice';
 import './utils/globals/PrintState';
 import './utils/globals/WebUI';
 import './utils/globals/GlobalVars';
 import './utils/globals/DispatchAction';
-
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import 'rc-slider/assets/index.css';
 import './styles/screen.scss';
 
+import { createRoot } from 'react-dom/client';
+
+import Router from './Router';
+
 document.addEventListener('keydown', (event) => {
     let prevent = false;
     if (event.keyCode === 8) {
-        let d: any = event.srcElement || event.target;
+        const d: any = event.srcElement || event.target;
 
         if (
             (d.tagName.toUpperCase() === 'INPUT' &&

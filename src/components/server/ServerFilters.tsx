@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import useServerStore from '../../stores/useServerStore';
-import { getGamemodeName, getMapName } from '../../utils/server/server';
-import Select from 'react-select';
-import { getDefaultFilters } from '../../utils/server';
 import clsx from 'clsx';
+import { useState } from 'react';
+import Select from 'react-select';
+
 import { ActionTypes } from '../../constants/ActionTypes';
+import useServerStore from '../../stores/useServerStore';
+import { getDefaultFilters } from '../../utils/server';
+import { getGamemodeName, getMapName } from '../../utils/server/server';
 
 interface IProps {
     visible: boolean;
@@ -393,7 +394,7 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
                 <h3>Maps</h3>
                 <Select
                     options={mapOptions}
-                    isSearchable={true}
+                    isSearchable
                     onChange={_onChangeMaps}
                     styles={selectStyle}
                     closeMenuOnSelect={false}
@@ -405,7 +406,7 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
                 <h3>Gamemodes</h3>
                 <Select
                     options={gamemodeOptions}
-                    isSearchable={true}
+                    isSearchable
                     onChange={_onChangeGamemodes}
                     styles={selectStyle}
                     closeMenuOnSelect={false}
@@ -417,7 +418,7 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
                 <h3>Tags</h3>
                 <Select
                     options={tagOptions}
-                    isSearchable={true}
+                    isSearchable
                     onChange={_onChangeTags}
                     styles={selectStyle}
                     closeMenuOnSelect={false}

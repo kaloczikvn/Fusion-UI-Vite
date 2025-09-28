@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import LoadingIndicator from '../global/LoadingIndicator';
-import useUserStore from '../../stores/useUserStore';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 import { PlayerDeleteStatus } from '../../constants/PlayerDeleteStatus';
+import useUserStore from '../../stores/useUserStore';
+import LoadingIndicator from '../global/LoadingIndicator';
 
 const DeletingPlayerPopup: React.FC = () => {
     const playerDeleteStatus = useUserStore((s) => s.playerDeleteStatus);

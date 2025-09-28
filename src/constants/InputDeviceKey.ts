@@ -512,8 +512,8 @@ export const getInputDeviceKeyFromKeyboardEvent = (e: any) => {
             return INPUT_DEVICE_KEY_Calculator;
         case 'MediaPlayPause':
             return INPUT_DEVICE_KEY_PlayPause;
-        case 'MediaStop':
-            return INPUT_DEVICE_KEY_MediaStop;
+        /*case 'MediaStop':
+            return INPUT_DEVICE_KEY_MediaStop;*/
         case 'AudioVolumeDown':
             return INPUT_DEVICE_KEY_VolumeDown;
         case 'AudioVolumeUp':

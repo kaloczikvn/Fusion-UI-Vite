@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import useBaseStore from '../stores/useBaseStore';
+
 import LoadingIndicator from '../components/global/LoadingIndicator';
 import { ActionTypes } from '../constants/ActionTypes';
 import { ConnectionStatus } from '../constants/ConnectionStatus';
+import useBaseStore from '../stores/useBaseStore';
 
 const PageConnection: React.FC = () => {
     const connectionStatus = useBaseStore((s) => s.connectionStatus);

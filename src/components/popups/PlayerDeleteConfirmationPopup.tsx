@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import DeletingPlayerPopup from './DeletingPlayerPopup';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 import { PlayerDeleteStatus } from '../../constants/PlayerDeleteStatus';
+import DeletingPlayerPopup from './DeletingPlayerPopup';
 
 interface IProps {
     name: string;

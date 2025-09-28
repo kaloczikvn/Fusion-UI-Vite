@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActionTypes } from '../../constants/ActionTypes';
 import { MdOutlineReport } from 'react-icons/md';
+
+import { ActionTypes } from '../../constants/ActionTypes';
 
 interface IProps {
     server: any;

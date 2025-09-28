@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import useBaseStore from '../../stores/useBaseStore';
+
 import { ActionTypes } from '../../constants/ActionTypes';
+import useBaseStore from '../../stores/useBaseStore';
 
 const QuitConfirmationPopup: React.FC = () => {
     const productName = useBaseStore((s) => s.productName);

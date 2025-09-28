@@ -1,6 +1,7 @@
-import React from 'react';
 import './BoolInput.scss';
+
 import clsx from 'clsx';
+import React from 'react';
 
 interface IProps {
     value: boolean;

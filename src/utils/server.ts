@@ -93,8 +93,8 @@ function sortByPlayersDesc(a: any, b: any) {
 }
 
 function sortByPingAsc(a: any, b: any) {
-    let pingLeft = a.ping !== '-' ? parseInt(a.ping, 10) : 99999;
-    let pingRight = b.ping !== '-' ? parseInt(b.ping, 10) : 99999;
+    const pingLeft = a.ping !== '-' ? parseInt(a.ping, 10) : 99999;
+    const pingRight = b.ping !== '-' ? parseInt(b.ping, 10) : 99999;
 
     if (pingLeft < pingRight) return -1;
 
@@ -104,8 +104,8 @@ function sortByPingAsc(a: any, b: any) {
 }
 
 function sortByPingDesc(a: any, b: any) {
-    let pingLeft = a.ping !== '-' ? parseInt(a.ping, 10) : 99999;
-    let pingRight = b.ping !== '-' ? parseInt(b.ping, 10) : 99999;
+    const pingLeft = a.ping !== '-' ? parseInt(a.ping, 10) : 99999;
+    const pingRight = b.ping !== '-' ? parseInt(b.ping, 10) : 99999;
 
     if (pingLeft < pingRight) return 1;
 

@@ -1,5 +1,6 @@
-import React from 'react';
 import './TextInput.scss';
+
+import React from 'react';
 
 interface IProps {
     value: string;

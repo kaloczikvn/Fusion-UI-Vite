@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-
-import useUserStore from '../../stores/useUserStore';
-import { LoginStatus } from '../../constants/LoginStatus';
 import { MdExitToApp, MdPowerSettingsNew } from 'react-icons/md';
+
+import { LoginStatus } from '../../constants/LoginStatus';
+import useUserStore from '../../stores/useUserStore';
 
 interface IProps {
     onQuit: () => void;

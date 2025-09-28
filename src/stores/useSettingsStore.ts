@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import { ActionTypes } from '../constants/ActionTypes';
 
 type State = {

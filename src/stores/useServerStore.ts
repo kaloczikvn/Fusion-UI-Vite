@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-import { ServerSort } from '../constants/ServerSort';
-import { SortDirection } from '../constants/SortDirection';
+
+import { ActionTypes } from '../constants/ActionTypes';
+import { ConnectionStatus } from '../constants/ConnectionStatus';
 import { ServerConnectStatus } from '../constants/ServerConnectStatus';
 import { ServerFetchStatus } from '../constants/ServerFetchStatus';
-import { ConnectionStatus } from '../constants/ConnectionStatus';
-import { ActionTypes } from '../constants/ActionTypes';
+import { ServerSort } from '../constants/ServerSort';
+import { SortDirection } from '../constants/SortDirection';
 type State = {
     map: any;
     filters: any | null;
@@ -70,7 +71,7 @@ const useServerStore = create<State>((set) => ({
         },
         [ActionTypes.SET_SERVERS]: (action: any) => {
             set(() => {
-                let map: any = {};
+                const map: any = {};
 
                 for (const server of action.servers) {
                     map[server.guid] = server;

@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-import UpdateReadyPopup from '../components/popups/UpdateReadyPopup';
+
 import ConnectToPendingServerPopup from '../components/popups/ConnectToPendingServerPopup';
-import useNavigateStore from './useNavigateStore';
+import UpdateReadyPopup from '../components/popups/UpdateReadyPopup';
 import { ActionTypes } from '../constants/ActionTypes';
 import { ConnectionStatus } from '../constants/ConnectionStatus';
 import { UpdateState } from '../constants/UpdateState';
+import useNavigateStore from './useNavigateStore';
 
 type State = {
     initialized: boolean;
@@ -124,7 +125,7 @@ const useBaseStore = create<State>((set) => ({
         },
         [ActionTypes.SET_PENDING_SERVER]: (action: any) => {
             set((s) => {
-                let obj: any = {
+                const obj: any = {
                     pendingServer: action.server,
                     pendingServerSpectate: action.spectate,
                     pendingServerPassword: action.password,

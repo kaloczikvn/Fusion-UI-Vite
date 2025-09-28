@@ -1,21 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-
-import PerfectScrollbar from 'perfect-scrollbar';
-import useServerStore from '../stores/useServerStore';
-import useUserStore from '../stores/useUserStore';
-import ConnectingServerPopup from '../components/popups/ConnectingServerPopup';
-import ServerEntry from '../components/server/ServerEntry';
 import clsx from 'clsx';
-import ServerFilters from '../components/server/ServerFilters';
-import { getDefaultFilters, getSortingFunction } from '../utils/server';
-import { checkServerCompatibility } from '../utils/server/server';
-import useBaseStore from '../stores/useBaseStore';
-import { ActionTypes } from '../constants/ActionTypes';
-import { ServerFetchStatus } from '../constants/ServerFetchStatus';
-import { ServerConnectStatus } from '../constants/ServerConnectStatus';
-import { COMPACT_VIEW } from '../constants/AccountStorageKeys';
-import { ServerSort } from '../constants/ServerSort';
-import { SortDirection } from '../constants/SortDirection';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
     MdArrowDropDown,
     MdArrowDropUp,
@@ -24,6 +8,21 @@ import {
     MdOutlineToggleOn,
     MdSync,
 } from 'react-icons/md';
+
+import ConnectingServerPopup from '../components/popups/ConnectingServerPopup';
+import ServerEntry from '../components/server/ServerEntry';
+import ServerFilters from '../components/server/ServerFilters';
+import { COMPACT_VIEW } from '../constants/AccountStorageKeys';
+import { ActionTypes } from '../constants/ActionTypes';
+import { ServerConnectStatus } from '../constants/ServerConnectStatus';
+import { ServerFetchStatus } from '../constants/ServerFetchStatus';
+import { ServerSort } from '../constants/ServerSort';
+import { SortDirection } from '../constants/SortDirection';
+import useBaseStore from '../stores/useBaseStore';
+import useServerStore from '../stores/useServerStore';
+import useUserStore from '../stores/useUserStore';
+import { getDefaultFilters, getSortingFunction } from '../utils/server';
+import { checkServerCompatibility } from '../utils/server/server';
 
 const PageServerBrowser: React.FC = () => {
     const filters = useServerStore((s) => s.filters);
@@ -45,7 +44,7 @@ const PageServerBrowser: React.FC = () => {
     const [width, setWidth] = useState<number>(920);
     const [height, setHeight] = useState<number>(580);
 
-    const scrollbarRef = useRef<PerfectScrollbar | null>(null);
+    // const scrollbarRef = useRef<PerfectScrollbar | null>(null);
     const serverListRef = useRef<HTMLDivElement | null>(null);
     const browserRef = useRef<HTMLDivElement | null>(null);
     const headerRef = useRef<HTMLDivElement | null>(null);
@@ -241,7 +240,7 @@ const PageServerBrowser: React.FC = () => {
         const headerStyle = window.getComputedStyle(headerRef.current);
 
         let requiredHeight = browserRef.current.clientHeight;
-        let requiredWidth = headerRef.current.clientWidth;
+        const requiredWidth = headerRef.current.clientWidth;
 
         requiredHeight -= parseFloat(browserStyle.paddingTop);
         requiredHeight -= parseFloat(browserStyle.paddingBottom);
@@ -309,7 +308,7 @@ const PageServerBrowser: React.FC = () => {
     }, [accountStorage]);
 
     const serversMemo = useMemo(() => {
-        let servers = [];
+        const servers = [];
 
         for (const guid of Object.keys(map)) {
             const server = map[guid];

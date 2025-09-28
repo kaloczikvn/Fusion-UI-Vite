@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import LoadingIndicator from '../global/LoadingIndicator';
-import useServerStore from '../../stores/useServerStore';
-import useBaseStore from '../../stores/useBaseStore';
-import { checkServerCompatibility } from '../../utils/server/server';
-import ServerPasswordPopup from './ServerPasswordPopup';
-import ConnectingServerPopup from './ConnectingServerPopup';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 import { ServerConnectStatus } from '../../constants/ServerConnectStatus';
+import useBaseStore from '../../stores/useBaseStore';
+import useServerStore from '../../stores/useServerStore';
+import { checkServerCompatibility } from '../../utils/server/server';
+import LoadingIndicator from '../global/LoadingIndicator';
+import ConnectingServerPopup from './ConnectingServerPopup';
+import ServerPasswordPopup from './ServerPasswordPopup';
 
 const ConnectToPendingServerPopup: React.FC = () => {
     const [compatibility, setCompatibility] = useState<any>(null);

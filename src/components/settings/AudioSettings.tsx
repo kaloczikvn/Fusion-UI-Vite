@@ -1,12 +1,12 @@
 import React, { memo, useMemo } from 'react';
-import NumberInput from './NumberInput';
-import useVoipStore from '../../stores/useVoipStore';
+import Select from 'react-select';
+
+import { ActionTypes } from '../../constants/ActionTypes';
 import { SELECT_STYLE } from '../../constants/Styles';
 import useSettingsStore from '../../stores/useSettingsStore';
-import Select from 'react-select';
+import useVoipStore from '../../stores/useVoipStore';
+import NumberInput from './NumberInput';
 import VoipSlider from './VoipSlider';
-import { ActionTypes } from '../../constants/ActionTypes';
-import Slider from './Slider';
 
 const AudioSettings: React.FC = () => {
     const devices = useVoipStore((s) => s.devices);

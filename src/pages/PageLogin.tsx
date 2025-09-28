@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import useUserStore from '../stores/useUserStore';
+import React, { useEffect,useState } from 'react';
+
 import LoginPopup from '../components/popups/LoginPopup';
 import { ActionTypes } from '../constants/ActionTypes';
 import { LoginStatus } from '../constants/LoginStatus';
+import useUserStore from '../stores/useUserStore';
 
 const PageLogin: React.FC = () => {
     const loginData = useUserStore((s) => s.loginData);

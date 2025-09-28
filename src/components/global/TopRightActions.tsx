@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import UpdateIndicator from './UpdateIndicator';
 
 const TopRightActions: React.FC = () => {

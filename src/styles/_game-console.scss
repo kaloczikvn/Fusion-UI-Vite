@@ -21,6 +21,7 @@
     font-family: 'JetBrains Mono';
     display: flex;
     flex-flow: column;
+    align-items: center;
 
     label {
         width: 225rem; // 225px
@@ -30,7 +31,7 @@
     }
 
     input {
-        line-height: 49rem; // 49px;
+        line-height: 20rem; // 49px;
         border: 0;
         padding: 0;
         margin: 0;
@@ -42,6 +43,7 @@
         font-size: 20rem; // 20px
         color: #fff;
         flex-grow: 1;
+        height: 50rem;
     }
 }
 

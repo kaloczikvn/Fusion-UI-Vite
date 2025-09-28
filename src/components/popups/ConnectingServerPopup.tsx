@@ -1,9 +1,10 @@
 import React from 'react';
-import LoadingIndicator from '../global/LoadingIndicator';
-import useServerStore from '../../stores/useServerStore';
-import useBaseStore from '../../stores/useBaseStore';
+
 import { ActionTypes } from '../../constants/ActionTypes';
 import { ServerConnectStatus } from '../../constants/ServerConnectStatus';
+import useBaseStore from '../../stores/useBaseStore';
+import useServerStore from '../../stores/useServerStore';
+import LoadingIndicator from '../global/LoadingIndicator';
 
 const ConnectingServerPopup: React.FC = () => {
     const connectStatus = useServerStore((s) => s.connectStatus);
@@ -169,8 +170,8 @@ const ConnectingServerPopup: React.FC = () => {
     }
 
     if (connectStatus === ServerConnectStatus.DOWNLOAD_FAILED) {
-        let title = 'Connection failed';
-        let text = 'Could not download the files required to join this server.';
+        const title = 'Connection failed';
+        const text = 'Could not download the files required to join this server.';
 
         return (
             <div className="center-notice">

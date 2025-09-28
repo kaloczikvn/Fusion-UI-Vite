@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { memo,useEffect, useState } from 'react';
 
 const LoadingIndicator: React.FC = () => {
     const [style, setStyle] = useState({});

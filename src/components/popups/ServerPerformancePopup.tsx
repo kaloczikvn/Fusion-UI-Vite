@@ -1,6 +1,7 @@
 import React from 'react';
-import ServerPasswordPopup from './ServerPasswordPopup';
+
 import { ActionTypes } from '../../constants/ActionTypes';
+import ServerPasswordPopup from './ServerPasswordPopup';
 
 interface IProps {
     server: any;

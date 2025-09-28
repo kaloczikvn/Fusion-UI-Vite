@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import useNavigateStore from '../../stores/useNavigateStore';
 import { useNavigate } from 'react-router';
+
+import useNavigateStore from '../../stores/useNavigateStore';
 
 const useNavigator = () => {
     const navigator = useNavigate();

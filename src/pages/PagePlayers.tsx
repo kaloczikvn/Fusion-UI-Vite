@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import useUserStore from '../stores/useUserStore';
+import { MdOutlineExitToApp, MdOutlineLibraryAdd } from 'react-icons/md';
+
+import SoldierEntry from '../components/players/SoldierEntry';
+import CreatePlayerPopup from '../components/popups/CreatePlayerPopup';
 import LoggingPlayerPopup from '../components/popups/LoggingPlayerPopup';
 import PlayerDeleteConfirmationPopup from '../components/popups/PlayerDeleteConfirmationPopup';
-import CreatePlayerPopup from '../components/popups/CreatePlayerPopup';
-import SoldierEntry from '../components/players/SoldierEntry';
 import { ActionTypes } from '../constants/ActionTypes';
 import { PlayerCreateStatus } from '../constants/PlayerCreateStatus';
 import { PlayerDeleteStatus } from '../constants/PlayerDeleteStatus';
 import { PlayerLoginStatus } from '../constants/PlayerLoginStatus';
-import { MdOutlineExitToApp, MdOutlineLibraryAdd } from 'react-icons/md';
+import useUserStore from '../stores/useUserStore';
 
 const PagePlayers: React.FC = () => {
     const players = useUserStore((s) => s.players);
@@ -82,7 +83,7 @@ const PagePlayers: React.FC = () => {
     }, []);
 
     // Handle player creation.
-    let playersRender = [];
+    const playersRender = [];
 
     for (let i = 0; i < players.length; ++i) {
         playersRender.push(
@@ -105,7 +106,7 @@ const PagePlayers: React.FC = () => {
         );
     }
 
-    let playerCount = playersRender.length;
+    const playerCount = playersRender.length;
 
     for (let i = 0; i < 4 - playerCount; ++i) {
         playersRender.push(

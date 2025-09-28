@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { UpdateState } from '../constants/UpdateState';
-import { UpdateError } from '../constants/UpdateError';
+
 import { ActionTypes } from '../constants/ActionTypes';
+import { UpdateError } from '../constants/UpdateError';
+import { UpdateState } from '../constants/UpdateState';
 
 type State = {
     state: number;

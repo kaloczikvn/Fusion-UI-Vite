@@ -1,0 +1,11 @@
+{
+    "folders": [
+        {
+            "name": "Fusion UI",
+            "path": "."
+        }
+    ],
+    "extensions": {
+        "recommendations": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    }
+}

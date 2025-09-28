@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
-
 import { Outlet } from 'react-router';
+
+import { ActionTypes } from '../../constants/ActionTypes';
 import useBaseStore from '../../stores/useBaseStore';
 import useSettingsStore from '../../stores/useSettingsStore';
 import AnimatedBackground from '../global/AnimatedBackground';
+import GameConsole from '../global/GameConsole';
+import GlobalNotice from '../global/GlobalNotice';
 import TopLeftActions from '../global/TopLeftActions';
+import TopMenu from '../global/TopMenu';
 import TopRightActions from '../global/TopRightActions';
 import Watermark from '../global/Watermark';
-import TopMenu from '../global/TopMenu';
-import GlobalNotice from '../global/GlobalNotice';
-import QuitConfirmationPopup from '../popups/QuitConfirmationPopup';
 import LogoutQuitConfirmationPopup from '../popups/LogoutQuitConfirmationPopup';
+import QuitConfirmationPopup from '../popups/QuitConfirmationPopup';
 import SettingsPopup from '../popups/SettingsPopup';
 import useNavigator from '../test/useNavigator';
 import useTest from '../test/useTest';
-import { ActionTypes } from '../../constants/ActionTypes';
-import GameConsole from '../global/GameConsole';
 
 const BaseWrapper: React.FC = () => {
     useTest();
@@ -62,38 +62,39 @@ const BaseWrapper: React.FC = () => {
         };
     }, [ingame]);
 
-    let mainContainers = <Watermark />;
-
-    if (initialized && !ingame) {
-        mainContainers = (
-            <>
-                <AnimatedBackground />
-                <div id="app-container" className={hasBlur ? 'has-blur' : ''}>
-                    <div className="top-bar">
-                        <TopLeftActions onQuit={onQuit} onLogoutQuit={onLogoutQuit} />
-                        {hasMenu ? <TopMenu /> : null}
-                        <TopRightActions />
-                    </div>
-                    <Outlet />
-                    <div id="build-info">{build !== null ? `Build #${build}` : 'Unknown Build'}</div>
-                </div>
-                {popup !== null ? <div className="popup-container">{popup}</div> : null}
-            </>
-        );
-    } else if (initialized && showPopup) {
-        mainContainers = (
-            <>
-                <AnimatedBackground />
-                <div id="app-container">
-                    <SettingsPopup />
-                </div>
-            </>
-        );
-    }
-
     return (
         <div id="ui-app">
-            {mainContainers}
+            {initialized ? (
+                <>
+                    {ingame ? (
+                        <>
+                            <Watermark />
+                            {showPopup ? (
+                                <>
+                                    <AnimatedBackground />
+                                    <div id="app-container">
+                                        <SettingsPopup />
+                                    </div>
+                                </>
+                            ) : null}
+                        </>
+                    ) : (
+                        <>
+                            <AnimatedBackground />
+                            <div id="app-container" className={hasBlur ? 'has-blur' : ''}>
+                                <div className="top-bar">
+                                    <TopLeftActions onQuit={onQuit} onLogoutQuit={onLogoutQuit} />
+                                    {hasMenu ? <TopMenu /> : null}
+                                    <TopRightActions />
+                                </div>
+                                <Outlet />
+                                <div id="build-info">{build !== null ? `Build #${build}` : 'Unknown Build'}</div>
+                            </div>
+                            {popup !== null ? <div className="popup-container">{popup}</div> : null}
+                        </>
+                    )}
+                </>
+            ) : null}
             <GameConsole />
             <GlobalNotice />
         </div>
