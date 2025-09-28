@@ -58,18 +58,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
 
-    .caps-lock-notice {
-        display: flex;
-        align-items: center;
-        font-size: 1.4vh;
-        height: 1.4vh;
-        line-height: 1.4vh;
-        color: #f57c00;
+.caps-lock-notice {
+    display: flex;
+    align-items: center;
+    font-size: 16rem;
+    line-height: 16rem;
+    color: #f57c00;
 
-        i {
-            font-size: 1.7vh;
-            margin-right: 0.5vh;
-        }
+    svg {
+        margin-right: 6rem;
+        width: 24rem;
+        height: 24rem;
     }
 }

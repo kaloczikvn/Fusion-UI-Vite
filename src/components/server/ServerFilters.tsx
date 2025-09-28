@@ -1,11 +1,11 @@
-import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
 
 import { ActionTypes } from '../../constants/ActionTypes';
 import useServerStore from '../../stores/useServerStore';
 import { getDefaultFilters } from '../../utils/server';
 import { getGamemodeName, getMapName } from '../../utils/server/server';
+import VUCheckbox from '../form/VUCheckbox';
 
 interface IProps {
     visible: boolean;
@@ -39,12 +39,16 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
         });
 
         setServerFilters(getDefaultFilters());
+
+        onClose();
     };
 
     const _onApplyFilters = (e: any) => {
         if (e) e.preventDefault();
 
         setServerFilters(filterState);
+
+        onClose();
     };
 
     const _onChangeMaps = (mapsValues: any) => {
@@ -175,52 +179,52 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
         }));
     };
 
-    const _onChangeFreq30Hz = (e: any) => {
+    const _onChangeFreq30Hz = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            freq30Hz: e.target.checked,
+            freq30Hz: value,
         }));
     };
 
-    const _onChangeFreq60Hz = (e: any) => {
+    const _onChangeFreq60Hz = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            freq60Hz: e.target.checked,
+            freq60Hz: value,
         }));
     };
 
-    const _onChangeFreq120Hz = (e: any) => {
+    const _onChangeFreq120Hz = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            freq120Hz: e.target.checked,
+            freq120Hz: value,
         }));
     };
 
-    const _onChangeHideFull = (e: any) => {
+    const _onChangeHideFull = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            hideFull: e.target.checked,
+            hideFull: value,
         }));
     };
 
-    const _onChangeHideEmpty = (e: any) => {
+    const _onChangeHideEmpty = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            hideEmpty: e.target.checked,
+            hideEmpty: value,
         }));
     };
 
-    const _onChangeHidePassworded = (e: any) => {
+    const _onChangeHidePassworded = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            hidePassworded: e.target.checked,
+            hidePassworded: value,
         }));
     };
 
-    const _onChangeHideIncompatible = (e: any) => {
+    const _onChangeHideIncompatible = (value: boolean) => {
         setFilterState((prev: any) => ({
             ...prev,
-            hideIncompatible: e.target.checked,
+            hideIncompatible: value,
         }));
     };
 
@@ -388,8 +392,28 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
 
     for (const tag of filterState.tags) selectedTags.push({ value: tag, label: tag });
 
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (visible && modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                onClose();
+            }
+        };
+
+        if (visible) {
+            document.addEventListener('click', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [visible]);
+
+    if (!visible) return null;
+
     return (
-        <div className={clsx('server-filters', { visible: visible })}>
+        <div className="server-filters">
             <div className="filter">
                 <h3>Maps</h3>
                 <Select
@@ -430,57 +454,69 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
                 <div className="left">
                     <div className="filter">
                         <h3>Server name</h3>
-                        <input
-                            type="text"
-                            value={filterState.serverName}
-                            onChange={_onChangeServerName}
-                            onKeyDown={_onKeyDown}
-                        />
+                        <div className="field-container">
+                            <input
+                                type="text"
+                                value={filterState.serverName}
+                                onChange={_onChangeServerName}
+                                onKeyDown={_onKeyDown}
+                            />
+                        </div>
                     </div>
                     <div className="filter">
                         <h3>Player count</h3>
                         <div className="min-max-ctr">
-                            <label>
-                                Min
-                                <input
-                                    type="text"
-                                    value={filterState.minPlayers}
-                                    onChange={_onChangeMinPlayers}
-                                    onKeyDown={_onKeyDown}
-                                />
-                            </label>
-                            <label>
-                                Max
-                                <input
-                                    type="text"
-                                    value={filterState.maxPlayers}
-                                    onChange={_onChangeMaxPlayers}
-                                    onKeyDown={_onKeyDown}
-                                />
-                            </label>
+                            <div>
+                                <p>Min</p>
+                                <div className="field-container">
+                                    <input
+                                        type="number"
+                                        value={filterState.minPlayers}
+                                        onChange={_onChangeMinPlayers}
+                                        onKeyDown={_onKeyDown}
+                                    />
+                                </div>
+                            </div>
+                            {/* */}
+                            <div>
+                                <p>Max</p>
+                                <div className="field-container">
+                                    <input
+                                        type="number"
+                                        value={filterState.maxPlayers}
+                                        onChange={_onChangeMaxPlayers}
+                                        onKeyDown={_onKeyDown}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="filter">
                         <h3>Ping</h3>
                         <div className="min-max-ctr">
-                            <label>
-                                Min
-                                <input
-                                    type="text"
-                                    value={filterState.minPing}
-                                    onChange={_onChangeMinPing}
-                                    onKeyDown={_onKeyDown}
-                                />
-                            </label>
-                            <label>
-                                Max
-                                <input
-                                    type="text"
-                                    value={filterState.maxPing}
-                                    onChange={_onChangeMaxPing}
-                                    onKeyDown={_onKeyDown}
-                                />
-                            </label>
+                            <div>
+                                <p>Min</p>
+                                <div className="field-container">
+                                    <input
+                                        type="number"
+                                        value={filterState.minPing}
+                                        onChange={_onChangeMinPing}
+                                        onKeyDown={_onKeyDown}
+                                    />
+                                </div>
+                            </div>
+                            {/* */}
+                            <div>
+                                <p>Max</p>
+                                <div className="field-container">
+                                    <input
+                                        type="number"
+                                        value={filterState.maxPing}
+                                        onChange={_onChangeMaxPing}
+                                        onKeyDown={_onKeyDown}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -488,46 +524,33 @@ const ServerFilters: React.FC<IProps> = ({ visible, onClose }) => {
                     <div className="filter">
                         <h3>Server frequency</h3>
                         <div className="frequency-filters">
-                            <label>
-                                <input type="checkbox" checked={filterState.freq30Hz} onChange={_onChangeFreq30Hz} />
-                                30Hz
-                            </label>
-                            <label>
-                                <input type="checkbox" checked={filterState.freq60Hz} onChange={_onChangeFreq60Hz} />
-                                60Hz
-                            </label>
-                            <label>
-                                <input type="checkbox" checked={filterState.freq120Hz} onChange={_onChangeFreq120Hz} />
-                                120Hz
-                            </label>
+                            <VUCheckbox checked={filterState.freq30Hz} onChange={_onChangeFreq30Hz} label="30Hz" />
+                            <VUCheckbox checked={filterState.freq60Hz} onChange={_onChangeFreq60Hz} label="60Hz" />
+                            <VUCheckbox checked={filterState.freq120Hz} onChange={_onChangeFreq120Hz} label="120Hz" />
                         </div>
                     </div>
                     <div className="filter">
                         <h3>Visibility filters</h3>
-                        <label className="filter-checkbox">
-                            <input type="checkbox" checked={filterState.hideFull} onChange={_onChangeHideFull} /> Hide
-                            full servers
-                        </label>
-                        <label className="filter-checkbox">
-                            <input type="checkbox" checked={filterState.hideEmpty} onChange={_onChangeHideEmpty} /> Hide
-                            empty servers
-                        </label>
-                        <label className="filter-checkbox">
-                            <input
-                                type="checkbox"
-                                checked={filterState.hidePassworded}
-                                onChange={_onChangeHidePassworded}
-                            />{' '}
-                            Hide password protected
-                        </label>
-                        <label className="filter-checkbox">
-                            <input
-                                type="checkbox"
-                                checked={filterState.hideIncompatible}
-                                onChange={_onChangeHideIncompatible}
-                            />{' '}
-                            Hide incompatible servers
-                        </label>
+                        <VUCheckbox
+                            checked={filterState.hideFull}
+                            onChange={_onChangeHideFull}
+                            label="Hide full servers"
+                        />
+                        <VUCheckbox
+                            checked={filterState.hideEmpty}
+                            onChange={_onChangeHideEmpty}
+                            label="Hide empty servers"
+                        />
+                        <VUCheckbox
+                            checked={filterState.hidePassworded}
+                            onChange={_onChangeHidePassworded}
+                            label="Hide password protected servers"
+                        />
+                        <VUCheckbox
+                            checked={filterState.hideIncompatible}
+                            onChange={_onChangeHideIncompatible}
+                            label="Hide incompatible servers"
+                        />
                     </div>
                 </div>
             </div>

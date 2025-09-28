@@ -1,51 +1,61 @@
 #origin-link-page {
-
-  .middle-container {
-    margin: 32.40740740740741vh auto 0; // 350px
-    width: 38.88888888888889vh; // 420px
-  }
-
-  h1, h2, p {
-    text-decoration: none;
-    text-transform: uppercase;
-    opacity: 0.5;
-    font-weight: 300;
-    font-size: 1.666666666666667vh; // 18px
-  }
-
-  h1 {
-    margin-bottom: 0.5555555555555556vh; // 6px;
-  }
-
-  p {
-    opacity: 0.5;
-    text-transform: none;
-    text-align: justify;
-    text-justify: inter-word;
-    font-size: 2.037037037037037vh; // 22px
-  }
-
-  h2 {
-    opacity: 0.7;
-    font-size: 2.314814814814815vh; // 25px
-  }
-
-  img {
-    width: 5.555555555555556vh; // 60px
-    margin-bottom: 1.851851851851852vh; // 20px;
-
-    &.spinning {
-      animation: spin 3s infinite linear;
+    &.content-wrapper {
+        padding-top: 150rem;
+        max-width: 500rem;
     }
-  }
 
-  .status-container {
-    margin-top: 4.62962962962963vh; // 50px;
-    text-align: center;
-  }
+    h1,
+    h2,
+    p {
+        text-decoration: none;
+        text-transform: uppercase;
+        opacity: 0.5;
+        font-weight: 300;
+        font-size: 18rem;
+    }
 
-  a {
-    margin-left: 0;
-    margin-top: 1.851851851851852vh; // 20px;
-  }
+    h1 {
+        margin-bottom: 8rem;
+        font-size: 22rem;
+        opacity: 0.7;
+    }
+
+    p {
+        opacity: 0.5;
+        text-transform: none;
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: 18rem;
+        line-height: 26rem;
+    }
+
+    h2 {
+        opacity: 1;
+        font-size: 25rem; // 25px
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    img {
+        width: 60rem; // 60px
+        height: 60rem;
+    }
+
+    .status-container {
+        margin-top: 50rem; // 50px;
+        text-align: center;
+
+        &-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40rem;
+        }
+    }
+
+    a {
+        margin-left: 0;
+        margin-top: 20rem; // 20px;
+    }
 }

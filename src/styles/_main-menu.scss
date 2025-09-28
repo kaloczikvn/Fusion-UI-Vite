@@ -10,10 +10,11 @@
     height: 420rem; // 420px
     background: rgba(0, 0, 0, 0.6);
     transform: translate(0%, 0%);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20rem);
     display: flex;
     position: relative;
 
+    /*
     &:after {
         display: flex;
         position: absolute;
@@ -24,6 +25,7 @@
         background: rgba(255, 255, 255, 0.2);
         content: '';
     }
+    */
 
     &.left {
         float: left;
@@ -57,8 +59,9 @@
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%),
             url('/assets/img/news-bg.png') no-repeat center center;
         background-size: 100% 100%;
-        // padding: 26rem; // 26px
         user-select: none;
+        border-bottom: 2rem solid rgb(96, 96, 96);
+        transition: border 150ms ease-in-out;
 
         &.secondary {
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%),
@@ -90,6 +93,8 @@
         }
 
         &:hover {
+            border-color: rgb(255, 255, 255);
+
             &:before {
                 opacity: 0.5;
             }
@@ -109,6 +114,7 @@
         }
     }
 
+    /*
     .matchmake-btn {
         width: 100%;
         height: 210rem; // 210px
@@ -177,4 +183,5 @@
             }
         }
     }
+    */
 }

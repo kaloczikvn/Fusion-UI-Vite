@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import LoadingIndicator from '../components/global/LoadingIndicator';
 import { ActionTypes } from '../constants/ActionTypes';
 import { OriginLinkStatus } from '../constants/OriginLinkStatus';
 import useBaseStore from '../stores/useBaseStore';
@@ -44,13 +45,13 @@ const PageOriginLink: React.FC = () => {
         };
     }, []);
 
-    let originState = 'Waiting for Origin / EA Desktop...';
+    let originState = 'Waiting for EA Desktop / Origin...';
     let canRetry = false;
     let spinning = false;
 
     switch (originLinkStatus) {
         case OriginLinkStatus.IDLE:
-            originState = 'Waiting for Origin / EA Desktop...';
+            originState = 'Waiting for EA Desktop / Origin...';
             spinning = true;
             break;
 
@@ -89,30 +90,35 @@ const PageOriginLink: React.FC = () => {
             break;
 
         case OriginLinkStatus.ORIGIN_ERROR:
-            originState = 'An error occurred while communicating with Origin / EA Desktop';
+            originState = 'An error occurred while communicating with EA Desktop / Origin';
             canRetry = true;
             break;
     }
 
     return (
-        <div id="origin-link-page">
-            <div className="middle-container">
-                <h1>Ownership Verification</h1>
-                <p>
-                    In order to use {productName} we will first need to verify your game ownership through your EA
-                    account. Please launch the EA Desktop app or the Origin client on your computer and log in with your
-                    account. This is a one-time process and will link your EA account with your Venice Unleashed
-                    account.
-                </p>
-                <div className="status-container">
-                    <img src="/assets/img/common/origin.svg" className={spinning ? 'spinning' : ''} />
-                    <h2>{originState}</h2>
-                    {canRetry ? (
-                        <a href="#" className="btn border-btn" onClick={onRetry}>
-                            Retry
-                        </a>
-                    ) : null}
+        <div id="origin-link-page" className="content-wrapper">
+            <h1>Ownership Verification</h1>
+            <p>
+                {`In order to use ${productName} we will first need to verify your game ownership through your EA account. Please launch the EA Desktop app or the Origin client on your computer and log in with your account. This is a one-time process and will link your EA account with your ${productName} account.`}
+            </p>
+            <div className="status-container">
+                <div className="status-container-logos">
+                    <img src="/assets/img/common/ea-desktop.svg" style={{ marginRight: '40rem' }} />
+                    <img src="/assets/img/common/origin.svg" />
                 </div>
+                <h2>
+                    {spinning ? (
+                        <span style={{ marginRight: '8rem' }}>
+                            <LoadingIndicator />
+                        </span>
+                    ) : null}{' '}
+                    {originState}
+                </h2>
+                {canRetry ? (
+                    <a href="#" className="btn border-btn" onClick={onRetry}>
+                        Retry
+                    </a>
+                ) : null}
             </div>
         </div>
     );

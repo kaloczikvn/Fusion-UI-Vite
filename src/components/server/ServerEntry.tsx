@@ -195,11 +195,7 @@ const ServerEntry: React.FC<IProps> = ({
     let spectateButton = null;
 
     if (parseInt(server.variables.maxspectators, 10) > 0) {
-        spectatorPlayerCount = (
-            <h4>
-                {spectatorCount} / {server.variables.maxspectators}
-            </h4>
-        );
+        spectatorPlayerCount = <h4>{`${spectatorCount} / ${server.variables.maxspectators}`}</h4>;
         spectateButton = (
             <a href="#" onClick={_onSpectate} className="btn border-btn spec-btn">
                 <MdVideocam style={{ marginRight: '5rem' }} />
@@ -352,9 +348,7 @@ const ServerEntry: React.FC<IProps> = ({
                     <h3>{getGamemodeName(server.variables.gamemode)}</h3>
                 </div>
                 <div className="column column-4">
-                    <h3>
-                        {playerCount} / {server.variables.maxplayers}
-                    </h3>
+                    <h3>{`${playerCount} / ${server.variables.maxplayers}`}</h3>
                     {spectatorPlayerCount}
                 </div>
                 <div className="column column-5">

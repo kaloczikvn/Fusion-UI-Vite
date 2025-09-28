@@ -5,9 +5,10 @@ import { ConnectionStatus } from '../../constants/ConnectionStatus';
 import { LoginStatus } from '../../constants/LoginStatus';
 import { OriginLinkStatus } from '../../constants/OriginLinkStatus';
 import { PlayerLoginStatus } from '../../constants/PlayerLoginStatus';
+import useNavigateStore from '../../stores/useNavigateStore';
 
 const useTest = () => {
-    // const { setNavigate } = useNavigateStore((s) => s.actions);
+    const { setNavigate } = useNavigateStore((s) => s.actions);
 
     const init = () => {
         window.DispatchAction(ActionTypes.CHANGE_CONNECTION_STATUS, { status: ConnectionStatus.CONNECTING });
@@ -1191,11 +1192,11 @@ const useTest = () => {
                 });
             }
         }, 1000);
+        */
 
         setTimeout(() => {
             setNavigate('/main-menu');
         }, 250);
-        */
 
         setInterval(() => {
             window.DispatchAction(ActionTypes.SET_VOIP_DATA, { data: { volume: Math.random() } });

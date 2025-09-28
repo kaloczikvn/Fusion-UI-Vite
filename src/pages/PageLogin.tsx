@@ -1,5 +1,7 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { MdOutlineReport } from 'react-icons/md';
 
+import VUCheckbox from '../components/form/VUCheckbox';
 import LoginPopup from '../components/popups/LoginPopup';
 import { ActionTypes } from '../constants/ActionTypes';
 import { LoginStatus } from '../constants/LoginStatus';
@@ -84,12 +86,6 @@ const PageLogin: React.FC = () => {
         };
     }, []);
 
-    let capsLockNoticeClass = 'capslock-notice';
-
-    if (capsLock) {
-        capsLockNoticeClass += ' on';
-    }
-
     return (
         <div id="login-page">
             <form onSubmit={onSubmit}>
@@ -104,6 +100,9 @@ const PageLogin: React.FC = () => {
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        onKeyDown={onUpdateCapsLock}
+                        onKeyUp={onUpdateCapsLock}
+                        onMouseDown={onUpdateCapsLock}
                     />
                     <br />
                 </div>
@@ -122,27 +121,15 @@ const PageLogin: React.FC = () => {
                     />
                     <br />
                 </div>
-                <div className={capsLockNoticeClass}>
-                    <strong>WARNING</strong>&nbsp;&nbsp;Caps Lock is on.
-                </div>
-                <a href="#" className="btn border-btn primary" onClick={onSubmit}>
-                    Login
-                </a>
-                <a href="#" className="btn border-btn" onClick={onSignUp}>
-                    Sign Up
-                </a>
+                {capsLock ? (
+                    <div className="caps-lock-notice">
+                        <MdOutlineReport color="#e8eaed" />
+                        CAPS LOCK IS ON
+                    </div>
+                ) : null}
                 <div className="login-actions">
                     <div className="left-actions">
-                        <label>
-                            Remember Me{' '}
-                            <input
-                                type="checkbox"
-                                name="remember"
-                                value="yes"
-                                checked={remember}
-                                onChange={(e) => setRemember(e.target.checked)}
-                            />
-                        </label>
+                        <VUCheckbox checked={remember} onChange={(value) => setRemember(value)} label="Remember Me" />
                     </div>
                     <div className="right-actions">
                         <a href="#" onClick={onForgotPassword}>
@@ -150,6 +137,12 @@ const PageLogin: React.FC = () => {
                         </a>
                     </div>
                 </div>
+                <a href="#" className="btn border-btn primary" onClick={onSubmit}>
+                    Login
+                </a>
+                <a href="#" className="btn border-btn" onClick={onSignUp}>
+                    Sign Up
+                </a>
                 <input
                     type="submit"
                     style={{

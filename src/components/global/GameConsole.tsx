@@ -17,6 +17,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 import { ActionTypes } from '../../constants/ActionTypes';
+import useUpdateEffect from '../../hooks/useUpdateEffect';
 import useBaseStore from '../../stores/useBaseStore';
 import useConsoleStore from '../../stores/useConsoleStore';
 
@@ -280,14 +281,14 @@ const GameConsole: React.FC = () => {
         };
     }, []);
 
-    useEffect(() => {
+    useUpdateEffect(() => {
         scrollBottom();
     }, [consoleUpdater]);
 
-    useEffect(() => {
-        setSuggestion(-1);
-
+    useUpdateEffect(() => {
         if (active) {
+            setSuggestion(-1);
+
             window.WebUI.Call('EnableKeyboard');
             window.WebUI.Call('EnableMouse');
 
@@ -303,11 +304,11 @@ const GameConsole: React.FC = () => {
         }
     }, [active]);
 
-    useEffect(() => {
+    useUpdateEffect(() => {
         setSuggestion(-1);
     }, [suggestions]);
 
-    useEffect(() => {
+    useUpdateEffect(() => {
         setMaxTextLength(text.length);
     }, [text]);
 

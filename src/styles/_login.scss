@@ -18,19 +18,9 @@
         }
     }
 
-    .capslock-notice {
-        font-size: 1.851851851851852vh; // 20px
-        margin-top: -0.9259259259259259vh; // 10px
-        margin-bottom: 0.9259259259259259vh; // 10px
-        display: none;
-
-        strong {
-            color: #e14d43;
-        }
-
-        &.on {
-            display: block;
-        }
+    .caps-lock-notice {
+        margin-top: -10rem; // 10px
+        margin-bottom: 15rem;
     }
 
     form {
@@ -49,15 +39,15 @@
     }
 
     .login-actions {
-        margin-top: 0.9259259259259259vh; // 10px
-
         display: flex;
         justify-content: space-between;
+        margin: 0 0 5rem;
 
-        label, a {
+        label,
+        a {
             text-decoration: none;
             text-transform: none;
-            opacity: 1.0;
+            opacity: 1;
             font-weight: 300;
             font-size: 1.666666666666667vh; // 18px
         }
@@ -67,7 +57,7 @@
             opacity: 0.6;
 
             &:hover {
-                opacity: 1.0;
+                opacity: 1;
             }
         }
 
@@ -76,7 +66,7 @@
             flex-direction: row;
             line-height: 1.851851851851852vh; // 20px
 
-            input[type="checkbox"] {
+            input[type='checkbox'] {
                 margin: 0 0 0 0.7407407407407407vh; // 0 0 0 8 px
             }
         }
@@ -87,10 +77,13 @@
     }
 
     .btn {
-        margin: 0.9259259259259259vh 0; // 10px 0
+        margin: 10rem 0; // 10px 0
         width: 100%;
         text-align: center;
-        height: 3.703703703703704vh; // 40px
-        line-height: 3.240740740740741vh; // 35px
+        align-items: center;
+        justify-content: center;
+        font-size: 20rem;
+        height: 40rem;
+        line-height: 40rem;
     }
 }
