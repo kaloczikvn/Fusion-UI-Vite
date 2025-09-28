@@ -360,7 +360,9 @@ const GameConsole: React.FC = () => {
                         e.preventDefault();
                         onLabelClick();
                     }}
-                >{`${productCode} ${version} [${build}] >`}</label>
+                >
+                    {`${productCode} ${version} [${build}] >`}
+                </label>
                 <input
                     type="text"
                     ref={conRef}
@@ -377,6 +379,7 @@ const GameConsole: React.FC = () => {
                 <Virtuoso
                     ref={outputRef}
                     totalCount={text.length + 2}
+                    overscan={2}
                     item={_renderRow}
                     followOutput
                     className="console-output"

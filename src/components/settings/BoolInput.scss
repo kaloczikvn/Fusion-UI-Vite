@@ -1,51 +1,46 @@
 .bool-input {
     position: relative;
-    display: inline-block;
+    display: flex;
     width: 100%;
-    height: 3.703703703703704vh;
+    height: 40rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 0.15741vh solid rgba(255, 255, 255, 0.4);
+    padding: 4rem;
 
     .off,
     .on {
-        position: absolute;
-        top: 50%;
         text-transform: uppercase;
-        z-index: 5;
-        font-size: 1.8vh;
+        font-size: 20rem;
         font-weight: 500;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .off {
-        left: 25%;
-        transform: translate(-50%, -50%);
         color: #000;
+        background: #fff;
     }
 
     .on {
-        right: 25%;
-        transform: translate(50%, -50%);
         color: #fff;
+        background: transparent;
     }
 
-    input {
-        opacity: 0;
-        width: 0;
-        height: 0;
+    &.checked {
+        .off {
+            color: #fff;
+            background: transparent;
+        }
 
-        &:checked {
-            & ~ .on {
-                color: #000;
-            }
-
-            & ~ .off {
-                color: #fff;
-            }
-
-            & + .slider:before {
-                transform: translateX(calc(100% - 0.5vh));
-            }
+        .on {
+            color: #000;
+            background: #fff;
         }
     }
 
+    /*
     .slider {
         cursor: pointer;
         position: absolute;
@@ -53,8 +48,6 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(255, 255, 255, 0.1);
-        border: 0.15741vh solid rgba(255, 255, 255, 0.4);
 
         &:before {
             position: absolute;
@@ -67,4 +60,5 @@
             z-index: 4;
         }
     }
+    */
 }

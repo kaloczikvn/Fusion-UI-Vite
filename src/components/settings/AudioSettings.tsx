@@ -1,5 +1,4 @@
 import React, { memo, useMemo } from 'react';
-import Slider from 'rc-slider';
 import NumberInput from './NumberInput';
 import useVoipStore from '../../stores/useVoipStore';
 import { SELECT_STYLE } from '../../constants/Styles';
@@ -7,6 +6,7 @@ import useSettingsStore from '../../stores/useSettingsStore';
 import Select from 'react-select';
 import VoipSlider from './VoipSlider';
 import { ActionTypes } from '../../constants/ActionTypes';
+import Slider from './Slider';
 
 const AudioSettings: React.FC = () => {
     const devices = useVoipStore((s) => s.devices);
@@ -62,15 +62,15 @@ const AudioSettings: React.FC = () => {
             <h2>Audio settings</h2>
             <div className="settings-row">
                 <h3>Master volume</h3>
-                <Slider onChange={setMasterVolume} value={currentSettings.masterVolume} />
+                <NumberInput onChange={setMasterVolume} value={currentSettings.masterVolume} />
             </div>
             <div className="settings-row">
                 <h3>Music volume</h3>
-                <Slider onChange={setMusicVolume} value={currentSettings.musicVolume} />
+                <NumberInput onChange={setMusicVolume} value={currentSettings.musicVolume} />
             </div>
             <div className="settings-row">
                 <h3>Dialogue volume</h3>
-                <Slider onChange={setDialogueVolume} value={currentSettings.dialogueVolume} />
+                <NumberInput onChange={setDialogueVolume} value={currentSettings.dialogueVolume} />
             </div>
             <h2>VoIP settings</h2>
             <div className="settings-row">
@@ -79,7 +79,7 @@ const AudioSettings: React.FC = () => {
                     options={voipDevicesMemo}
                     isSearchable={false}
                     value={voipDevicesMemo[selectedDeviceIndexMemo]}
-                    onChange={(value) => onVoipDeviceChange(value as any)}
+                    onChange={(value: any) => onVoipDeviceChange(value)}
                     styles={SELECT_STYLE}
                 />
             </div>

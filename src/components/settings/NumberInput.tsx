@@ -1,6 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
-import Slider from 'rc-slider';
+import Slider from './Slider';
 import './NumberInput.scss';
 
 interface IProps {
@@ -16,37 +15,6 @@ const NumberInput: React.FC<IProps> = ({ value, min, max, onChange, className })
         onChange(value);
     };
 
-    const _onInputChange = (e?: any) => {
-        // Make sure to only allow numbers.
-        if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g)) {
-            e.target.value = e.target.value.replace(/[^0-9]/g, '');
-            return;
-        }
-
-        if (e.target.value.length === 0) {
-            e.target.value = 0;
-        }
-
-        let value = parseInt(e.target.value, 10);
-
-        if (max !== undefined && value > max) {
-            e.target.value = max;
-            value = max;
-        }
-
-        if (min !== undefined && value < min) {
-            e.target.value = min;
-            value = min;
-        }
-
-        onChange(value);
-    };
-
-    return (
-        <div className={clsx('slider-input', className)}>
-            <input className="slider-value" type="text" onChange={_onInputChange} value={value} />
-            <Slider onChange={_onSliderChange} value={value} min={min} max={max} />
-        </div>
-    );
+    return <Slider onChange={_onSliderChange} value={value} min={min} max={max} className={className} />;
 };
 export default NumberInput;

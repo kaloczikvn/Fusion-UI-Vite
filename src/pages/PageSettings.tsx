@@ -131,29 +131,6 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
         setSettingsSelectedMod(mod);
     };
 
-    const _onModList = (ref?: any) => {
-        if (ref === null) {
-            modListScrollbarRef.current = null;
-            return;
-        }
-
-        modListScrollbarRef.current = new PerfectScrollbar(ref, {
-            wheelSpeed: 1,
-        });
-    };
-
-    const _onModSettings = (ref?: any) => {
-        if (ref === null) {
-            modSettingsScrollbarRef.current = null;
-            return;
-        }
-
-        modSettingsScrollbarRef.current = new PerfectScrollbar(ref, {
-            wheelSpeed: 3,
-            suppressScrollX: true,
-        });
-    };
-
     const _isTabActive = (tab?: any) => {
         if (tab === activeTab) {
             return 'tab active';
@@ -282,9 +259,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                 return (
                     <BoolInput
                         value={setting.currentValue ?? setting.value}
-                        onChange={(e) => {
-                            _onChangeModInput(settingKey, e.target.checked);
-                        }}
+                        onChange={(value) => _onChangeModInput(settingKey, value)}
                     />
                 );
             case ModSettingType.NUMBER:
@@ -425,11 +400,9 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
             <div className="mod-search-bar">
                 <TextInput value={modName} onChange={_onChangeModName} placeholder="Search..." />
             </div>
-            <div className="mod-list" style={{ overflowX: 'hidden' }} ref={_onModList}>
+            <div className="mod-list" style={{ overflowX: 'hidden', overflowY: 'auto' }}>
                 {Object.keys(modSettings)
-                    .filter((key) => {
-                        return key.toLowerCase().search(modName.toLowerCase()) != -1;
-                    })
+                    .filter((key) => key.toLowerCase().search(modName.toLowerCase()) != -1)
                     .sort((a, b) => a.localeCompare(b))
                     .map((key) => (
                         <div
@@ -442,7 +415,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                     ))}
             </div>
             {selectedMod !== '' ? (
-                <div className="mod-settings" style={{ overflowX: 'hidden' }} ref={_onModSettings}>
+                <div className="mod-settings" style={{ overflowX: 'hidden', overflowY: 'auto' }}>
                     <h2>{selectedMod}</h2>
                     <div className="settings-container">{renderActiveModSettings()}</div>
                 </div>

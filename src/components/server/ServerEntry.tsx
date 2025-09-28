@@ -198,7 +198,7 @@ const ServerEntry: React.FC<IProps> = ({
         );
         spectateButton = (
             <a href="#" onClick={_onSpectate} className="btn border-btn spec-btn">
-                <MdVideocam />
+                <MdVideocam style={{ marginRight: '5rem' }} />
                 <span>Spec</span>
             </a>
         );
@@ -370,7 +370,7 @@ const ServerEntry: React.FC<IProps> = ({
                     </a>
                     {spectateButton}
                     <a href="#" onClick={_onJoin} className="btn border-btn join-btn">
-                        <MdPlayArrow />
+                        <MdPlayArrow style={{ marginRight: '5rem' }} />
                         <span>Join</span>
                     </a>
                 </div>

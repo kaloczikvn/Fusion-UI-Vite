@@ -1,5 +1,6 @@
 import React from 'react';
 import './BoolInput.scss';
+import clsx from 'clsx';
 
 interface IProps {
     value: boolean;
@@ -8,8 +9,7 @@ interface IProps {
 
 const BoolInput: React.FC<IProps> = ({ value, onChange }) => {
     return (
-        <label className="bool-input">
-            <input type="checkbox" checked={value} onChange={onChange} />
+        <label className={clsx('bool-input', { checked: value })} onClick={() => onChange(!value)}>
             <span className="slider round"></span>
             <span className="off">Off</span>
             <span className="on">On</span>
