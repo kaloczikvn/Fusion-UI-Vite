@@ -58,13 +58,14 @@
         top: 0.1851851851851852vh; // 2px
         background: #555;
         box-shadow: 0 0 0.1851851851851852vh rgba(0, 0, 0, 1);
-        font-size: 1.851851851851852vh; // 20px
+        font-size: 20rem; // 20px
         font-family: 'JetBrains Mono';
 
         li {
             padding: 0.7407407407407407vh 1.296296296296296vh; // 8px 14px
             margin: 0.3703703703703704vh; // 4px
             color: #aaa;
+            display: flex;
 
             &.active {
                 background: #666;

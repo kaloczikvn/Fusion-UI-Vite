@@ -7,7 +7,7 @@ interface State {
     fullExpanded: boolean;
     suggestions: any;
     previousCommands: any;
-    consoleUpdater: { update: boolean };
+    consoleUpdater: number;
     //
     actions: { [key: number]: (action: any) => void };
 }
@@ -18,7 +18,7 @@ const useConsoleStore = create<State>((set) => ({
     fullExpanded: false,
     suggestions: [],
     previousCommands: [],
-    consoleUpdater: { update: true },
+    consoleUpdater: 0,
     //
     actions: {
         [ActionTypes.TOGGLE_CONSOLE_ACTIVE]: () => {
@@ -28,6 +28,7 @@ const useConsoleStore = create<State>((set) => ({
                         suggestions: [],
                         active: true,
                         fullExpanded: false,
+                        consoleUpdater: Math.random(),
                     };
                 }
 
@@ -40,6 +41,7 @@ const useConsoleStore = create<State>((set) => ({
 
                 return {
                     fullExpanded: true,
+                    consoleUpdater: Math.random(),
                 };
             });
         },
@@ -47,6 +49,7 @@ const useConsoleStore = create<State>((set) => ({
             set({
                 suggestions: [],
                 active: action.active,
+                consoleUpdater: Math.random(),
             });
         },
         [ActionTypes.ADD_CONSOLE_TEXT]: (action: any) => {
@@ -196,7 +199,7 @@ const useConsoleStore = create<State>((set) => ({
 
                 return {
                     text: finalStateText,
-                    consoleUpdater: { ...state.consoleUpdater },
+                    consoleUpdater: Math.random(),
                 };
             });
         },
@@ -225,12 +228,10 @@ const useConsoleStore = create<State>((set) => ({
             });
         },
         [ActionTypes.CLEAR_CONSOLE]: () => {
-            set((state: any) => {
-                return {
-                    text: [],
-                    consoleUpdater: { ...state.consoleUpdater },
-                };
-            });
+            set(() => ({
+                text: [],
+                consoleUpdater: Math.random(),
+            }));
         },
     },
 }));

@@ -6,6 +6,7 @@
     height: 36rem; // 35.88px;
     transition: all 350ms ease-in-out;
     position: relative;
+    backdrop-filter: blur(10rem);
 }
 
 .update-indicator-container {
@@ -23,8 +24,8 @@
 }
 
 .update-indicator .loading-indicator {
-    width: 20rem; // 20px;
-    height: 20rem; // 20px;
+    width: 22rem;
+    height: 22rem;
 }
 
 .update-indicator span {
@@ -39,8 +40,8 @@
 }
 
 .progress-indicator {
-    width: 22rem; // 26px;
-    height: 22rem; // 26px;
+    width: 22rem;
+    height: 22rem;
 
     svg {
         width: 100%;
@@ -49,11 +50,14 @@
 }
 
 .update-indicator.updated {
-    border-color: rgba(3, 175, 1, 0.38);
+    border-color: rgba(176, 255, 136, 0.82);
+    background: rgba(176, 255, 136, 0.1);
 
+    /*
     &:hover {
         border-color: rgba(3, 175, 1, 0.6);
     }
+    */
 
     span {
         color: rgb(180, 230, 184);
@@ -61,11 +65,14 @@
 }
 
 .update-indicator.error {
-    border-color: rgba(255, 95, 95, 0.38);
+    border-color: rgb(255, 95, 95);
+    background: rgba(255, 95, 95, 0.1);
 
+    /*
     &:hover {
         border-color: rgba(255, 95, 95, 0.6);
     }
+    */
 
     span {
         color: #fd8d8d;

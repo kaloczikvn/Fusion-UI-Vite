@@ -13,11 +13,11 @@ Element.prototype.scrollTo = function (val) {
     (this as any).dispatchEvent(new Event('scroll')); // Trigger scroll event
 };
 
+import clsx from 'clsx';
 import React, { useEffect, useRef, useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 import { ActionTypes } from '../../constants/ActionTypes';
-import useUpdateEffect from '../../hooks/useUpdateEffect';
 import useBaseStore from '../../stores/useBaseStore';
 import useConsoleStore from '../../stores/useConsoleStore';
 
@@ -32,30 +32,24 @@ const GameConsole: React.FC = () => {
     const version = useBaseStore((s) => s.version);
     const build = useBaseStore((s) => s.build);
 
-    const [suggestion, setSuggestion] = useState<number>(-1);
+    const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
     const [previous, setPrevious] = useState<number>(-1);
     const [currentText, setCurrentText] = useState<string>('');
-    const [maxTextLength, setMaxTextLength] = useState<number>(0);
 
     const outputRef = useRef<any>(null); // TODO: Fix any
     const conRef = useRef<any>(null); // TODO: Fix any
-
-    const _doScroll = () => {
-        if (outputRef.current && maxTextLength > 0) {
-            outputRef.current.scrollToIndex(maxTextLength - 1);
-        }
-    };
+    const textRef = useRef<any>([]);
 
     const scrollBottom = () => {
-        window.requestAnimationFrame(_doScroll);
-    };
-
-    const _onResize = () => {
-        scrollBottom();
+        setTimeout(() => {
+            window.requestAnimationFrame(() => {
+                outputRef.current?.scrollToIndex(textRef.current.length - 1);
+            });
+        }, 50);
     };
 
     const closeConsole = () => {
-        window.DispatchAction(ActionTypes.SET_CONSOLE_ACTIVE);
+        window.DispatchAction(ActionTypes.SET_CONSOLE_ACTIVE, { active: false });
     };
 
     const clearSuggestions = () => {
@@ -74,16 +68,7 @@ const GameConsole: React.FC = () => {
         window.DispatchAction(ActionTypes.CLEAR_CONSOLE);
     };
 
-    const onHoverSuggestion = (i: number) => {
-        setSuggestion(i);
-    };
-
-    const onSuggestionClick = () => {
-        conRef.current.value = `${suggestions[suggestion].text} `;
-        clearSuggestions();
-    };
-
-    const _renderRow = (index: number) => {
+    const renderRow = (index: number) => {
         if (index === 0 || index - 1 >= text.length) {
             return <div className="padding-row" />;
         }
@@ -94,10 +79,6 @@ const GameConsole: React.FC = () => {
                 dangerouslySetInnerHTML={{ __html: text[index - 1].text.replace('(null).', '') }}
             />
         );
-    };
-
-    const onLabelClick = () => {
-        conRef.current?.focus();
     };
 
     const onInput = () => {
@@ -143,10 +124,10 @@ const GameConsole: React.FC = () => {
             }
 
             // Otherwise we're browsing suggestions.
-            if (suggestion >= suggestions.length - 1) {
-                setSuggestion(-1);
+            if (selectedSuggestionIndex >= suggestions.length - 1) {
+                setSelectedSuggestionIndex(-1);
             } else {
-                setSuggestion((p) => p + 1);
+                setSelectedSuggestionIndex((p) => p + 1);
             }
 
             return;
@@ -183,10 +164,10 @@ const GameConsole: React.FC = () => {
             }
 
             // Otherwise we're browsing suggestions.
-            if (suggestion <= -1) {
-                setSuggestion(suggestions.length - 1);
+            if (selectedSuggestionIndex <= -1) {
+                setSelectedSuggestionIndex(suggestions.length - 1);
             } else {
-                setSuggestion((p) => p - 1);
+                setSelectedSuggestionIndex((p) => p - 1);
             }
 
             return;
@@ -200,8 +181,8 @@ const GameConsole: React.FC = () => {
             setPrevious(-1);
 
             // If we have a suggestion selected then type it out instead of submitting.
-            if (suggestion >= 0) {
-                conRef.current.value = `${suggestions[suggestion].text} `;
+            if (selectedSuggestionIndex >= 0) {
+                conRef.current.value = `${suggestions[selectedSuggestionIndex].text} `;
                 clearSuggestions();
                 return;
             }
@@ -264,8 +245,8 @@ const GameConsole: React.FC = () => {
         if (e.keyCode === 9) {
             e.preventDefault();
 
-            if (suggestion >= 0) {
-                conRef.current.value = `${suggestions[suggestion].text} `;
+            if (selectedSuggestionIndex >= 0) {
+                conRef.current.value = `${suggestions[selectedSuggestionIndex].text} `;
                 clearSuggestions();
             }
 
@@ -274,43 +255,46 @@ const GameConsole: React.FC = () => {
     };
 
     useEffect(() => {
-        window.addEventListener('resize', _onResize);
+        const onResize = () => {
+            scrollBottom();
+        };
+
+        window.addEventListener('resize', onResize);
 
         return () => {
-            window.removeEventListener('resize', _onResize);
+            window.removeEventListener('resize', onResize);
         };
     }, []);
 
-    useUpdateEffect(() => {
-        scrollBottom();
-    }, [consoleUpdater]);
+    /*
 
-    useUpdateEffect(() => {
+    */
+
+    useEffect(() => {
         if (active) {
-            setSuggestion(-1);
+            setSelectedSuggestionIndex(-1);
 
             window.WebUI.Call('EnableKeyboard');
             window.WebUI.Call('EnableMouse');
 
-            setTimeout(() => {
-                if (active) {
-                    scrollBottom();
-                    conRef.current?.focus();
-                }
-            }, 50);
+            conRef.current?.focus();
         } else {
             window.WebUI.Call('ResetKeyboard');
             window.WebUI.Call('ResetMouse');
         }
     }, [active]);
 
-    useUpdateEffect(() => {
-        setSuggestion(-1);
+    useEffect(() => {
+        setSelectedSuggestionIndex(-1);
     }, [suggestions]);
 
-    useUpdateEffect(() => {
-        setMaxTextLength(text.length);
+    useEffect(() => {
+        textRef.current = text;
     }, [text]);
+
+    useEffect(() => {
+        scrollBottom();
+    }, [consoleUpdater]);
 
     let _suggestions = null;
 
@@ -320,12 +304,13 @@ const GameConsole: React.FC = () => {
         for (let i = 0; i < suggestions.length; ++i) {
             suggestionList.push(
                 <li
-                    className={suggestion === i ? 'active' : ''}
-                    key={i}
-                    onMouseEnter={() => onHoverSuggestion(i)}
+                    className={clsx({ active: selectedSuggestionIndex === i })}
+                    key={`suggestion-${suggestions.text}-${i}`}
+                    onMouseEnter={() => setSelectedSuggestionIndex(i)}
                     onClick={(e) => {
                         e.preventDefault();
-                        onSuggestionClick();
+                        conRef.current.value = `${suggestions[selectedSuggestionIndex].text} `;
+                        clearSuggestions();
                     }}
                 >
                     {suggestions[i].text} <strong>{suggestions[i].desc}</strong>
@@ -334,12 +319,6 @@ const GameConsole: React.FC = () => {
         }
 
         _suggestions = <ul id="console-suggestions">{suggestionList}</ul>;
-    }
-
-    let height = '150rem'; // 150px
-
-    if (fullExpanded) {
-        height = '935rem'; // 935px
     }
 
     const style: any = {
@@ -359,7 +338,7 @@ const GameConsole: React.FC = () => {
                 <label
                     onClick={(e) => {
                         e.preventDefault();
-                        onLabelClick();
+                        conRef.current?.focus();
                     }}
                 >
                     {`${productCode} ${version} [${build}] >`}
@@ -381,10 +360,10 @@ const GameConsole: React.FC = () => {
                     ref={outputRef}
                     totalCount={text.length + 2}
                     overscan={2}
-                    item={_renderRow}
+                    item={renderRow}
                     followOutput
                     className="console-output"
-                    style={{ height }}
+                    style={{ height: fullExpanded ? '935rem' : '150rem' }}
                 />
                 {_suggestions}
             </div>
