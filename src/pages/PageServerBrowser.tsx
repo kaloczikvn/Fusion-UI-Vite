@@ -45,7 +45,6 @@ const PageServerBrowser: React.FC = () => {
     const [height, setHeight] = useState<number>(580);
 
     // const scrollbarRef = useRef<PerfectScrollbar | null>(null);
-    const serverListRef = useRef<HTMLDivElement | null>(null);
     const browserRef = useRef<HTMLDivElement | null>(null);
     const headerRef = useRef<HTMLDivElement | null>(null);
 
@@ -287,12 +286,6 @@ const PageServerBrowser: React.FC = () => {
         };
     }, []);
 
-    /*
-    useEffect(() => {
-        if (scrollbarRef.current !== null) scrollbarRef.current.update();
-    });
-    */
-
     let sortIcon: any = '';
 
     if (sortDirection === SortDirection.ASC) sortIcon = <MdArrowDropUp />;
@@ -415,24 +408,6 @@ const PageServerBrowser: React.FC = () => {
         return JSON.stringify(filters) !== JSON.stringify(getDefaultFilters());
     }, [filters]);
 
-    /*
-    useEffect(() => {
-        if (!scrollbarRef.current && serverListRef.current) {
-            scrollbarRef.current = new PerfectScrollbar(serverListRef.current, {
-                wheelSpeed: 3,
-                suppressScrollX: true,
-            });
-        }
-
-        return () => {
-            if (scrollbarRef.current) {
-                scrollbarRef.current.destroy();
-                scrollbarRef.current = null;
-            }
-        };
-    }, []);
-    */
-
     return (
         <div className="server-browser content-wrapper" ref={browserRef}>
             <div className="server-list">
@@ -445,7 +420,7 @@ const PageServerBrowser: React.FC = () => {
                                     : `Found ${serversMemo.length} server${serversMemo.length !== 1 ? 's' : ''}`}
                             </span>
                             <a href="#" className={clsx({ fetching: fetchStatus === ServerFetchStatus.FETCHING })}>
-                                <MdSync />
+                                <MdSync className="header-action-icon" />
                             </a>
                         </div>
                         <div
@@ -457,7 +432,7 @@ const PageServerBrowser: React.FC = () => {
                         >
                             <span onClick={onEditFilters}>Filters</span>
                             <a href="#" onClick={onEditFilters}>
-                                <MdFilterList />
+                                <MdFilterList className="header-action-icon" />
                             </a>
                             <ServerFilters visible={filtersVisible} onClose={_onCloseFilters} />
                         </div>
@@ -466,14 +441,26 @@ const PageServerBrowser: React.FC = () => {
                             onClick={onToggleCompactView}
                         >
                             <span>Compact view</span>
-                            <a href="#">{compactViewMemo ? <MdOutlineToggleOn /> : <MdOutlineToggleOff />}</a>
+                            <a href="#">
+                                {compactViewMemo ? (
+                                    <MdOutlineToggleOn className="header-action-icon" />
+                                ) : (
+                                    <MdOutlineToggleOff className="header-action-icon" />
+                                )}
+                            </a>
                         </div>
                         <div
                             className={'header-action compact' + (favoriteServersOnly ? ' active' : '')}
                             onClick={onToggleFavoritesOnly}
                         >
                             <span>Favorites</span>
-                            <a href="#">{favoriteServersOnly ? <MdOutlineToggleOn /> : <MdOutlineToggleOff />}</a>
+                            <a href="#">
+                                {favoriteServersOnly ? (
+                                    <MdOutlineToggleOn className="header-action-icon" />
+                                ) : (
+                                    <MdOutlineToggleOff className="header-action-icon" />
+                                )}
+                            </a>
                         </div>
                     </div>
                     <div className="column column-2 sort-action" onClick={_onSortByMap}>
@@ -500,7 +487,6 @@ const PageServerBrowser: React.FC = () => {
                         width: width,
                         height: height,
                     }}
-                    ref={serverListRef}
                 >
                     {serversMemo.length > 0 ? (
                         <>

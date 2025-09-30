@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
 
-import VUCheckbox from '../components/form/VUCheckbox';
+import Checkbox from '../components/form/Checkbox';
+import Input from '../components/form/Input';
 import LoginPopup from '../components/popups/LoginPopup';
 import { ActionTypes } from '../constants/ActionTypes';
 import { LoginStatus } from '../constants/LoginStatus';
@@ -92,34 +93,33 @@ const PageLogin: React.FC = () => {
                 <img src="/assets/img/logo.svg" />
 
                 <label htmlFor="username">Username</label>
-                <br />
-                <div className="field-container">
-                    <input
+                <div style={{ margin: '4rem 0 16rem' }}>
+                    <Input
                         type="text"
                         key="username"
                         id="username"
+                        placeholder="Enter username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
                         onMouseDown={onUpdateCapsLock}
                     />
-                    <br />
                 </div>
-                <label htmlFor="password">Password</label>
                 <br />
-                <div className="field-container">
-                    <input
+                <label htmlFor="password">Password</label>
+                <div style={{ margin: '4rem 0 16rem' }}>
+                    <Input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         key="password"
                         id="password"
+                        placeholder="Enter pasword"
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
                         onMouseDown={onUpdateCapsLock}
                     />
-                    <br />
                 </div>
                 {capsLock ? (
                     <div className="caps-lock-notice">
@@ -129,7 +129,7 @@ const PageLogin: React.FC = () => {
                 ) : null}
                 <div className="login-actions">
                     <div className="left-actions">
-                        <VUCheckbox checked={remember} onChange={(value) => setRemember(value)} label="Remember Me" />
+                        <Checkbox checked={remember} onChange={(value) => setRemember(value)} label="Remember Me" />
                     </div>
                     <div className="right-actions">
                         <a href="#" onClick={onForgotPassword}>

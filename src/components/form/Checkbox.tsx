@@ -1,5 +1,3 @@
-import './VUCheckbox.scss';
-
 import type { FC } from 'react';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 
@@ -9,9 +7,9 @@ interface IProps {
     onChange: (value: boolean) => void;
 }
 
-const VUCheckbox: FC<IProps> = ({ checked, onChange, label }) => {
+const Checkbox: FC<IProps> = ({ checked, onChange, label }) => {
     return (
-        <div className="vu-checkbox" onClick={() => onChange(!checked)}>
+        <div className="checkbox" onClick={() => onChange(!checked)}>
             {checked ? (
                 <MdCheckBox style={{ marginRight: '6rem' }} />
             ) : (
@@ -21,4 +19,4 @@ const VUCheckbox: FC<IProps> = ({ checked, onChange, label }) => {
         </div>
     );
 };
-export default VUCheckbox;
+export default Checkbox;

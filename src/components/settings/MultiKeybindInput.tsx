@@ -1,8 +1,10 @@
 import './MultiKeybindInput.scss';
 
 import React, { useRef, useState } from 'react';
+import { MdKeyboard } from 'react-icons/md';
 
-import { getInputDeviceKeyFromKeyboardEvent,InputDeviceKeyNames } from '../../constants/InputDeviceKey';
+import { getInputDeviceKeyFromKeyboardEvent, InputDeviceKeyNames } from '../../constants/InputDeviceKey';
+import Input from '../form/Input';
 
 interface IProps {
     value: number;
@@ -86,7 +88,7 @@ const MultiKeybindInput: React.FC<IProps> = ({ value, onChange, placeholder }) =
 
     return (
         <div className="multi-keybind-input">
-            <input
+            <Input
                 type="text"
                 ref={inputRef}
                 value={_getValue()}
@@ -95,6 +97,8 @@ const MultiKeybindInput: React.FC<IProps> = ({ value, onChange, placeholder }) =
                 onClick={_onStartEditing}
                 onBlur={_onCancel}
                 readOnly
+                isFullWidth
+                startIcon={<MdKeyboard />}
             />
             {editing ? (
                 <button className="keybind-reset" onClick={_onCancel}>

@@ -1,23 +1,18 @@
 .settings {
     .tabs {
         display: flex;
-        font-size: 1.666666666666667vh;
+        font-size: 16rem;
+        line-height: 26rem;
         font-weight: 500;
         color: #fff;
         text-decoration: none;
         text-transform: uppercase;
-        line-height: 2.777777777777778vh;
-        border-bottom: 0.15741vh solid rgba(255, 255, 255, 0.2);
-        margin-bottom: 0.9259259259259259vh;
+        border-bottom: 2rem solid rgba(255, 255, 255, 0.2);
 
         .tab {
             display: inline-flex;
             opacity: 0.25;
-            padding: 0 1vh;
-
-            /*&:first-of-type {
-        padding-left: 0;
-      }*/
+            padding: 5rem 10rem;
 
             &:hover {
                 opacity: 0.5;
@@ -26,67 +21,56 @@
             &.active {
                 opacity: 0.75;
                 //color: #e14d43;
-                border-bottom: 0.15741vh solid #e14d43;
-                margin-bottom: -0.15741vh;
+                border-bottom: 2rem solid #e14d43;
+                margin-bottom: -2rem;
             }
         }
     }
 
     .tab-inner {
         position: relative;
-        border: 0.15741vh solid rgba(255, 255, 255, 0.2);
+        border-left: 2rem solid rgba(255, 255, 255, 0.2);
+        border-bottom: 2rem solid rgba(255, 255, 255, 0.2);
+        border-right: 2rem solid rgba(255, 255, 255, 0.2);
         height: 70%;
         overflow-y: scroll;
-        overflow-x: hidden !important;
+        overflow-x: hidden;
         background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(0.9259259259259vh);
+        backdrop-filter: blur(20rem);
     }
 
     h2 {
         text-transform: uppercase;
-        font-size: 2vh; // 28px
-        margin-bottom: 1.851851851851852vh; // 20px
-        line-height: 3vh; // 50px
-        text-shadow: 0 0 0.3703703703703704vh rgba(0, 0, 0, 1); // 4px
+        font-size: 20rem;
+        margin-bottom: 20rem;
+        line-height: 20rem;
+        text-shadow: 0 0 4rem rgba(0, 0, 0, 1);
         color: #e14d43;
     }
 
     h3 {
         text-transform: uppercase;
-        font-size: 1.851851851851852vh; // 20px
+        font-size: 18rem;
+        line-height: 26rem;
         font-weight: 400;
-        text-shadow: 0 0 0.3703703703703704vh rgba(0, 0, 0, 1); // 4px
+        text-shadow: 0 0 4rem rgba(0, 0, 0, 1);
     }
 
     .mod-settings-container {
+        position: relative;
         display: flex;
         height: 100%;
 
         .mod-search-bar {
-            height: 4.472222vh;
-            left: 1px;
-            top: 1px;
-            width: 20%;
+            left: 0;
+            right: 80%;
+            top: 0;
             position: absolute;
-
-            input[type='text'] {
-                background: rgba(255, 255, 255, 0.1);
-                width: 100%;
-                height: 4.472222vh; // 40px
-                padding: 0 0.9259259259259259vh; // 0 10px
-                color: #fff;
-                font-family: 'Blinker';
-                font-size: 1.481481481481481vh; // 16px
-                border-top: 0;
-                border-left: 0;
-            }
         }
 
         .mod-list {
-            border-right: 0.15741vh solid rgba(255, 255, 255, 0.4);
             position: relative;
-            // height: calc(100% - 4.472222vh);
-            margin-top: 4.472222vh;
+            margin-top: 50rem;
             width: 20%;
 
             &.no-mod {
@@ -96,24 +80,17 @@
             }
 
             .mod {
-                border-bottom: 0.15741vh solid rgba(255, 255, 255, 0.2);
-                padding: 0 0.9259259259259259vh;
-                line-height: 2vh;
-                height: 4.472222vh; // 40px
+                border-bottom: 2rem solid rgba(255, 255, 255, 0.2);
+                padding: 0 10rem;
+                height: 50rem;
+                display: flex;
+                align-items: center;
 
                 span {
-                    height: 100%;
                     opacity: 0.4;
-                    display: flex;
-                    align-items: center;
                     text-transform: uppercase;
-                    font-size: 1.5vh;
-
-                    img {
-                        height: 1.8518518518518518518518518518519vh;
-                        margin-right: 0.9259259259259259vh;
-                        object-fit: contain;
-                    }
+                    font-size: 16rem;
+                    line-height: 16rem;
                 }
 
                 &.active {
@@ -133,9 +110,9 @@
         }
 
         .mod-settings {
+            border-left: 2rem solid rgba(255, 255, 255, 0.2);
             position: relative;
-            // max-height: calc(100% - 4vh);
-            padding: 2vh;
+            padding: 20rem;
             width: 80%;
 
             &.no-mod {
@@ -153,7 +130,7 @@
 
 .settings-row {
     display: flex;
-    margin-bottom: 1.851851851851852vh; // 20px
+    margin-bottom: 10rem;
     align-items: center;
 
     h3 {
@@ -164,9 +141,14 @@
         display: flex;
         align-items: center;
 
-        .slider-value {
-            margin-right: 2vmin;
-            line-height: 3vh;
+        .input-wrapper {
+            margin-right: 20rem;
+            max-width: 60rem;
+            min-width: 60rem;
+
+            input {
+                text-align: center;
+            }
         }
     }
 }

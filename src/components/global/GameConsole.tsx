@@ -266,10 +266,6 @@ const GameConsole: React.FC = () => {
         };
     }, []);
 
-    /*
-
-    */
-
     useEffect(() => {
         if (active) {
             setSelectedSuggestionIndex(-1);
@@ -321,19 +317,15 @@ const GameConsole: React.FC = () => {
         _suggestions = <ul id="console-suggestions">{suggestionList}</ul>;
     }
 
-    const style: any = {
-        display: 'block',
-        visibility: 'hidden',
-        pointerEvents: 'none',
-    };
-
-    if (active) {
-        style.visibility = 'visible';
-        style.pointerEvents = 'auto';
-    }
-
     return (
-        <div id="game-console-container" style={style}>
+        <div
+            id="game-console-container"
+            style={{
+                display: active ? 'block' : 'none',
+                visibility: active ? 'visible' : 'hidden',
+                pointerEvents: active ? 'auto' : 'none',
+            }}
+        >
             <div id="console-input">
                 <label
                     onClick={(e) => {
@@ -343,17 +335,19 @@ const GameConsole: React.FC = () => {
                 >
                     {`${productCode} ${version} [${build}] >`}
                 </label>
-                <input
-                    type="text"
-                    ref={conRef}
-                    autoFocus
-                    autoComplete="off"
-                    autoCorrect="off"
-                    autoCapitalize="off"
-                    spellCheck="false"
-                    onInput={() => onInput()}
-                    onKeyDown={(e) => onKeyDown(e as any)}
-                />
+                <div className="console-input-wrapper" onClick={() => conRef.current?.focus()}>
+                    <input
+                        type="text"
+                        ref={conRef}
+                        autoFocus
+                        autoComplete="off"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck="false"
+                        onInput={() => onInput()}
+                        onKeyDown={(e) => onKeyDown(e as any)}
+                    />
+                </div>
             </div>
             <div id="console-body-container">
                 <Virtuoso

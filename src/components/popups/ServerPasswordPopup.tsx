@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
 
 import { ActionTypes } from '../../constants/ActionTypes';
+import Input from '../form/Input';
 
 interface IProps {
     server: any;
@@ -56,13 +57,14 @@ const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
                         ) : null}
                     </div>
 
-                    <div className="field-container">
-                        <input
+                    <div style={{ margin: '4rem 0 16rem' }}>
+                        <Input
                             type="password"
                             name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             id="password"
+                            placeholder="Enter the server password"
                             onKeyDown={onUpdateCapsLock}
                             onKeyUp={onUpdateCapsLock}
                             onMouseDown={onUpdateCapsLock}

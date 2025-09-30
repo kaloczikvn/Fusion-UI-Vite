@@ -2,10 +2,9 @@
     position: relative;
     display: flex;
     width: 100%;
-    height: 40rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 0.15741vh solid rgba(255, 255, 255, 0.4);
-    padding: 4rem;
+    height: 50rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 10rem;
 
     .off,
     .on {
@@ -21,11 +20,13 @@
     .off {
         color: #000;
         background: #fff;
+        margin-right: 5rem;
     }
 
     .on {
         color: #fff;
         background: transparent;
+        margin-left: 5rem;
     }
 
     &.checked {
@@ -39,26 +40,4 @@
             background: #fff;
         }
     }
-
-    /*
-    .slider {
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        &:before {
-            position: absolute;
-            content: '';
-            width: 50%;
-            top: 0.25vh;
-            left: 0.25vh;
-            bottom: 0.25vh;
-            background: rgba(255, 255, 255, 0.95);
-            z-index: 4;
-        }
-    }
-    */
 }

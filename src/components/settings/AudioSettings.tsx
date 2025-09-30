@@ -1,10 +1,9 @@
 import React, { memo, useMemo } from 'react';
-import Select from 'react-select';
 
 import { ActionTypes } from '../../constants/ActionTypes';
-import { SELECT_STYLE } from '../../constants/Styles';
 import useSettingsStore from '../../stores/useSettingsStore';
 import useVoipStore from '../../stores/useVoipStore';
+import { Select } from '../form/Select';
 import NumberInput from './NumberInput';
 import VoipSlider from './VoipSlider';
 
@@ -32,8 +31,8 @@ const AudioSettings: React.FC = () => {
         window.DispatchAction(ActionTypes.SET_VOIP_DATA, { data: { volumeMultiplier: volume } });
     };
 
-    const onVoipDeviceChange = (device: { value: number; label: string }) => {
-        window.WebUI.Call('VoipSelectDevice', device.value);
+    const onVoipDeviceChange = (value: number) => {
+        window.WebUI.Call('VoipSelectDevice', value);
     };
 
     const onVoipCutoffVolumeChange = (volume: number | number[]) => {
@@ -50,11 +49,11 @@ const AudioSettings: React.FC = () => {
             return [{ value: -1, label: 'No microphone detected' }];
         }
         return devices.map((device) => ({ value: device.id, label: device.name }));
-    }, [devices, selectedDevice]);
+    }, [devices]);
 
     const selectedDeviceIndexMemo: number = useMemo(() => {
-        if (devices.length === 0) return 0; // I don't think we need this one
-        return devices.findIndex((device) => device.id === selectedDevice);
+        if (devices.length === 0) return -1; // I don't think we need this one
+        return selectedDevice;
     }, [devices, selectedDevice]);
 
     return (
@@ -77,10 +76,8 @@ const AudioSettings: React.FC = () => {
                 <h3>Microphone Device</h3>
                 <Select
                     options={voipDevicesMemo}
-                    isSearchable={false}
-                    value={voipDevicesMemo[selectedDeviceIndexMemo]}
+                    value={selectedDeviceIndexMemo}
                     onChange={(value: any) => onVoipDeviceChange(value)}
-                    styles={SELECT_STYLE}
                 />
             </div>
             <div className="settings-row">

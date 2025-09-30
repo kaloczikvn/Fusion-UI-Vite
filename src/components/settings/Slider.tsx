@@ -1,4 +1,6 @@
-import { type FC, type ReactNode,useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type FC, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import Input from '../form/Input';
 
 interface IProps {
     className?: string;
@@ -12,28 +14,28 @@ interface IProps {
 const styles = {
     slider: {
         flex: '1',
-        height: '4px',
+        height: '6rem',
         background: 'rgba(255, 255, 255, 0.2)',
-        borderRadius: '10px',
+        borderRadius: '6rem',
         position: 'relative',
         cursor: 'pointer',
-        margin: '10px 0',
+        margin: '10rem 0',
     },
     thumb: {
         position: 'absolute',
         top: '0',
-        width: '16px',
-        height: '16px',
+        width: '16rem',
+        height: '16rem',
         background: '#ffffff',
         borderRadius: '50%',
-        transform: 'translateX(-50%) translateY(-6px)',
+        transform: 'translateX(-50%) translateY(-6rem)',
         cursor: 'pointer',
         opacity: '0.8',
     },
     track: {
-        height: '4px',
+        height: '6rem',
         background: 'rgba(255, 255, 255, 0.7)',
-        borderRadius: '2px',
+        borderRadius: '6rem',
         position: 'absolute',
         top: '0',
         left: '0',
@@ -240,7 +242,7 @@ const Slider: FC<IProps> = ({ className, value, onChange, min, max, extraNode })
 
     return (
         <div className={sliderClassName}>
-            <input
+            <Input
                 className="slider-value"
                 type="text"
                 maxLength={inputMaxLength}

@@ -1,5 +1,3 @@
-declare module 'react-select';
-
 interface IServer {
     guid: string;
     name: string;
@@ -19,4 +17,9 @@ interface IServer {
         min_buildno: any;
         vext_req: any;
     };
+}
+
+interface IDropdownOption {
+    label: string;
+    value: any;
 }

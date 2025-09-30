@@ -2,8 +2,8 @@ form {
     text-align: left;
 
     label {
-        font-size: 1.666666666666667vh; // 18px
-        opacity: 0.5;
+        font-size: 18rem; // 18px
+        opacity: 0.65;
         text-transform: uppercase;
     }
 
@@ -40,24 +40,6 @@ form {
 .slider-input {
     position: relative;
 
-    input {
-        width: 10%;
-        height: 3.703703703703704vh; // 40px
-        color: #fff;
-        border: 0.1574074074074074vh solid rgba(255, 255, 255, 0.7); // 1.7px
-        transition: all 150ms ease-in-out;
-        text-align: center;
-        font-size: 18rem; // 18px
-        font-family: 'Blinker';
-        margin-right: 5%;
-        background: rgba(0, 0, 0, 0.8);
-
-        &:hover,
-        &:focus {
-            border-color: #fff;
-        }
-    }
-
     .rc-slider {
         width: 100%;
     }
@@ -66,9 +48,9 @@ form {
         opacity: 0.4;
         position: absolute;
         left: 0;
-        height: 0.5555555555555556vh; // 6px
+        height: 6rem; // 6px
         background: #e14d43;
-        border-radius: 0.5555555555555556vh; // 6px
+        border-radius: 6rem; // 6px
         transition: width 100ms ease-in-out;
         width: 0;
         z-index: -1;
@@ -117,30 +99,124 @@ form {
     }
 }
 
-input[type='checkbox'] {
-    // TODO: Fix checkbox
-    display: none;
-
-    width: 1.851851851851852vh; // 20px
-    height: 1.851851851851852vh; // 20px
-    border: 0.1574074074074074vh solid rgba(255, 255, 255, 0.4);
-    background: rgba(0, 0, 0, 0.4);
-    margin: 0;
-    margin-right: 0.9259259259259259vh; // 10px
-    // display: inline-block;
-    vertical-align: middle;
+.input-wrapper {
     position: relative;
+    display: flex;
+    height: 50rem;
+    min-width: 160rem;
+    max-width: 360rem;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2rem solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-family: 'Blinker';
+    --inputFontSize: 18rem;
 
-    &:checked:after {
-        content: '';
-        height: 0.3703703703703704vh; // 4px
-        width: 0.8333333333333333vh; // 9px
-        border-left: 0.2777777777777778vh solid #e14d43; // 3px
-        border-bottom: 0.2777777777777778vh solid #e14d43; // 3px
-        position: absolute;
-        top: 0.2777777777777778vh; // 3px
-        left: 0.1851851851851852vh; // 2px
-
-        transform: rotate(-45deg);
+    &.compact {
+        height: 40rem;
+        --inputFontSize: 16rem;
     }
+
+    &.full-width {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    &-padding {
+        margin: 0 10rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+
+    &-placeholder {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.3);
+        font-weight: 400;
+        font-family: 'Blinker';
+        font-size: var(--inputFontSize);
+        line-height: var(--inputFontSize);
+    }
+
+    &-value {
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: 100%;
+        color: #fff;
+        font-weight: 400;
+        font-family: 'Blinker';
+        font-size: var(--inputFontSize);
+        line-height: var(--inputFontSize);
+
+        &.placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    input {
+        flex: 1;
+        width: 100%;
+        position: relative;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        color: #fff;
+        font-family: 'Blinker';
+        font-size: var(--inputFontSize);
+        line-height: var(--inputFontSize);
+    }
+
+    svg {
+        width: 26rem;
+        height: 26rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    &-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border: 2rem solid rgba(255, 255, 255, 0.6);
+        background: #333;
+        z-index: 1000;
+        max-height: 400rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            padding: 0 10rem;
+            height: 50rem;
+            background: transparent;
+            font-weight: 400;
+            font-family: 'Blinker';
+            font-size: var(--inputFontSize);
+            line-height: var(--inputFontSize);
+
+            svg {
+                width: 20rem;
+                height: 20rem;
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            &:hover {
+                background: #444;
+            }
+
+            &.selected {
+                background: #555;
+            }
+        }
+    }
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 18rem;
+    font-weight: 400;
 }

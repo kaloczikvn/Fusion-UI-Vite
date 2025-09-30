@@ -30,8 +30,14 @@
         color: #999;
     }
 
+    .console-input-wrapper {
+        height: 50px;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
     input {
-        line-height: 20rem; // 49px;
         border: 0;
         padding: 0;
         margin: 0;
@@ -40,10 +46,11 @@
         font-weight: 400;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
-        font-size: 20rem; // 20px
         color: #fff;
+        font-size: 20rem;
+        line-height: 20rem;
+        height: 20rem;
         flex-grow: 1;
-        height: 50rem;
     }
 }
 

@@ -1,4 +1,4 @@
-import { createBrowserRouter,Navigate, RouterProvider } from 'react-router';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
 import BaseWrapper from './components/wrapper/BaseWrapper';
 import PageConnection from './pages/PageConnection';

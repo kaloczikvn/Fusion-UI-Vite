@@ -84,6 +84,7 @@
             display: flex;
             position: relative;
             align-items: center;
+
             &:hover {
                 span,
                 svg {
@@ -91,27 +92,29 @@
                 }
             }
 
-            &.active svg {
-                opacity: 1;
-                fill: #e14d43;
+            &.active {
+                .header-action-icon {
+                    opacity: 1;
+                    fill: #e14d43;
+                }
             }
 
             &.hasFilter {
                 &::after {
                     content: '';
                     position: absolute;
-                    right: -4rem;
+                    right: -5rem;
                     top: 2rem;
-                    width: 8rem;
-                    height: 8rem;
+                    width: 12rem;
+                    height: 12rem;
                     background: #e14d43;
-                    border-radius: 50%;
+                    border-radius: 12rem;
                     pointer-events: none;
                 }
             }
 
             a.fetching {
-                svg {
+                .header-action-icon {
                     fill: #e14d43;
                     opacity: 1;
                     animation: spin-reverse 1s infinite linear;
@@ -513,16 +516,6 @@
     display: none;
 }
 
-.server-filter-backdrop {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 998;
-    background: red;
-}
-
 .server-filters {
     position: absolute;
     left: 100%;
@@ -576,28 +569,13 @@
     align-items: center;
     justify-content: space-between;
 
-    /*label {
-        width: 46%;
-        display: inline-block;
-
-        &:first-child {
-            margin-right: 8%;
-        }
-    }
-
-    input[type='text'] {
-        width: 65%;
-        display: inline-block;
-        margin-left: 16rem; // 16px
-    }
-    */
     & > div {
         width: 40%;
     }
 
     p {
-        margin: 0;
-        font-size: 14rem;
+        margin: 0 0 4rem;
+        font-size: 16rem;
         line-height: 16rem;
     }
 }
@@ -613,20 +591,8 @@
 
 .frequency-filters {
     display: flex;
-    label {
-        display: inline-block;
-        width: 33.3333%;
-        font-weight: 300;
-        font-size: 16rem; // 16px
-
-        // input {
-        //     vertical-align: middle;
-        // }
-
-        &:last-child {
-            width: 33.3332%;
-        }
-    }
+    flex-flow: column;
+    justify-content: space-between;
 }
 
 .filter-buttons {
@@ -639,6 +605,7 @@
     }
 }
 
+/*
 .ps__rail-y {
     z-index: 5;
 }
@@ -651,3 +618,4 @@
 .ps .ps__rail-y.ps--clicking {
     background-color: transparent;
 }
+*/

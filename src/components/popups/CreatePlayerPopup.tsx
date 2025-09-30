@@ -4,6 +4,7 @@ import { ActionTypes } from '../../constants/ActionTypes';
 import { PlayerCreateStatus } from '../../constants/PlayerCreateStatus';
 import useBaseStore from '../../stores/useBaseStore';
 import useUserStore from '../../stores/useUserStore';
+import Input from '../form/Input';
 import LoadingIndicator from '../global/LoadingIndicator';
 
 const CreatePlayerPopup: React.FC = () => {
@@ -136,12 +137,12 @@ const CreatePlayerPopup: React.FC = () => {
             <div className="notice-content">
                 <h1>Create new Soldier</h1>
                 <form onSubmit={onSubmit}>
-                    <label htmlFor="name">Soldier Name</label>
-                    <br />
-                    <div className="field-container">
-                        <input
+                    <label htmlFor="name">Soldier name</label>
+                    <div style={{ margin: '4rem 0 16rem' }}>
+                        <Input
                             type="text"
                             name="name"
+                            placeholder="Enter a name for your solider"
                             ref={inputRef}
                             onChange={(e) => setInputValue(e.target.value)}
                             value={inputValue}

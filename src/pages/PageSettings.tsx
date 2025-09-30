@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Select from 'react-select';
+import { MdSearch } from 'react-icons/md';
 
+import Input from '../components/form/Input';
+import { Select } from '../components/form/Select';
 import ApplySettingsPopup from '../components/popups/ApplySettingsPopup';
 import AudioSettings from '../components/settings/AudioSettings';
 import BoolInput from '../components/settings/BoolInput';
 import KeybindInput from '../components/settings/KeybindInput';
 import MultiKeybindInput from '../components/settings/MultiKeybindInput';
 import NumberInput from '../components/settings/NumberInput';
-import OptionsInput from '../components/settings/OptionsInput';
-import TextInput from '../components/settings/TextInput';
 import { ActionTypes } from '../constants/ActionTypes';
 import { ModSettingType } from '../constants/ModSettingType';
-import { SELECT_STYLE } from '../constants/Styles';
 import useSettingsStore from '../stores/useSettingsStore';
 
 interface IProps {
@@ -33,6 +32,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
 
     const modListScrollbarRef = useRef<any>(null);
     const modSettingsScrollbarRef = useRef<any>(null);
+    const modsearchRef = useRef<any>(null);
 
     const disableBlur = () => {
         window.DispatchAction(ActionTypes.SET_BLUR, {
@@ -66,7 +66,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
 
     const setFullscreen = (fullscreen: boolean) => {
         window.DispatchAction(ActionTypes.SET_CURRENT_SETTINGS, {
-            fullscreen: fullscreen,
+            settings: { fullscreen },
         });
     };
 
@@ -220,16 +220,16 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
         window.WebUI.Call('RefreshSettings');
     };
 
-    const _onDisplayModeChange = (displayMode: any) => {
-        setFullscreen(displayMode.value);
+    const _onDisplayModeChange = (value: any) => {
+        setFullscreen(value);
     };
 
-    const _onResolutionChange = (resolution: any) => {
-        setResolutionIndex(resolution.value);
+    const _onResolutionChange = (value: any) => {
+        setResolutionIndex(value);
     };
 
-    const _onScreenChange = (resolution: any) => {
-        setScreenIndex(resolution.value);
+    const _onScreenChange = (value: any) => {
+        setScreenIndex(value);
     };
 
     useEffect(() => {
@@ -293,21 +293,23 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                 );
             case ModSettingType.STRING:
                 return (
-                    <TextInput
+                    <Input
+                        type="text"
                         value={setting.currentValue ?? setting.value}
                         onChange={(e) => {
                             _onChangeModInput(settingKey, e.target.value);
                         }}
+                        isFullWidth
                     />
                 );
             case ModSettingType.OPTION:
                 return (
-                    <OptionsInput
+                    <Select
                         value={setting.currentValue ?? setting.value.value}
-                        options={setting.value.options}
-                        allowEmpty={setting.allowEmpty}
-                        onChange={(e) => {
-                            _onChangeModInput(settingKey, e.value);
+                        options={setting.value.options.map((t: any) => ({ value: t, label: t }))}
+                        // allowEmpty={setting.allowEmpty}
+                        onChange={(value) => {
+                            _onChangeModInput(settingKey, value);
                         }}
                     />
                 );
@@ -367,30 +369,24 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                         <h3>Display mode</h3>
                         <Select
                             options={displayModeOptions}
-                            isSearchable={false}
-                            value={displayModeOptions[currentSettings.fullscreen ? 0 : 1]}
+                            value={currentSettings.fullscreen === true}
                             onChange={_onDisplayModeChange}
-                            styles={SELECT_STYLE}
                         />
                     </div>
                     <div className="settings-row">
                         <h3>Fullscreen resolution</h3>
                         <Select
                             options={fullscreenOptions}
-                            isSearchable={false}
-                            value={fullscreenOptions[currentSettings.selectedResolution]}
+                            value={currentSettings.selectedResolution}
                             onChange={_onResolutionChange}
-                            styles={SELECT_STYLE}
                         />
                     </div>
                     <div className="settings-row">
                         <h3>Fullscreen monitor</h3>
                         <Select
                             options={screenOptions}
-                            isSearchable={false}
-                            value={screenOptions[currentSettings.selectedScreen]}
+                            value={currentSettings.selectedScreen}
                             onChange={_onScreenChange}
-                            styles={SELECT_STYLE}
                         />
                     </div>
                 </>
@@ -403,7 +399,17 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
     const modSettingsRender = (
         <div className="mod-settings-container">
             <div className="mod-search-bar">
-                <TextInput value={modName} onChange={_onChangeModName} placeholder="Search..." />
+                <Input
+                    type="text"
+                    key="modsearch"
+                    id="modsearch"
+                    placeholder="Search..."
+                    value={modName}
+                    onChange={_onChangeModName}
+                    onFocus={() => setModName('')}
+                    ref={modsearchRef}
+                    startIcon={<MdSearch style={{ marginRight: '10rem' }} />}
+                />
             </div>
             <div className="mod-list" style={{ overflowX: 'hidden', overflowY: 'auto' }}>
                 {Object.keys(modSettings)
@@ -415,7 +421,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                             key={key}
                             onClick={() => _onSelectMod(key)}
                         >
-                            <span>{key ?? ''}</span>
+                            <span>{key || ''}</span>
                         </div>
                     ))}
             </div>
@@ -426,7 +432,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                 </div>
             ) : (
                 <div className="mod-settings no-mod">
-                    <h3>No mod selected</h3>
+                    <h3>Please select a mod on the left side to see the settings...</h3>
                 </div>
             )}
         </div>

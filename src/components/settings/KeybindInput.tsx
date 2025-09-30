@@ -1,8 +1,10 @@
 import './KeybindInput.scss';
 
 import React, { useRef, useState } from 'react';
+import { MdKeyboard } from 'react-icons/md';
 
-import { getInputDeviceKeyFromKeyboardEvent,InputDeviceKeyNames } from '../../constants/InputDeviceKey';
+import { getInputDeviceKeyFromKeyboardEvent, InputDeviceKeyNames } from '../../constants/InputDeviceKey';
+import Input from '../form/Input';
 
 interface IProps {
     value: number;
@@ -48,23 +50,26 @@ const KeybindInput: React.FC<IProps> = ({ value, onChange, placeholder }) => {
 
     return (
         <div className="keybind-input">
-            <input
+            <Input
                 type="text"
                 ref={inputRef}
                 value={!editing ? InputDeviceKeyNames[value] ?? '' : ''}
                 placeholder={editing ? 'Press a key...' : placeholder ?? ''}
                 onKeyDown={_onKeyDown}
                 onClick={() => setEditing(true)}
+                onFocus={() => setEditing(true)}
                 onBlur={_onCancel}
                 readOnly
+                isFullWidth
+                startIcon={<MdKeyboard style={{ marginRight: '6rem' }} />}
             />
             {editing ? (
-                <button className="keybind-reset" onClick={_onCancel}>
+                <button className="btn border-btn keybind-reset" onClick={_onCancel}>
                     Cancel
                 </button>
             ) : null}
             {!editing && value !== originalValue ? (
-                <button className="keybind-reset" onClick={_onReset}>
+                <button className="btn border-btn keybind-reset" onClick={_onReset}>
                     Reset
                 </button>
             ) : null}
