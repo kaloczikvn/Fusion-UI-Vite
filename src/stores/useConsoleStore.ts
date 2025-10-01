@@ -66,10 +66,7 @@ const useConsoleStore = create<State>((set) => ({
 
                     const command = text.substring(25, lastIndex);
 
-                    text =
-                        '**WARNING** Unknown console command `' +
-                        command +
-                        '`. You can use *list* to list all available commands.';
+                    text = `**WARNING**  Unknown console command \`${command}\`. You can use *list*  to list all available commands.`;
                 }
 
                 // Escape HTML characters.

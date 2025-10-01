@@ -231,9 +231,7 @@ const PageServerBrowser: React.FC = () => {
     };
 
     const _onResize = () => {
-        if (!browserRef.current || !headerRef.current) {
-            return;
-        }
+        if (!browserRef.current || !headerRef.current) return;
 
         const browserStyle = window.getComputedStyle(browserRef.current);
         const headerStyle = window.getComputedStyle(headerRef.current);
@@ -245,8 +243,10 @@ const PageServerBrowser: React.FC = () => {
         requiredHeight -= parseFloat(browserStyle.paddingBottom);
         requiredHeight -= parseFloat(headerStyle.height);
 
-        setWidth(requiredWidth);
-        setHeight(requiredHeight);
+        if (isNaN(requiredHeight) || isNaN(requiredWidth)) return;
+
+        setWidth(requiredWidth || 920);
+        setHeight(requiredHeight || 580);
     };
 
     const _onHandleClickOutsideOfFiltersBox = (e: any) => {

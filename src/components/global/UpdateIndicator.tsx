@@ -1,10 +1,9 @@
 import React, { memo } from 'react';
+import { MdCloudDone, MdCloudDownload, MdCloudOff, MdCloudSync } from 'react-icons/md';
 
 import { UpdateError } from '../../constants/UpdateError';
 import { UpdateState } from '../../constants/UpdateState';
 import useUpdateStore from '../../stores/useUpdateStore';
-import LoadingIndicator from './LoadingIndicator';
-import ProgressIndicator from './ProgressIndicator';
 
 const UpdateIndicator: React.FC = () => {
     const percentage = useUpdateStore((s) => s.percentage);
@@ -20,7 +19,7 @@ const UpdateIndicator: React.FC = () => {
             <div className="update-indicator">
                 <div className="update-indicator-container">
                     <span>Starting Update</span>
-                    <LoadingIndicator />
+                    <MdCloudSync />
                 </div>
             </div>
         );
@@ -34,7 +33,7 @@ const UpdateIndicator: React.FC = () => {
                 <div className="update-indicator">
                     <div className="update-indicator-container">
                         <span>Finishing Update</span>
-                        <ProgressIndicator percentage={100} />
+                        <MdCloudDownload />
                     </div>
                 </div>
             );
@@ -44,7 +43,7 @@ const UpdateIndicator: React.FC = () => {
             <div className="update-indicator">
                 <div className="update-indicator-container">
                     <span>Updating {_percentage}%</span>
-                    <ProgressIndicator percentage={percentage * 100.0} />
+                    <MdCloudDownload />
                 </div>
             </div>
         );
@@ -55,7 +54,7 @@ const UpdateIndicator: React.FC = () => {
             <div className="update-indicator updated">
                 <div className="update-indicator-container">
                     <span>Update Ready</span>
-                    <ProgressIndicator percentage={100} completed />
+                    <MdCloudDone />
                 </div>
             </div>
         );
@@ -79,7 +78,7 @@ const UpdateIndicator: React.FC = () => {
             <div className="update-indicator error">
                 <div className="update-indicator-container">
                     <span>{errorText}</span>
-                    <ProgressIndicator percentage={100} error />
+                    <MdCloudOff />
                 </div>
             </div>
         );

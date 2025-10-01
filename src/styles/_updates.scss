@@ -21,6 +21,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    svg {
+        width: 22rem;
+        height: 22rem;
+        margin-bottom: 3rem;
+        fill: rgba(255, 255, 255, 0.8);
+    }
 }
 
 .update-indicator .loading-indicator {
@@ -59,6 +66,10 @@
     }
     */
 
+    svg {
+        fill: rgb(180, 230, 184);
+    }
+
     span {
         color: rgb(180, 230, 184);
     }
@@ -73,6 +84,9 @@
         border-color: rgba(255, 95, 95, 0.6);
     }
     */
+    svg {
+        fill: #fd8d8d;
+    }
 
     span {
         color: #fd8d8d;

@@ -71,6 +71,9 @@ const AudioSettings: React.FC = () => {
                 <h3>Dialogue volume</h3>
                 <NumberInput onChange={setDialogueVolume} value={currentSettings.dialogueVolume} />
             </div>
+
+            <hr />
+
             <h2>VoIP settings</h2>
             <div className="settings-row">
                 <h3>Microphone Device</h3>

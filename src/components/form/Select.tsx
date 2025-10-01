@@ -33,18 +33,19 @@ export function Select<T extends string | number | boolean>({
 }: SelectProps<T>) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement | null>(null);
+
     useEffect(() => {
-        // Close dropdown on outside click
-        const handleClickOutside = (e: MouseEvent) => {
-            if (ref.current && !ref.current.contains(e.target as Node)) {
+        const handleClick = (e: MouseEvent) => {
+            // Close dropdown if clicked outside
+            if (ref.current && !ref.current.contains(e.target as Node) && ref.current !== e.target) {
                 setOpen(false);
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClick);
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('mousedown', handleClick);
         };
     }, []);
 
@@ -86,14 +87,9 @@ export function Select<T extends string | number | boolean>({
     }
 
     return (
-        <div ref={ref} className="input-wrapper full-width">
+        <div ref={ref} className="input-wrapper full-width" onClick={() => setOpen((p) => !p)}>
             <div className="input-wrapper-padding">
-                <span
-                    className={clsx('input-wrapper-value', { placeholder: displayPlaceholder })}
-                    onClick={() => setOpen((prev) => !prev)}
-                >
-                    {displayLabel}
-                </span>
+                <span className={clsx('input-wrapper-value', { placeholder: displayPlaceholder })}>{displayLabel}</span>
                 <MdArrowDropDown />
             </div>
 
@@ -108,7 +104,10 @@ export function Select<T extends string | number | boolean>({
                             <div
                                 key={String(opt.value)}
                                 className={clsx('input-wrapper-dropdown-item', { selected: isSelected })}
-                                onClick={() => toggleValue(opt.value)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleValue(opt.value);
+                                }}
                             >
                                 {isMulti ? (
                                     <>

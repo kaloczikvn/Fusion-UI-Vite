@@ -66,11 +66,12 @@
         user-select: none;
 
         span {
-            opacity: 0.7;
+            opacity: 0.6;
             transition: opacity 150ms ease-in-out;
         }
 
         svg {
+            opacity: 0.6;
             transition: opacity 150ms ease-in-out;
 
             &.sort-indicator {
@@ -93,6 +94,10 @@
             }
 
             &.active {
+                span {
+                    opacity: 1;
+                }
+
                 .header-action-icon {
                     opacity: 1;
                     fill: #e14d43;
@@ -259,7 +264,11 @@
 
             &.tags {
                 margin: 0 2rem;
-                font-size: 16rem;
+                font-size: 18rem;
+
+                svg {
+                    fill: #61d2ff;
+                }
 
                 strong {
                     color: #61d2ff;

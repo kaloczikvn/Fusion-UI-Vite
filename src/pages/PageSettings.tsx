@@ -392,6 +392,8 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
                 </>
             ) : null}
 
+            <hr />
+
             <AudioSettings />
         </div>
     );
