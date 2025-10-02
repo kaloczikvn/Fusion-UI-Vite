@@ -1,5 +1,6 @@
 import { ServerSort } from '../constants/ServerSort';
 import { SortDirection } from '../constants/SortDirection';
+import { getGamemodeName, getMapName } from './server/server';
 
 export const getServerSpectators = (server: any) => {
     const spectatorsNum = parseInt(server.variables.spectators, 10);
@@ -55,19 +56,27 @@ function sortByNameDesc(a: any, b: any) {
 }
 
 function sortByMapAsc(a: any, b: any) {
-    return a.variables.mapname.localeCompare(b.variables.mapname);
+    const mapA = getMapName(a.variables.mapname);
+    const mapB = getMapName(b.variables.mapname);
+    return mapA.localeCompare(mapB);
 }
 
 function sortByMapDesc(a: any, b: any) {
-    return -a.variables.mapname.localeCompare(b.variables.mapname);
+    const mapA = getMapName(a.variables.mapname);
+    const mapB = getMapName(b.variables.mapname);
+    return -mapA.localeCompare(mapB);
 }
 
 function sortByGamemodeAsc(a: any, b: any) {
-    return a.variables.gamemode.localeCompare(b.variables.gamemode);
+    const gamemodeA = getGamemodeName(a.variables.gamemode);
+    const gamemodeB = getGamemodeName(b.variables.gamemode);
+    return gamemodeA.localeCompare(gamemodeB);
 }
 
 function sortByGamemodeDesc(a: any, b: any) {
-    return -a.variables.gamemode.localeCompare(b.variables.gamemode);
+    const gamemodeA = getGamemodeName(a.variables.gamemode);
+    const gamemodeB = getGamemodeName(b.variables.gamemode);
+    return -gamemodeA.localeCompare(gamemodeB);
 }
 
 function sortByPlayersAsc(a: any, b: any) {
