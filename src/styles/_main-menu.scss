@@ -15,9 +15,8 @@
         position: relative;
         width: 650rem; // 650px
         height: 420rem; // 420px
-        background: rgba(0, 0, 0, 0.6);
-        transform: translate(0%, 0%);
-        backdrop-filter: blur(20rem);
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 2rem solid rgba(255, 255, 255, 0.25);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,7 +25,6 @@
             url('/assets/img/news-bg.png') no-repeat center center;
         background-size: 100% 100%;
         user-select: none;
-        border-bottom: 2rem solid rgb(96, 96, 96);
         transition: border 150ms ease-in-out;
 
         &.secondary {
@@ -59,7 +57,7 @@
         }
 
         &:hover {
-            border-color: rgb(255, 255, 255);
+            border-color: rgb(255, 255, 255, 0.8);
 
             &:before {
                 opacity: 0.5;
@@ -90,6 +88,36 @@
                 color: #fff;
                 font-weight: 400;
             }
+        }
+    }
+}
+
+h1.separator {
+    font-size: 22rem;
+    opacity: 0.6;
+    text-transform: uppercase;
+    margin-bottom: 20rem;
+    font-weight: 500;
+    text-shadow: 0 0 4rem rgba(0, 0, 0, 0.4);
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 40rem;
+
+    .btn {
+        svg {
+            fill: #fff;
+            margin-right: 6rem;
+        }
+
+        img {
+            max-width: 14rem;
+            max-height: 14rem;
+            width: 14rem;
+            margin-right: 7rem;
         }
     }
 }

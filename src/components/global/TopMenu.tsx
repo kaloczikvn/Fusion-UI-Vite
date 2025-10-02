@@ -7,7 +7,7 @@ const TopMenu: React.FC = () => {
             <ul className="left-items">
                 <li>
                     <NavLink to="/main-menu" className={({ isActive }) => (isActive ? 'active' : '')}>
-                        News
+                        Home
                     </NavLink>
                 </li>
                 <li>
