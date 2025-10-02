@@ -133,15 +133,13 @@ a {
     text-align: center;
 
     img {
-        height: 4.62962962962963vh; // 50px
-        display: block;
+        height: 50rem; // 50px
     }
 
     span {
-        margin-top: 0.5555555555555556vh; // 6px
-        display: block;
+        margin-top: 6rem; // 6px
         font-weight: 300;
-        font-size: 1.851851851851852vh; // 20px
+        font-size: 20rem; // 20px
     }
 }
 
@@ -149,7 +147,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20rem; // 20px
 }
 
 @import 'buttons';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
 
 import { ActionTypes } from '../../constants/ActionTypes';
@@ -12,6 +12,7 @@ interface IProps {
 const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
     const [password, setPassword] = useState<string>('');
     const [isCapsLockOn, setIsCapsLockOn] = useState<boolean>(false);
+    const passwordRef = useRef<HTMLInputElement>(null);
 
     const closePopup = () => {
         window.DispatchAction(ActionTypes.SET_POPUP, {
@@ -19,7 +20,11 @@ const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
         });
     };
 
-    const onUpdateCapsLock = (e?: any) => {
+    const onUpdateCapsLock = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            onSubmit();
+        }
+
         setIsCapsLockOn(e.getModifierState('CapsLock'));
     };
 
@@ -39,6 +44,10 @@ const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
 
     useEffect(() => {
         (document.activeElement as HTMLElement).blur();
+
+        setTimeout(() => {
+            passwordRef.current?.focus();
+        }, 50);
     }, []);
 
     return (
@@ -67,7 +76,11 @@ const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
                             placeholder="Enter the server password"
                             onKeyDown={onUpdateCapsLock}
                             onKeyUp={onUpdateCapsLock}
-                            onMouseDown={onUpdateCapsLock}
+                            onMouseDown={(e) => {
+                                setIsCapsLockOn(e.getModifierState('CapsLock'));
+                            }}
+                            ref={passwordRef}
+                            autoFocus
                         />
                     </div>
 

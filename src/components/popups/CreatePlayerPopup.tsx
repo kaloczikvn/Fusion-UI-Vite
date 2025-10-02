@@ -62,7 +62,7 @@ const CreatePlayerPopup: React.FC = () => {
     useEffect(() => {
         (document.activeElement as HTMLElement).blur();
 
-        if (inputRef.current) inputRef.current.focus();
+        inputRef.current?.focus();
     }, []);
 
     if (playerCreateStatus === PlayerCreateStatus.CREATION_FAILED) {
@@ -145,8 +145,14 @@ const CreatePlayerPopup: React.FC = () => {
                             placeholder="Enter a name for your solider"
                             ref={inputRef}
                             onChange={(e) => setInputValue(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    onSubmit();
+                                }
+                            }}
                             value={inputValue}
                             id="name"
+                            autoFocus
                         />
                     </div>
                     <div className="form-actions">

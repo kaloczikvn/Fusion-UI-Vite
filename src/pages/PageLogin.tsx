@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
 
 import Checkbox from '../components/form/Checkbox';
@@ -12,10 +12,12 @@ const PageLogin: React.FC = () => {
     const loginData = useUserStore((s) => s.loginData);
     const loginToken = useUserStore((s) => s.loginToken);
 
-    const [capsLock, setCapsLock] = useState(false);
+    const [isCapsLockOn, setIsCapsLockOn] = useState(false);
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [remember, setRemember] = useState<boolean>(false);
+
+    const usernameRef = useRef<HTMLInputElement>(null);
 
     const enableBlur = () => {
         window.DispatchAction(ActionTypes.SET_BLUR, {
@@ -42,8 +44,12 @@ const PageLogin: React.FC = () => {
     };
 
     const onUpdateCapsLock = (e: any) => {
+        if (e.key === 'Enter') {
+            onSubmit(e);
+        }
+
         const capsLockState = e.getModifierState('CapsLock');
-        setCapsLock(capsLockState);
+        setIsCapsLockOn(capsLockState);
     };
 
     const onForgotPassword = (e: any) => {
@@ -69,6 +75,8 @@ const PageLogin: React.FC = () => {
     useEffect(() => {
         enableBlur();
         disableMenu();
+
+        usernameRef.current?.focus();
 
         if (loginData !== null) {
             onSetLogin();
@@ -103,7 +111,10 @@ const PageLogin: React.FC = () => {
                         onChange={(e) => setUsername(e.target.value)}
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
-                        onMouseDown={onUpdateCapsLock}
+                        onMouseDown={(e) => {
+                            setIsCapsLockOn(e.getModifierState('CapsLock'));
+                        }}
+                        ref={usernameRef}
                     />
                 </div>
                 <br />
@@ -118,10 +129,12 @@ const PageLogin: React.FC = () => {
                         placeholder="Enter pasword"
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
-                        onMouseDown={onUpdateCapsLock}
+                        onMouseDown={(e) => {
+                            setIsCapsLockOn(e.getModifierState('CapsLock'));
+                        }}
                     />
                 </div>
-                {capsLock ? (
+                {isCapsLockOn ? (
                     <div className="caps-lock-notice">
                         <MdOutlineReport color="#e8eaed" />
                         CAPS LOCK IS ON

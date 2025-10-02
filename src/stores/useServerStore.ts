@@ -204,11 +204,14 @@ const useServerStore = create<State>((set) => ({
             });
         },
         [ActionTypes.TOGGLE_FAVORITE_SERVERS_ONLY]: () => {
-            set((s) => {
-                return {
-                    favoriteServersOnly: !s.favoriteServersOnly,
-                };
-            });
+            set((s) => ({
+                favoriteServersOnly: !s.favoriteServersOnly,
+            }));
+        },
+        [ActionTypes.SET_FAVORITE_SERVERS_ONLY]: (action: any) => {
+            set(() => ({
+                favoriteServersOnly: action.favoriteServersOnly,
+            }));
         },
     },
 }));

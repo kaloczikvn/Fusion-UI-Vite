@@ -6,6 +6,7 @@ import useBaseStore from '../stores/useBaseStore';
 
 const PageMainMenu: React.FC = () => {
     const news = useBaseStore((s) => s.news);
+    // const { setNavigate } = useNavigateStore((s) => s.actions);
     const fetchNewsIntervalRef = useRef<number | null>(null);
 
     const disableBlur = () => {
@@ -15,6 +16,29 @@ const PageMainMenu: React.FC = () => {
     const enableMenu = () => {
         window.DispatchAction(ActionTypes.SET_MENU, { menu: true });
     };
+
+    /*
+    const openServersWithRM = () => {
+        setNavigate('server-browser');
+
+        window.DispatchAction(ActionTypes.SET_SERVER_FILTERS, {
+            filters: {
+                ...getDefaultFilters(),
+                tags: ['realitymod'],
+            },
+        });
+        window.DispatchAction(ActionTypes.SET_FAVORITE_SERVERS_ONLY, { favoriteServersOnly: false });
+    };
+
+    const openFavoritServers = () => {
+        setNavigate('server-browser');
+
+        window.DispatchAction(ActionTypes.SET_SERVER_FILTERS, {
+            filters: getDefaultFilters(),
+        });
+        window.DispatchAction(ActionTypes.SET_FAVORITE_SERVERS_ONLY, { favoriteServersOnly: true });
+    };
+    */
 
     useEffect(() => {
         const fetchNews = () =>
@@ -76,23 +100,21 @@ const PageMainMenu: React.FC = () => {
 
     return (
         <div className="main-menu content-wrapper">
-            <div className="main-container">
+            <div className="news-container">
                 <a className="news-item" href={newsLeft.link} onClick={(e) => openNewsLink(newsLeft.link, e)}>
                     <MdOpenInNew />
-                    <div className="news-description">
+                    <div className="news-item-description">
                         <h2>{newsLeft.title}</h2>
                         <h1>{newsLeft.description}</h1>
                     </div>
                 </a>
-            </div>
-            <div className="main-container">
                 <a
                     className="news-item secondary"
                     href={newsRight.link}
                     onClick={(e) => openNewsLink(newsRight.link, e)}
                 >
                     <MdOpenInNew />
-                    <div className="news-description">
+                    <div className="news-item-description">
                         <h2>{newsRight.title}</h2>
                         <h1>{newsRight.description}</h1>
                     </div>
