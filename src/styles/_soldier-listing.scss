@@ -25,7 +25,7 @@
     -webkit-user-select: none;
     user-select: none;
     cursor: pointer;
-    border-bottom: 2rem solid rgb(96, 96, 96);
+    border: 2rem solid rgba(255, 255, 255, 0.25);
     transition: border 150ms ease-in-out;
 
     &:before {
@@ -117,7 +117,7 @@
     }
 
     &:hover {
-        border-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255, 0.8);
 
         .actions {
             opacity: 1;

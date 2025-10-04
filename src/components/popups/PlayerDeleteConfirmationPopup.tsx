@@ -50,9 +50,7 @@ const PlayerDeleteConfirmationPopup: React.FC<IProps> = ({ name, guid }) => {
         <div className="center-notice">
             <div className="notice-content">
                 <h1>Delete Soldier</h1>
-                <p>
-                    Are you sure you want to delete your soldier <b>{name}</b>? This action cannot be reversed.
-                </p>
+                <p>Are you sure you want to delete your soldier "{name}? This action cannot be reversed.</p>
                 <div className="action-buttons">
                     <a href="#" className="btn border-btn" onClick={onClosePopup}>
                         Cancel
