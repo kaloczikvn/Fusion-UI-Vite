@@ -11,9 +11,8 @@
 
 .soldier-entry {
     display: flex;
-    width: 260rem; // 260px
-    height: 440rem; // 440px
-    vertical-align: top;
+    width: 260rem;
+    height: 440rem;
     background: rgba(0, 0, 0, 0.6);
     position: relative;
     justify-content: center;
@@ -22,7 +21,6 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%),
         url('/assets/img/soldier-bg.png') no-repeat center center;
     background-size: 100% 100%;
-    -webkit-user-select: none;
     user-select: none;
     cursor: pointer;
     border: 2rem solid rgba(255, 255, 255, 0.25);
@@ -44,7 +42,6 @@
 
     /*
     &:after {
-        display: inline-block;
         position: absolute;
         left: 0;
         bottom: 0;
@@ -135,8 +132,7 @@
     &.empty {
         background: rgba(0, 0, 0, 0.6);
         transform: translate(0%, 0%);
-        backdrop-filter: blur(20rem); // 20px
-        will-change: top;
+        backdrop-filter: blur(20rem);
 
         &:before {
             display: none;

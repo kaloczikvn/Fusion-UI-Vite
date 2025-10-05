@@ -1,14 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { MdBookmark, MdOpenInNew } from 'react-icons/md';
+import { MdOpenInNew } from 'react-icons/md';
 
 import { ActionTypes } from '../constants/ActionTypes';
 import useBaseStore from '../stores/useBaseStore';
-import useNavigateStore from '../stores/useNavigateStore';
-import { getDefaultFilters } from '../utils/server';
 
 const PageMainMenu: React.FC = () => {
     const news = useBaseStore((s) => s.news);
-    const { setNavigate } = useNavigateStore((s) => s.actions);
+    // const { setNavigate } = useNavigateStore((s) => s.actions);
     const fetchNewsIntervalRef = useRef<number | null>(null);
 
     const disableBlur = () => {
@@ -19,6 +17,7 @@ const PageMainMenu: React.FC = () => {
         window.DispatchAction(ActionTypes.SET_MENU, { menu: true });
     };
 
+    /*
     const openServersListWith = (tag: string) => {
         setNavigate('server-browser');
 
@@ -39,6 +38,7 @@ const PageMainMenu: React.FC = () => {
         });
         window.DispatchAction(ActionTypes.SET_FAVORITE_SERVERS_ONLY, { favoriteServersOnly: true });
     };
+    */
 
     useEffect(() => {
         const fetchNews = () =>
@@ -100,6 +100,7 @@ const PageMainMenu: React.FC = () => {
 
     return (
         <div className="main-menu content-wrapper">
+            {/*
             <h1 className="separator">Shortcuts</h1>
             <div className="buttons-container">
                 <a
@@ -143,18 +144,9 @@ const PageMainMenu: React.FC = () => {
                 >
                     <span>Zombies</span>
                 </a>
-                {/*
-                <a
-                    href="#"
-                    className="btn border-btn"
-                    onClick={(e) => openLink('https://discord.com/invite/dpJwaVZ', e)}
-                >
-                    <FaDiscord />
-                    <span>Discord</span>
-                </a>
-                */}
             </div>
             <h1 className="separator">News</h1>
+            */}
             <div className="news-container">
                 <a className="news-item" href={newsLeft.link} onClick={(e) => openLink(newsLeft.link, e)}>
                     <MdOpenInNew />

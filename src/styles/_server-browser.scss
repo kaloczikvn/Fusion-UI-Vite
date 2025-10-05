@@ -3,7 +3,6 @@
 
     .left-content {
         margin-top: 24rem; // 24px
-        display: inline-block;
         width: 70%;
         position: relative;
         padding-right: 20rem; // 20px
@@ -12,13 +11,11 @@
 
     .right-content {
         margin-top: 24rem; // 24px
-        display: inline-block;
         width: 29.99%;
         padding-left: 20rem; // 20px
     }
 
     .column {
-        display: inline-block;
         // overflow: hidden;
 
         &.column-1 {
@@ -62,7 +59,6 @@
         line-height: 30rem; // 30px
         border-bottom: 1rem solid rgba(255, 255, 255, 0.2);
         padding-right: 20rem; // 20px
-        -webkit-user-select: none;
         user-select: none;
 
         span {
@@ -164,7 +160,6 @@
         }
 
         span.notice {
-            -webkit-user-select: none;
             user-select: none;
         }
     }
@@ -173,9 +168,7 @@
         padding: 10rem 0; // 10px 0
         font-size: 20rem; // 20px
         font-weight: 300;
-        display: inline-block;
         opacity: 0.75;
-        -webkit-user-select: none;
         user-select: none;
     }
 }
@@ -187,7 +180,6 @@
     margin-top: 10rem; // 10px
     background: #000;
     transition: height 150ms ease-in-out;
-    -webkit-user-select: none;
     user-select: none;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.7);
@@ -534,7 +526,6 @@
     z-index: 999;
     transform: translate(0%, 0%);
     backdrop-filter: blur(10rem);
-    will-change: top;
     background: rgba(0, 0, 0, 0.8);
     border: 2rem solid rgba(255, 255, 255, 0.4);
 
@@ -545,7 +536,6 @@
     .left,
     .right {
         flex: 1 1 50%;
-        display: inline-block;
     }
 
     .left {
@@ -600,7 +590,6 @@
 
 .frequency-filters {
     display: flex;
-    flex-flow: column;
     justify-content: space-between;
 }
 

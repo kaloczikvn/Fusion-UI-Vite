@@ -14,27 +14,6 @@ const VoipSlider: React.FC<IProps> = ({ value, volume, onChange }) => {
         onChange(sliderValue / 100.0);
     };
 
-    /*
-    const onInputChange = (e?: any) => {
-        // Make sure to only allow numbers.
-        if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g)) {
-            e.target.value = e.target.value.replace(/[^0-9]/g, '');
-            return;
-        }
-
-        if (e.target.value.length === 0) e.target.value = '0';
-
-        let inputValue = parseInt(e.target.value, 10);
-
-        if (inputValue > 100) {
-            e.target.value = '100';
-            inputValue = 100;
-        }
-
-        onChange(inputValue / 100.0);
-    };
-    */
-
     return (
         <>
             <Slider
@@ -46,6 +25,8 @@ const VoipSlider: React.FC<IProps> = ({ value, volume, onChange }) => {
                         style={{ width: `${volume * 100.0}%` }}
                     />
                 }
+                min={0}
+                max={100}
             />
         </>
     );

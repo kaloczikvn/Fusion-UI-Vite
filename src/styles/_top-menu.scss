@@ -17,10 +17,6 @@
     .left-items,
     .right-items {
         display: flex;
-        list-style-type: none;
-        vertical-align: top;
-        // border-bottom: 0.1574074074074074vh solid rgba(255, 255, 255, 0.3);
-        // padding: 50rem 0 18rem; // 50px 0 18px
 
         li {
             display: flex;
@@ -54,14 +50,13 @@
     }
 
     .menu-logo {
-        display: inline-block;
-        width: 100rem; // 100px
-        height: 100rem; // 100px
-        margin: 0 65rem; // 0 65px
+        width: 100rem;
+        height: 100rem;
+        margin: 0 65rem;
         background: url('/assets/img/logo.svg') no-repeat center center;
         background-size: 100% auto;
         position: relative;
-        top: 14rem; // 14px;
+        top: 14rem;
         opacity: 0.25;
     }
 }

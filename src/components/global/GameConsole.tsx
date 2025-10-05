@@ -273,7 +273,9 @@ const GameConsole: React.FC = () => {
             window.WebUI.Call('EnableKeyboard');
             window.WebUI.Call('EnableMouse');
 
-            conRef.current?.focus();
+            setTimeout(() => {
+                conRef.current?.focus();
+            }, 50);
         } else {
             window.WebUI.Call('ResetKeyboard');
             window.WebUI.Call('ResetMouse');
